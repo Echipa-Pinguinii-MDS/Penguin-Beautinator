@@ -1,2 +1,2 @@
 # Penguin-Beautinator
-MDA Project
+MDS Project
