@@ -1,11 +1,13 @@
-import React from "react";
-import Menu from "./Menu.js";
-import Content from "./Content";
+import React from 'react';
+import Menu from './Menu.js';
+import Content from './Content';
+import './SalonApp.css';
 
 const SalonApp = (props) => {
     return (
         <article className={'SalonApp'}>
             <Menu sections={props.sections}/>
+            <div className={'VerticalLine'}/>
             <Content name={'Nume salon'}
                      sections={props.sections}
                      description={'Lorem ipsum sit amet'}

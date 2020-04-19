@@ -1,10 +1,10 @@
-import React from "react";
-import Title from "./Content/Title";
-import About from "./Content/About";
-import Gallery from "./Content/Gallery";
-import Contact from "./Content/Contact";
-import Services from "./Content/Services";
-import PropTypes from "prop-types";
+import React from 'react';
+import Title from './Content/Title';
+import About from './Content/About';
+import Gallery from './Content/Gallery';
+import Contact from './Content/Contact';
+import Services from './Content/Services';
+import PropTypes from 'prop-types';
 
 const Content = (props) => {
     return (
@@ -28,7 +28,6 @@ Content.defaultProps = {
 
 Content.propTypes = {
     name: PropTypes.string.isRequired,
-    sections: PropTypes.array,
     description: PropTypes.string,
     services: PropTypes.array.isRequired,
     images: PropTypes.array,

@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const About = (props) => {
     return (
         <section className={'About'}>
-            <h3>{props.description ? props.title : ''}</h3>
-            <p>{props.description}</p>
+            <h3 className={'Section-title'}>{props.description ? props.title : ''}</h3>
+            <p className={'Section-description'}>{props.description}</p>
         </section>
     )
 };

@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Logo = (props) => {
     return (
@@ -15,7 +15,7 @@ Logo.defaultProps = {
 
 const Item = (props) => {
     return (
-        <div key={props.index} className={'Item'}>
+        <div className={'Item'}>
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a>{props.section}</a>
         </div>
@@ -31,14 +31,10 @@ const Menu = (props) => {
         <div className={'Menu'}>
             <Logo/>
             {Object.keys(props.sections).map((key, index) =>
-                <Item index={index} section={props.sections[key]} />
+                <Item key={index} section={props.sections[key]} />
             )}
         </div>
     )
 };
-
-Menu.propTypes = {
-    sections: PropTypes.array.isRequired
-}
 
 export default Menu;

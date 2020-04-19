@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Info = (props) => {
     return (
-        <label key={props.index} className={'Info'}>
+        <label className={'Info'}>
             <input type='checkbox'/>
             <h4>{props.title}</h4>
             <h4>{props.price} lei</h4>
@@ -21,10 +21,10 @@ Info.propTypes ={
 const Services = (props) => {
     return (
         <section className={'Services'}>
-            <h3>{props.title}</h3>
+            <h3 className={'Section-title'}>{props.title}</h3>
             <form className={'Services-infos'}>
                 {props.services.map((service, index) =>
-                    <Info index={index}
+                    <Info key={index}
                           title={service.title}
                           price={service.price}
                           length={service.length}/>

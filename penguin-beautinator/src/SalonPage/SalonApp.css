@@ -1,0 +1,87 @@
+.SalonApp {
+    display: flex;
+    flex-direction: row;
+}
+
+.VerticalLine {
+    border-left: 2px solid silver;
+    height: 800px;
+}
+
+.Menu {
+    padding: 10px;
+    width: 20%;
+}
+
+.Logo {
+    padding: 5px;
+    width: 100%;
+}
+
+.Item {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.Content {
+    padding: 10px;
+    width: 60%;
+}
+
+.Title {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.About {
+    display: flex;
+    flex-direction: column;
+}
+
+.Section-title {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.Section-description {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.Services {
+    display: flex;
+    flex-direction: column;
+}
+
+.Services-infos {
+    display: flex;
+    flex-direction: column;
+}
+
+.Info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Gallery {
+    display: flex;
+    flex-direction: column;
+}
+
+.Gallery-images {
+    display: flex;
+    flex-direction: row;
+}
+
+.Image {
+    padding: 5px;
+}
+
+.Contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
