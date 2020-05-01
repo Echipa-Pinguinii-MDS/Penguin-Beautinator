@@ -1,0 +1,72 @@
+.SalonPicker {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.SalonCard {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.SalonCard img {
+    padding: 10px;
+    height: 100px;
+    width: 100px;
+}
+
+.InfoCard {
+    padding: 10px;
+}
+
+.Review {
+    padding: 20px;
+}
+
+.Stars img {
+    height: 15px;
+    width: 15px;
+}
+
+#di1 {
+    display: flex;
+    justify-content: center;
+}
+
+#di2 {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#di3 {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#di4 {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#di5 {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#di6 {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#di7 {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#di8 {
+    display: flex;
+    justify-content: flex-end;
+}

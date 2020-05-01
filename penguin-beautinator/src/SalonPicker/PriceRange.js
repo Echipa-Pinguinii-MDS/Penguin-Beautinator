@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const PriceRange = (props) => {
     return (
-        <div className={'di8'}>
+        <div className={'PriceRange'} id={'di8'}>
             {[1, 2, 3, 4, 5].map((index) =>
                 index <= props.noDollars ? '$' : ''
             )}

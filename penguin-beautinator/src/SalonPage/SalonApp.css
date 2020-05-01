@@ -1,17 +1,6 @@
 .SalonApp {
     display: flex;
     flex-direction: row;
-    font-family: 'Open Sans', sans-serif;
-    top: -20px;
-    left: -20px;
-    right: -40px;
-    bottom: -40px;
-    margin-top: 50px;
-    width: auto;
-    height: auto;
-    background-size: cover;
-    z-index: 0;
-    background-repeat: no-repeat;
 }
 
 .VerticalLine {

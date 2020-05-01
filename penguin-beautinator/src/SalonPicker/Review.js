@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PriceRange from './PriceRange';
 
 const Stars = (props) => {
     return (
-        <div className={'di3'}>
+        <div className={'Stars'} id={'di3'}>
             {[1, 2, 3, 4, 5].map((index) =>
                 <img src={index <= props.noFullStars ? props.fullStar : props.emptyStar} alt={''}/>
             )}
@@ -22,16 +23,18 @@ Stars.propTypes = {
 
 const Review = (props) => {
     return (
-        <div>
+        <div className={'Review'}>
             <Stars noFullStars={props.noFullStars}/>
-            <div id={'di7'}>Numar reviewuri: {props.noReviews}</div>
+            <div id={'di7'}>{props.noReviews === 1 ? '1 review' : props.noReviews + 'reviewuri'}</div>
+            <PriceRange noDollars={props.noDollars}/>
         </div>
     )
 }
 
 Review.propTypes = {
     noFullStars: PropTypes.number.isRequired,
-    noReviews: PropTypes.number.isRequired
+    noReviews: PropTypes.number.isRequired,
+    noDollars: PropTypes.number.isRequired
 }
 
 export default Review;
