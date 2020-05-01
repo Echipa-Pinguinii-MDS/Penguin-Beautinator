@@ -8,7 +8,7 @@ const Contact = (props) => {
             <h5>Program de lucru: {props.program.join(', ')}</h5>
             <h5>Telefon: {props.phone.join('/ ')}</h5>
             <h5>E-mail: {props.email.join(', ')}</h5>
-            <h5>{props.address ? 'Adresa' + props.address: ''}</h5>
+            <h5>Adresa: {props.address}</h5>
         </section>
     )
 };
@@ -18,7 +18,7 @@ Contact.propTypes = {
     program: PropTypes.array.isRequired,
     phone: PropTypes.array.isRequired,
     email: PropTypes.array.isRequired,
-    address: PropTypes.string
+    address: PropTypes.string.isRequired
 };
 
 export default Contact;

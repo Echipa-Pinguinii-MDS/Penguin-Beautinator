@@ -34,7 +34,7 @@ Content.propTypes = {
     program: PropTypes.array.isRequired,
     phone: PropTypes.array.isRequired,
     email: PropTypes.array.isRequired,
-    address: PropTypes.string
+    address: PropTypes.string.isRequired
 }
 
 export default Content;
