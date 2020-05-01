@@ -10,6 +10,10 @@ const NavBar = () => {
                   className={'Left'}
                   src={'https://discordemoji.com/assets/emoji/3946_Penguin_walk.gif'}
                   href={'index.html'}/>
+            <Item section={'Saloane'}
+                  className={'Left'}
+                  src={'https://media.giphy.com/media/Ep8HfalJsuCcg/giphy.gif'}
+                  href={'saloane.html'}/>
             <Item section={'Programarile mele'}
                   className={'Left'}
                   src={'https://thumbs.gfycat.com/BossyCarelessHake.webp'}
