@@ -16,7 +16,8 @@ const SalonApp = (props) => {
                          {title: 'Tuns - par lung', price: 20, length: 30}]}
                      program={['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00']}
                      phone={['07********', '031*******']}
-                     email={['contact@salon.com']}/>
+                     email={['contact@salon.com']}
+                     address={'Lorem Ipsum 10'}/>
         </article>
     )
 };
