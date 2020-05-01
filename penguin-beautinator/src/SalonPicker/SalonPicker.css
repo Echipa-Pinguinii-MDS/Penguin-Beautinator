@@ -1,15 +1,15 @@
 .SalonPicker {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     padding: 10px;
+    overflow: hidden;
 }
 
 .SalonCard {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     padding: 10px;
-    overflow: hidden;
 }
 
 .SalonCard img {
@@ -19,11 +19,17 @@
 }
 
 .InfoCard {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.SalonInfo {
     padding: 10px;
 }
 
 .Review {
-    padding: 20px;
+    padding: 10px;
 }
 
 .Stars img {
