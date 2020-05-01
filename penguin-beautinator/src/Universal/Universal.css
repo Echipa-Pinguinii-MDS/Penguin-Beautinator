@@ -1,0 +1,35 @@
+.NavBar {
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    overflow: hidden;
+    background-color: white;
+}
+
+.NavBar a {
+    font-size: 16px;
+    color: grey;
+    text-align: center;
+    text-decoration: none;
+}
+
+.NavBar a:hover {
+    background-color: red;
+}
+
+.Left {
+    float: left;
+    height: 15px;
+    width: 20px;
+}
+
+.Right {
+    display: flex;
+    float: right;
+    height: 15px;
+    width: 20px;
+}
