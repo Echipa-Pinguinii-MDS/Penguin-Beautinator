@@ -22,19 +22,6 @@ const SalonPicker = (props) => {
     )
 }
 
-SalonPicker.defaultProps = {
-    salons: [{
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
-        name: 'Nume',
-        address: 'Adresa',
-        description: 'Descriere',
-        services: 'Coafor / Epilat / Masaj / Manipedi',
-        noFullStars: 3,
-        noReviews: 1,
-        noDollars: 2
-    }]
-}
-
 SalonPicker.propTypes = {
     salons: PropTypes.array.isRequired
 }

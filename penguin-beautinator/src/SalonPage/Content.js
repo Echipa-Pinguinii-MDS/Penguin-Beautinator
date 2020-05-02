@@ -1,10 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Title from './Content/Title';
 import About from './Content/About';
 import Gallery from './Content/Gallery';
 import Contact from './Content/Contact';
 import Services from './Content/Services';
-import PropTypes from 'prop-types';
 
 const Content = (props) => {
     return (
@@ -21,10 +21,6 @@ const Content = (props) => {
         </div>
     )
 };
-
-Content.defaultProps = {
-    sections: {about: 'Despre noi', services: 'Servicii', gallery: 'Galerie', contact: 'Contact'}
-}
 
 Content.propTypes = {
     name: PropTypes.string.isRequired,
