@@ -19,9 +19,12 @@ class Salons(models.Model):
 
 class Services(models.Model):
     salon = models.IntegerField()
+    employee = models.CharField()
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=400)
     price = models.FloatField()
+    open_timeslots = models.CharField(max_length=3000)
+    available_timeslots = models.CharField(max_length=3000)
 
 
 class Users(models.Model):
