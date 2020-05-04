@@ -19,7 +19,7 @@ class Salons(models.Model):
 
 class Services(models.Model):
     salon = models.IntegerField()
-    employee = models.CharField()
+    employee = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=400)
     price = models.FloatField()
