@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Menu from './Menu.js';
 import Content from './Content';
-import './SalonApp.css';
+import './SalonPage.css';
 
-const SalonApp = (props) => {
+const SalonPage = (props) => {
     return (
-        <article className={'SalonApp'}>
+        <article className={'SalonPage'}>
             <Menu sections={props.sections}/>
             <div className={'VerticalLine'}/>
             <Content name={props.name}
@@ -22,11 +22,11 @@ const SalonApp = (props) => {
     )
 }
 
-SalonApp.defaultProps = {
+SalonPage.defaultProps = {
     sections: {about: 'Despre noi', services: 'Servicii', gallery: 'Galerie', contact: 'Contact'}
 }
 
-SalonApp.propTypes = {
+SalonPage.propTypes = {
     sections: PropTypes.array,
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
@@ -38,4 +38,4 @@ SalonApp.propTypes = {
     address: PropTypes.string.isRequired
 }
 
-export default SalonApp;
+export default SalonPage;

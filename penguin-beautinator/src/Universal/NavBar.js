@@ -1,12 +1,10 @@
 import React from 'react';
 import Item from './Item';
-import './Universal.css';
-
 
 const NavBar = () => {
     return (
         <div className={'NavBar'}>
-            <Item section={'Pinguin Beautinator'}
+            <Item section={'Penguin Beautinator'}
                   className={'Left'}
                   src={'https://discordemoji.com/assets/emoji/3946_Penguin_walk.gif'}
                   href={'index.html'}/>
