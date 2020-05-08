@@ -2,6 +2,7 @@ from django.db import models
 
 
 # Create your models here.
+# When edited modify the admin too
 class Appointments(models.Model):
     salon = models.IntegerField()
     client = models.IntegerField()
