@@ -9,8 +9,7 @@ const SalonCard = (props) => {
             <InfoCard src={props.src}
                       name={props.name}
                       address={props.address}
-                      description={props.description}
-                      services={props.services}/>
+                      description={props.description}/>
             <Review noFullStars={props.noFullStars}
                     noReviews={props.noReviews}
                     noDollars={props.noDollars}/>
@@ -19,10 +18,10 @@ const SalonCard = (props) => {
 }
 
 SalonCard.propTypes = {
+    src: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    services: PropTypes.string.isRequired,
     noFullStars: PropTypes.number.isRequired,
     noReviews: PropTypes.number.isRequired,
     noDollars: PropTypes.number.isRequired

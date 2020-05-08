@@ -12,7 +12,6 @@ const SalonPicker = (props) => {
                            name={salon.name}
                            address={salon.address}
                            description={salon.description}
-                           services={salon.services}
                            noFullStars={salon.noFullStars}
                            noReviews={salon.noReviews}
                            noDollars={salon.noDollars}

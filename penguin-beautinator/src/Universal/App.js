@@ -12,7 +12,6 @@ const MainApp = () => {
                     name: 'Nume',
                     address: 'Adresa',
                     description: 'Descriere',
-                    services: 'Coafor / Epilat / Masaj / Manipedi',
                     noFullStars: 3,
                     noReviews: 1,
                     noDollars: 2

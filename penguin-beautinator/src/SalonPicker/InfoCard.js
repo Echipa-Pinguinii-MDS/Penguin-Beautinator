@@ -9,18 +9,20 @@ const InfoCard = (props) => {
                  alt={''}/>
             <SalonInfo name={props.name}
                       address={props.address}
-                      description={props.description}
-                      services={props.services}/>
+                      description={props.description}/>
         </div>
     )
+}
+
+InfoCard.defaultProps = {
+    src: ''
 }
 
 InfoCard.propTypes = {
     src: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    services: PropTypes.string.isRequired
+    description: PropTypes.string.isRequired
 }
 
 export default InfoCard;
