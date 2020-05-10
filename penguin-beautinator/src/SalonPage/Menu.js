@@ -1,5 +1,6 @@
 import React from 'react';
 import Item from '../Universal/Item';
+import PropTypes from "prop-types";
 
 const Menu = (props) => {
     return(
@@ -10,10 +11,15 @@ const Menu = (props) => {
             )}
         </div>
     )
-};
+}
 
 Menu.defaultProps = {
     logo: ''
-};
+}
+
+Menu.propTypes = {
+    sections: PropTypes.objectOf(PropTypes.string).isRequired,
+    logo: PropTypes.string
+}
 
 export default Menu;
