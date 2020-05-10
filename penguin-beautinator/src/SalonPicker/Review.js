@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PriceRange from './PriceRange';
 
 const Stars = (props) => {
     return (
-        <div className={'Stars'} id={'di3'}>
-            {[1, 2, 3, 4, 5].map((index) =>
-                <img src={index <= props.noFullStars ? props.fullStar : props.emptyStar} alt={''}/>
+        <div className={'Stars'}>
+            {[1, 2, 3, 4, 5].map(index =>
+                index <= props.noFullStars ?
+                    <img key={index.toString()} src={props.fullStar} alt={'Full Star'}/> :
+                    <img key={index.toString()} src={props.emptyStar} alt={'Empty Star'}/>
             )}
         </div>
     )
@@ -21,11 +22,27 @@ Stars.propTypes = {
     noFullStars: PropTypes.number.isRequired,
 }
 
+const PriceRange = (props) => {
+    return (
+        <p className={'PriceRange'}>
+            {[1, 2, 3, 4, 5].map((index) =>
+                index <= props.noDollars ? '$' : ''
+            )}
+        </p>
+    )
+}
+
+PriceRange.propTypes = {
+    noDollars: PropTypes.number.isRequired
+}
+
 const Review = (props) => {
+    const noReviews = props.noReviews === 0 ? 'Niciun review momentan' :
+        props.noReviews === 1 ? '1 review' : props.noReviews + 'reviews';
     return (
         <div className={'Review'}>
             <Stars noFullStars={props.noFullStars}/>
-            <div id={'di7'}>{props.noReviews === 1 ? '1 review' : props.noReviews + 'reviewuri'}</div>
+            <p>{noReviews}</p>
             <PriceRange noDollars={props.noDollars}/>
         </div>
     )

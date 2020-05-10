@@ -6,8 +6,8 @@ const Gallery = (props) => {
         <section className={'Gallery'}>
             <h3 className={'Section-title'}>{props.title}</h3>
             <div className={'Gallery-images'}>
-                {props.images.map((image, index) =>
-                    <img key={index} src={image} alt={'Salon image'}/>
+                {props.images.map(image =>
+                    <img key={image} src={image} alt={'Salon'}/>
                 )}
             </div>
         </section>

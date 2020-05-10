@@ -21,8 +21,8 @@ const Section = (props) => {
     return (
         <div className={'Services-infos'}>
             <h4>{props.category}</h4>
-            {props.services[props.category].map((service, index) =>
-                <Info key={index}
+            {props.service.map(service =>
+                <Info key={service.title}
                       title={service.title}
                       price={service.price}
                       length={service.length}/>
@@ -33,7 +33,7 @@ const Section = (props) => {
 
 Section.propTypes = {
     category: PropTypes.string.isRequired,
-    services: PropTypes.array.isRequired
+    service: PropTypes.array.isRequired
 }
 
 const Services = (props) => {
@@ -41,8 +41,8 @@ const Services = (props) => {
         <section className={'Services'}>
             <h3 className={'Section-title'}>{props.title}</h3>
             <div className={'Services-categories'}>
-                {Object.keys(props.services).map((category) =>
-                    <Section services={props.services} category={category}/>
+                {Object.keys(props.services).map(category =>
+                    <Section key={category} service={props.services[category]} category={category}/>
                 )}
             </div>
         </section>

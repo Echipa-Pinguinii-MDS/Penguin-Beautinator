@@ -6,11 +6,8 @@ const Menu = (props) => {
     return(
         <div className={'Menu'}>
             {props.salon.src !== '' && <img src={props.salon.src} className={'Logo'} alt={'Salon logo'}/>}
-            {Object.keys(props.sections).map((key, index) =>
-                <div className={'Menu-Item'}>
-                   {props.hasContent(key, props.salon) &&
-                   <Item key={index} section={props.sections[key]}/>}
-                </div>
+            {Object.keys(props.sections).map(key =>
+               props.hasContent(key, props.salon) ? <Item key={key} section={props.sections[key]}/> : ''
             )}
         </div>
     )

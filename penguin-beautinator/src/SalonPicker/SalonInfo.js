@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 const SalonInfo = (props) => {
     return (
         <div className={'SalonInfo'}>
-            <div id={'di2'}>{props.name}</div>
-            <div id={'di4'}>{props.address}</div>
-            <div id={'di5'}>{props.description}</div>
+            <p>{props.name}</p>
+            <p>{props.address}</p>
+            <p>{props.description}</p>
         </div>
     )
 }

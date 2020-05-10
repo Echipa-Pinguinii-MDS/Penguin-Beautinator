@@ -3,6 +3,7 @@
     flex-direction: column;
     padding: 10px;
     overflow: hidden;
+    width: 90%;
 }
 
 .SalonCard {
@@ -12,24 +13,45 @@
     padding: 10px;
 }
 
-.SalonCard img {
-    padding: 10px;
-    height: 100px;
-    width: 100px;
-}
-
 .InfoCard {
     display: flex;
     flex-direction: row;
     padding: 10px;
 }
 
-.SalonInfo {
+.InfoCard img {
     padding: 10px;
+    height: 100px;
+    width: 100px;
+}
+
+.SalonInfo {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.SalonInfo p {
+    margin: 0 0 10px 0;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .Review {
     padding: 10px;
+}
+
+.Review p {
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Stars {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .Stars img {
@@ -47,11 +69,6 @@
     justify-content: flex-start;
 }
 
-#di3 {
-    display: flex;
-    justify-content: flex-end;
-}
-
 #di4 {
     display: flex;
     justify-content: flex-start;
@@ -65,14 +82,4 @@
 #di6 {
     display: flex;
     justify-content: flex-start;
-}
-
-#di7 {
-    display: flex;
-    justify-content: flex-end;
-}
-
-#di8 {
-    display: flex;
-    justify-content: flex-end;
 }

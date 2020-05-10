@@ -31,7 +31,7 @@
     text-decoration: none;
 }
 
-.NavBar a:hover {
+.NavBar .Item:hover {
     background-color: red;
 }
 
@@ -43,7 +43,6 @@
 
 .Right {
     display: flex;
-    float: right;
     height: 15px;
     width: 20px;
 }

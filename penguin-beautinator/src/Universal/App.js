@@ -42,8 +42,8 @@ MainApp.defaultProps = {
             {title: 'Tuns - par mediu', price: 15, length: 25},
             {title: 'Tuns - par lung', price: 20, length: 30}],
         manichiura: [
-            {title: 'Clasic', price: '25', length: 15},
-            {title: 'Semipermanenta', price: '50', length: 30}]
+            {title: 'Clasic', price: 25, length: 15},
+            {title: 'Semipermanenta', price: 50, length: 30}]
     }
 }
 
