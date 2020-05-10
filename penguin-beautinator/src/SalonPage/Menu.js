@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const Menu = (props) => {
     return(
         <div className={'Menu'}>
-            <img src={props.logo} className={'Logo'} alt={''}/>
+            {props.logo !== '' && <img src={props.logo} className={'Logo'} alt={'Salon logo'}/>}
             {Object.keys(props.sections).map((key, index) =>
                 <Item key={index} section={props.sections[key]} />
             )}
@@ -13,13 +13,9 @@ const Menu = (props) => {
     )
 }
 
-Menu.defaultProps = {
-    logo: ''
-}
-
 Menu.propTypes = {
     sections: PropTypes.objectOf(PropTypes.string).isRequired,
-    logo: PropTypes.string
+    logo: PropTypes.string.isRequired
 }
 
 export default Menu;

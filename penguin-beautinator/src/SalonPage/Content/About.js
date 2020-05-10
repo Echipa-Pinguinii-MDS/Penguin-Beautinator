@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const About = (props) => {
     return (
         <section className={'About'}>
-            <h3 className={'Section-title'}>{props.description ? props.title : ''}</h3>
+            <h3 className={'Section-title'}>{props.title}</h3>
             <p className={'Section-description'}>{props.description}</p>
         </section>
     )
@@ -12,7 +12,7 @@ const About = (props) => {
 
 About.propTypes = {
     title: PropTypes.string.isRequired,
-    description: PropTypes.string
+    description: PropTypes.string.isRequired
 };
 
 export default About;

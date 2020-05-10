@@ -17,10 +17,10 @@ const SalonPage = (props) => {
 SalonPage.propTypes = {
     sections: PropTypes.objectOf(PropTypes.string).isRequired,
     salon: PropTypes.shape({
-        src: PropTypes.string,
+        src: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        images: PropTypes.array,
+        description: PropTypes.string.isRequired,
+        images: PropTypes.array.isRequired,
         program: PropTypes.array.isRequired,
         phone: PropTypes.array.isRequired,
         email: PropTypes.array.isRequired,

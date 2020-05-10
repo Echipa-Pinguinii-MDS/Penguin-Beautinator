@@ -13,12 +13,14 @@ const Content = (props) => {
                    noFullStars={props.salon.noFullStars}
                    noReviews={props.salon.noReviews}
                    noDollars={props.salon.noDollars}/>
+            {props.salon.description !== '' &&
             <About title={props.sections.about}
-                   description={props.salon.description}/>
+                   description={props.salon.description}/>}
             <Services title={props.sections.services}
                       services={props.services}/>
+            {props.salon.images.length > 0 &&
             <Gallery title={props.sections.gallery}
-                     images={props.salon.images}/>
+                     images={props.salon.images}/> }
             <Contact title={props.sections.contact}
                      program={props.salon.program}
                      email={props.salon.email}
@@ -35,8 +37,8 @@ Content.propTypes = {
         noFullStars: PropTypes.number.isRequired,
         noReviews: PropTypes.number.isRequired,
         noDollars: PropTypes.number.isRequired,
-        description: PropTypes.string,
-        images: PropTypes.array,
+        description: PropTypes.string.isRequired,
+        images: PropTypes.array.isRequired,
         program: PropTypes.array.isRequired,
         phone: PropTypes.array.isRequired,
         email: PropTypes.array.isRequired,

@@ -11,8 +11,7 @@ const MainApp = (props) => {
             <SalonPicker salons={[props.salon]}/>
             <SalonPage sections={props.sections}
                        salon={props.salon}
-                       services={props.services}
-            />
+                       services={props.services}/>
         </div>
     )
 }
@@ -32,6 +31,7 @@ MainApp.defaultProps = {
         noDollars: 2,
         description: 'Lorem ipsum sit amet',
         address: 'Lorem Ipsum 10',
+        images: [],
         program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
         phone: ['07********', '031*******'],
         email: ['contact@salon.com']
