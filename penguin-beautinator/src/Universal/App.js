@@ -11,12 +11,12 @@ const MainApp = () => {
             <SalonPicker salons={[{
                     src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
                     name: 'Nume',
-                    address: 'Adresa',
-                    description: 'Descriere',
                     noFullStars: 3,
                     noReviews: 1,
-                    noDollars: 2
-                }]}/>
+                    noDollars: 2,
+                    description: 'Descriere',
+                    address: 'Adresa'
+            }]}/>
             <SalonPage sections={{
                             about: 'Despre noi',
                             services: 'Servicii',
@@ -26,8 +26,11 @@ const MainApp = () => {
                        salon={{
                            src: '',
                            name: 'Nume salon',
-                           address: 'Lorem Ipsum 10',
+                           noFullStars: 3,
+                           noReviews: 1,
+                           noDollars: 2,
                            description: 'Lorem ipsum sit amet',
+                           address: 'Lorem Ipsum 10',
                            services: {
                               coafor: [
                                   {title: 'Tuns - par scurt', price: 10, length: 20},

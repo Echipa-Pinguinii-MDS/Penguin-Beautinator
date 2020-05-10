@@ -9,10 +9,16 @@ import Services from './Content/Services';
 const Content = (props) => {
     return (
         <div className={'Content'}>
-            <Title name={props.salon.name}/>
-            <About title={props.sections.about} description={props.salon.description}/>
-            <Services title={props.sections.services} services={props.salon.services}/>
-            <Gallery title={props.sections.gallery} images={props.salon.images}/>
+            <Title name={props.salon.name}
+                   noFullStars={props.salon.noFullStars}
+                   noReviews={props.salon.noReviews}
+                   noDollars={props.salon.noDollars}/>
+            <About title={props.sections.about}
+                   description={props.salon.description}/>
+            <Services title={props.sections.services}
+                      services={props.salon.services}/>
+            <Gallery title={props.sections.gallery}
+                     images={props.salon.images}/>
             <Contact title={props.sections.contact}
                      program={props.salon.program}
                      email={props.salon.email}
@@ -26,6 +32,9 @@ Content.propTypes = {
     sections: PropTypes.objectOf(PropTypes.string),
     salon: PropTypes.shape({
         name: PropTypes.string.isRequired,
+        noFullStars: PropTypes.number.isRequired,
+        noReviews: PropTypes.number.isRequired,
+        noDollars: PropTypes.number.isRequired,
         description: PropTypes.string,
         services: PropTypes.array.isRequired,
         images: PropTypes.array,

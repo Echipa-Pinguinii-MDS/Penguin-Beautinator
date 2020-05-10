@@ -40,7 +40,7 @@ h3, h4 {
 
 .Title {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
 .About {
