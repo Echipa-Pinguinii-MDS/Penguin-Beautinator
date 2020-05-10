@@ -4,12 +4,17 @@ import Menu from './Menu.js';
 import Content from './Content';
 import './SalonPage.css';
 
-const SalonPage = (props) => {
+function SalonPage (props) {
+    function hasContent(section, salon) {
+        return !((section === 'about' && salon.description === '') ||
+            (section === 'gallery' && salon.images.length === 0));
+    }
+
     return (
         <article className={'SalonPage'}>
-            <Menu sections={props.sections} logo={props.salon.src}/>
+            <Menu sections={props.sections} salon={props.salon} hasContent={hasContent}/>
             <div className={'VerticalLine'}/>
-            <Content sections={props.sections} salon={props.salon} services={props.services}/>
+            <Content sections={props.sections} salon={props.salon} services={props.services} hasContent={hasContent}/>
         </article>
     )
 }

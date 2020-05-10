@@ -13,12 +13,12 @@ const Content = (props) => {
                    noFullStars={props.salon.noFullStars}
                    noReviews={props.salon.noReviews}
                    noDollars={props.salon.noDollars}/>
-            {props.salon.description !== '' &&
+            {props.hasContent('about', props.salon) &&
             <About title={props.sections.about}
                    description={props.salon.description}/>}
             <Services title={props.sections.services}
                       services={props.services}/>
-            {props.salon.images.length > 0 &&
+            {props.hasContent('gallery', props.salon) &&
             <Gallery title={props.sections.gallery}
                      images={props.salon.images}/> }
             <Contact title={props.sections.contact}
