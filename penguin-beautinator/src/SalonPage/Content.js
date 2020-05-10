@@ -16,7 +16,7 @@ const Content = (props) => {
             <About title={props.sections.about}
                    description={props.salon.description}/>
             <Services title={props.sections.services}
-                      services={props.salon.services}/>
+                      services={props.services}/>
             <Gallery title={props.sections.gallery}
                      images={props.salon.images}/>
             <Contact title={props.sections.contact}
@@ -36,13 +36,13 @@ Content.propTypes = {
         noReviews: PropTypes.number.isRequired,
         noDollars: PropTypes.number.isRequired,
         description: PropTypes.string,
-        services: PropTypes.array.isRequired,
         images: PropTypes.array,
         program: PropTypes.array.isRequired,
         phone: PropTypes.array.isRequired,
         email: PropTypes.array.isRequired,
         address: PropTypes.string.isRequired
-    })
+    }).isRequired,
+    services: PropTypes.objectOf(PropTypes.array).isRequired
 }
 
 export default Content;

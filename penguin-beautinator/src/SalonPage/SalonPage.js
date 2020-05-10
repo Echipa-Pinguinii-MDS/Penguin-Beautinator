@@ -9,13 +9,9 @@ const SalonPage = (props) => {
         <article className={'SalonPage'}>
             <Menu sections={props.sections} logo={props.salon.src}/>
             <div className={'VerticalLine'}/>
-            <Content sections={props.sections} salon={props.salon}/>
+            <Content sections={props.sections} salon={props.salon} services={props.services}/>
         </article>
     )
-}
-
-SalonPage.defaultProps = {
-    sections: {about: 'Despre noi', services: 'Servicii', gallery: 'Galerie', contact: 'Contact'}
 }
 
 SalonPage.propTypes = {
@@ -24,13 +20,13 @@ SalonPage.propTypes = {
         src: PropTypes.string,
         name: PropTypes.string.isRequired,
         description: PropTypes.string,
-        services: PropTypes.array.isRequired,
         images: PropTypes.array,
         program: PropTypes.array.isRequired,
         phone: PropTypes.array.isRequired,
         email: PropTypes.array.isRequired,
         address: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    services: PropTypes.objectOf(PropTypes.array).isRequired
 }
 
 export default SalonPage;
