@@ -1,10 +1,5 @@
 .MainApp {
     font-family: 'Open Sans', sans-serif;
-    top: -20px;
-    left: -20px;
-    right: -40px;
-    bottom: -40px;
-    margin-top: 50px;
     width: auto;
     height: auto;
     background-size: cover;
@@ -13,7 +8,6 @@
 }
 
 .NavBar {
-    padding: 5px;
     display: flex;
     flex-direction: row;
     top: 0;
@@ -22,27 +16,41 @@
     position: fixed;
     overflow: hidden;
     background-color: white;
+    align-items: center;
 }
 
-.NavBar a {
-    font-size: 16px;
+.Item {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.Item img {
+    padding: 5px;
+    align-self: center;
+}
+
+.Item h2 {
+    font-size: 15px;
     color: grey;
-    text-align: center;
     text-decoration: none;
 }
 
-.NavBar .Item:hover {
+.Item:hover {
     background-color: red;
 }
 
 .Left {
-    float: left;
     height: 15px;
-    width: 20px;
+    width: 15px;
 }
 
 .Right {
-    display: flex;
-    height: 15px;
+    height: 20px;
     width: 20px;
+}
+
+.AppPage {
+    padding: 10px;
+    margin-top: 50px;
 }

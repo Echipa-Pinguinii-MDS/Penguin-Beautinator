@@ -1,5 +1,4 @@
 import React from 'react';
-import Item from '../Universal/Item';
 import PropTypes from "prop-types";
 
 const Menu = (props) => {
@@ -7,7 +6,7 @@ const Menu = (props) => {
         <div className={'Menu'}>
             {props.salon.src !== '' && <img src={props.salon.src} className={'Logo'} alt={'Salon logo'}/>}
             {Object.keys(props.sections).map(key =>
-               props.hasContent(key, props.salon) ? <Item key={key} section={props.sections[key]}/> : ''
+                props.hasContent(key, props.salon) && <h3>{props.sections[key]}</h3>
             )}
         </div>
     )

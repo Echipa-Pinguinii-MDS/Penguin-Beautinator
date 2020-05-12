@@ -1,8 +1,6 @@
 .SalonPicker {
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    overflow: hidden;
     width: 90%;
 }
 
