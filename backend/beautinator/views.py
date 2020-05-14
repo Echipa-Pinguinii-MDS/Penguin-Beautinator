@@ -127,10 +127,13 @@ def add_service(request):
                        open_timeslots=open_timeslots, available_timeslots=available_timeslots)
     service.save()
 
+
 """Daca user-ul si parola sunt bune returneaza
 id ul user-ului precedat de 'u' 
 Daca doar parola nu e buna returneaza check_password false
 Daca user-ul nu e bun returneaza check_user false"""
+
+
 def user_login(request):
     email = request.POST['user_email']
     password = request.POST['user_password']
@@ -152,6 +155,8 @@ def user_login(request):
 id ul salonului precedat de 's' 
 Daca doar parola nu e buna returneaza check_password false
 Daca salonul nu e bun returneaza check_user false"""
+
+
 def salon_login(request):
     email = request.POST['user_email']
     password = request.POST['user_password']
@@ -167,4 +172,3 @@ def salon_login(request):
             return JsonResponse({"check_password": False})
         output = 's' + current_id
         return JsonResponse({"user_id": output})
-
