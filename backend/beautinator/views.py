@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.core import serializers
 
 from .models import Users, Salons, Services, Appointments
 
@@ -33,7 +34,8 @@ def user_data_by_id(request):
 
 def salons_list(request):
     salons = Salons.objects.all()
-    return JsonResponse({"salons_list": list(salons)})
+    json_value = serializers.serialize('json', salons)
+    return JsonResponse({"salons_list": json_value})
 
 
 def all_services(request):
