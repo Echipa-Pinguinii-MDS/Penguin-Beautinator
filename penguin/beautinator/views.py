@@ -9,34 +9,6 @@ def check_email(request):
     return JsonResponse({"check_email": Users.objects.filter(email=email).exists()})
 
 
-def check_password(request):
-    email = request.POST['user_email']
-    password = request.POST['user_password']
-
-    try:
-        user = Users.objects.get(email=email)
-    except (KeyError, Users.DoesNotExist):
-        return JsonResponse({"check_password": None})
-    else:
-        if password == user.password:
-            correct = True
-        else:
-            correct = False
-        return JsonResponse({"check_password": correct})
-
-    # ai ambele varinate, vezi care iti place si foloseste-o
-    # eu as recomanda-o pe prima
-    # if not check_email(email):
-    #     return JsonResponse({"check_password": "User doesn't exist"})
-    # else:
-    #     user = Users.objects.get(email = email)
-    #     if password == user.password:
-    #         correct = True
-    #     else:
-    #         correct = False
-    #     return JsonResponse({"check_password": correct})
-
-
 def user_data_by_email(request):
     user_email = request.POST['user_email']
 
@@ -154,3 +126,45 @@ def add_service(request):
     service = Services(salon=salon, employee=employee, title=title, description=description, price=price,
                        open_timeslots=open_timeslots, available_timeslots=available_timeslots)
     service.save()
+
+"""Daca user-ul si parola sunt bune returneaza
+id ul user-ului precedat de 'u' 
+Daca doar parola nu e buna returneaza check_password false
+Daca user-ul nu e bun returneaza check_user false"""
+def user_login(request):
+    email = request.POST['user_email']
+    password = request.POST['user_password']
+
+    try:
+        user = Users.objects.get(email=email)
+    except (KeyError, Users.DoesNotExist):
+        return JsonResponse({"check_user": False})
+    else:
+        if password == user.password:
+            current_id = user.pk
+        else:
+            return JsonResponse({"check_password": False})
+        output = 'u' + current_id
+        return JsonResponse({"user_id": output})
+
+
+"""Daca salonul si parola sunt bune returneaza
+id ul salonului precedat de 's' 
+Daca doar parola nu e buna returneaza check_password false
+Daca salonul nu e bun returneaza check_user false"""
+def salon_login(request):
+    email = request.POST['user_email']
+    password = request.POST['user_password']
+
+    try:
+        salon = Salons.objects.get(email=email)
+    except (KeyError, Salons.DoesNotExist):
+        return JsonResponse({"check_user": False})
+    else:
+        if password == salon.password:
+            current_id = salon.pk
+        else:
+            return JsonResponse({"check_password": False})
+        output = 's' + current_id
+        return JsonResponse({"user_id": output})
+
