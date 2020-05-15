@@ -32,6 +32,8 @@ result.data;
 result.data['label']
 ```
 
+Mai multe detalii [aici](https://github.com/axios/axios/blob/master/README.md).
+
 ---
 
 Cookies
