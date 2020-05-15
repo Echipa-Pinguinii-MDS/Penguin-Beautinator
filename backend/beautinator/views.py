@@ -21,8 +21,8 @@ def user_data_by_email(request):
         return JsonResponse({"user_data": model_to_dict(data)})
 
 
-def user_data_by_id(request):
-    user_id = request.POST['user_id']
+def user_data_by_id(request, user_id):
+    #user_id = request.POST['pk']
 
     try:
         data = Users.objects.get(id=user_id)
@@ -42,15 +42,24 @@ def all_services(request):
     return JsonResponse({"all_services": list(services)})
 
 
-def salon_services(request):
-    salon_id = request.POST['salon_id']
+def salon_data_by_id(request, salon_id):
+    try:
+        data = Salons.objects.get(id=salon_id)
+    except (KeyError, Salons.DoesNotExist):
+        return JsonResponse({"salon_data": None})
+    else:
+        return JsonResponse({"salon_data": model_to_dict(data)})
+
+
+def salon_services(request, salon_id):
+    #salon_id = request.POST['salon_id']
 
     services = Services.objects.filter(salon=salon_id).values()
     return JsonResponse({"salon_services": list(services)})
 
 
-def user_appointments(request):
-    user_id = request.POST['user_id']
+def user_appointments(request, user_id):
+    #user_id = request.POST['user_id']
 
     appts = Appointments.objects.filter(client=user_id).values()
     return JsonResponse({"user_appointments": list(appts)})
