@@ -1,18 +1,14 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import Review from '../../SalonPicker/Review';
 
 const Title = (props) => {
     return (
-        < section;
-    className = {'Title'} >
-        < h2 > {props.name} < /h2>
-        < Review;
-    noFullStars = {props.noFullStars};
-    noReviews = {props.noReviews};
-    noDollars = {props.noDollars};
-    />
-    < /section>;
-)
+        <section className={'Title'}>
+            <h2>{props.name}</h2>
+            <Review noFullStars={props.noFullStars} noReviews={props.noReviews} noDollars={props.noDollars}/>
+        </section>
+    )
 };
 
 Title.propTypes = {

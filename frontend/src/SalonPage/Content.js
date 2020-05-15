@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import Title from './Content/Title';
 import About from './Content/About';
@@ -7,40 +8,27 @@ import Services from './Content/Services';
 
 const Content = (props) => {
     return (
-        < div;
-    className = {'Content'} >
-        < Title;
-    name = {props.salon.name};
-    noFullStars = {props.salon.noFullStars};
-    noReviews = {props.salon.noReviews};
-    noDollars = {props.salon.noDollars}
-    />;
-    {
-        props.hasContent('about', props.salon) &&
-        < About;
-        title = {props.sections.about};
-        description = {props.salon.description};
-        />}
-        < Services;
-        title = {props.sections.services};
-        services = {props.services}
-        />;
-        {
-            props.hasContent('gallery', props.salon) &&
-            < Gallery;
-            title = {props.sections.gallery};
-            images = {props.salon.images};
-            /> }
-            < Contact;
-            title = {props.sections.contact};
-            program = {props.salon.program};
-            email = {props.salon.email};
-            phone = {props.salon.phone};
-            address = {props.salon.address};
-            />
-            < /div>;
-        )
-};
+        <div className={'Content'}>
+            <Title name={props.salon.name}
+                   noFullStars={props.salon.noFullStars}
+                   noReviews={props.salon.noReviews}
+                   noDollars={props.salon.noDollars}/>
+            {props.hasContent('about', props.salon) &&
+            <About title={props.sections.about}
+                   description={props.salon.description}/>}
+            <Services title={props.sections.services}
+                      services={props.services}/>
+            {props.hasContent('gallery', props.salon) &&
+            <Gallery title={props.sections.gallery}
+                     images={props.salon.images}/> }
+            <Contact title={props.sections.contact}
+                     program={props.salon.program}
+                     email={props.salon.email}
+                     phone={props.salon.phone}
+                     address={props.salon.address}/>
+        </div>
+    )
+}
 
 Content.propTypes = {
     sections: PropTypes.objectOf(PropTypes.string),
@@ -57,6 +45,6 @@ Content.propTypes = {
         address: PropTypes.string.isRequired
     }).isRequired,
     services: PropTypes.objectOf(PropTypes.array).isRequired
-};
+}
 
 export default Content;

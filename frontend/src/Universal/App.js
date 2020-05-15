@@ -1,3 +1,4 @@
+import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import NavBar from './NavBar';
 import PenguinBeautinator from '../PenguinBeautinator/PenguinBeautinator';
@@ -8,45 +9,25 @@ import SalonPage from "../SalonPage/SalonPage";
 
 const MainApp = (props) => {
     return (
-        < Router;
-    className = {'MainApp'} >
-        < NavBar / >
-        < div;
-    className = {'AppPage'} >
-        < Route;
-    path = {'/desprenoi'} > < PenguinBeautinator / > < /Route>
-        < Route;
-    exact;
-    path = {'/saloane'} > < SalonPicker;
-    salons = {props.salons};
-    /> </;
-    Route >
-    < Route;
-    path = {'/programari'};
-    />
-    < Route;
-    path = {'/login'} > < Login / > < /Route>
-        < Route;
-    path = {'/signup'}
-    />;
-    {
-        props.salons.map(salon =>
-        < Route;
-        key = {salon.name};
-        path = {'/' +salon.name} >
-            < SalonPage;
-        sections = {props.sections};
-        salon = {salon};
-        services = {props.services};
-        />
-        < /Route>;
+        <Router className={'MainApp'}>
+            <NavBar/>
+            <div className={'AppPage'}>
+                <Route path={'/desprenoi'}> <PenguinBeautinator/> </Route>
+                <Route exact path={'/saloane'}> <SalonPicker salons={props.salons}/> </Route>
+                <Route path={'/programari'}/>
+                <Route path={'/login'}> <Login/> </Route>
+                <Route path={'/signup'}/>
+                {props.salons.map(salon =>
+                    <Route key={salon.name} path={'/' + salon.name}>
+                        <SalonPage sections={props.sections}
+                                   salon={salon}
+                                   services={props.services}/>
+                    </Route>
+                )}
+            </div>
+        </Router>
     )
-    }
-<
-    /div>
-    < /Router>;
-)
-};
+}
 
 MainApp.defaultProps = {
     sections: {
@@ -77,6 +58,6 @@ MainApp.defaultProps = {
             {title: 'Clasic', price: 25, length: 15},
             {title: 'Semipermanenta', price: 50, length: 30}]
     }
-};
+}
 
 export default MainApp;

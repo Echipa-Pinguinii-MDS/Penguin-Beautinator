@@ -1,3 +1,4 @@
+import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SalonCard from './SalonCard';
@@ -5,26 +6,21 @@ import './SalonPicker.css';
 
 const SalonPicker = (props) => {
     return (
-        < div;
-    className = {'SalonPicker'} >
-        {
-            props.salons.map(salon =>
-                < Link to = {salon.name} key = {salon.name} >
-            < SalonCard src = {salon.src}
-            name = {salon.name}
-            address = {salon.address}
-            description = {salon.description}
-            noFullStars = {salon.noFullStars}
-            noReviews = {salon.noReviews}
-            noDollars = {salon.noDollars};
-    />
-    < /Link>;
-)
+        <div className={'SalonPicker'}>
+            {props.salons.map(salon =>
+                <Link to={salon.name} key={salon.name}>
+                    <SalonCard src={salon.src}
+                               name={salon.name}
+                               address={salon.address}
+                               description={salon.description}
+                               noFullStars={salon.noFullStars}
+                               noReviews={salon.noReviews}
+                               noDollars={salon.noDollars}/>
+                </Link>
+            )}
+        </div>
+    )
 }
-<
-    /div>;
-)
-};
 
 SalonPicker.defaultProps = {
     sections: {
@@ -42,10 +38,10 @@ SalonPicker.defaultProps = {
             {title: 'Clasic', price: 25, length: 15},
             {title: 'Semipermanenta', price: 50, length: 30}]
     }
-};
+}
 
 SalonPicker.propTypes = {
     salons: PropTypes.array.isRequired
-};
+}
 
 export default SalonPicker;

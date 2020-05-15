@@ -1,33 +1,22 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import Menu from './Menu.js';
 import Content from './Content';
 import './SalonPage.css';
 
-function SalonPage(props) {
+function SalonPage (props) {
     function hasContent(section, salon) {
         return !((section === 'about' && salon.description === '') ||
             (section === 'gallery' && salon.images.length === 0));
     }
 
     return (
-        < article;
-    className = {'SalonPage'} >
-        < Menu;
-    sections = {props.sections};
-    salon = {props.salon};
-    hasContent = {hasContent};
-    />
-    < div;
-    className = {'VerticalLine'};
-    />
-    < Content;
-    sections = {props.sections};
-    salon = {props.salon};
-    services = {props.services};
-    hasContent = {hasContent};
-    />
-    < /article>;
-)
+        <article className={'SalonPage'}>
+            <Menu sections={props.sections} salon={props.salon} hasContent={hasContent}/>
+            <div className={'VerticalLine'}/>
+            <Content sections={props.sections} salon={props.salon} services={props.services} hasContent={hasContent}/>
+        </article>
+    )
 }
 
 SalonPage.propTypes = {
@@ -43,6 +32,6 @@ SalonPage.propTypes = {
         address: PropTypes.string.isRequired
     }).isRequired,
     services: PropTypes.objectOf(PropTypes.array).isRequired
-};
+}
 
 export default SalonPage;

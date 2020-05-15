@@ -1,5 +1,5 @@
-import {useState} from "react";
-import {Button, FormControl, FormGroup, FormLabel} from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./Login.css";
 
 export default function Login() {
@@ -15,47 +15,29 @@ export default function Login() {
     }
 
     return (
-        < div;
-    className = "Login" >
-        < form;
-    onSubmit = {handleSubmit} >
-        < FormGroup;
-    controlId = "email";
-    bssize = "large" >
-        < FormLabel > Email < /FormLabel>
-        < FormControl;
-    autoFocus;
-    type = "email";
-    value = {email};
-    onChange = {e;
-=>
-    setEmail(e.target.value)
-}
-    />
-    < /FormGroup>
-    < FormGroup;
-    controlId = "password";
-    bsSize = "large" >
-        < FormLabel > Password < /FormLabel>
-        < FormControl;
-    value = {password};
-    onChange = {e;
-=>
-    setPassword(e.target.value)
-}
-    type = "password"
-        / >
-        < /FormGroup>
-        < Button;
-    block;
-    bssize = "large";
-    disabled = {;
-    !validateForm()
-}
-    type = "submit" >
-        Login
-        < /Button>
-        < /form>
-        < /div>;
-)
+        <div className="Login">
+            <form onSubmit={handleSubmit}>
+                <FormGroup controlId="email" bssize="large">
+                    <FormLabel>Email</FormLabel>
+                    <FormControl
+                        autoFocus
+                        type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                </FormGroup>
+                <FormGroup controlId="password" bsSize="large">
+                    <FormLabel>Password</FormLabel>
+                    <FormControl
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        type="password"
+                    />
+                </FormGroup>
+                <Button block bssize="large" disabled={!validateForm()} type="submit">
+                    Login
+                </Button>
+            </form>
+        </div>
+    );
 }
