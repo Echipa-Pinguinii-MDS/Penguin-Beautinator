@@ -1,5 +1,5 @@
+from django.forms.models import model_to_dict
 from django.http import JsonResponse
-from django.core import serializers
 
 from .models import Users, Salons, Services, Appointments
 
@@ -18,7 +18,7 @@ def user_data_by_email(request):
     except (KeyError, Users.DoesNotExist):
         return JsonResponse({"user_data": None})
     else:
-        return JsonResponse({"user_data": list(data)})
+        return JsonResponse({"user_data": model_to_dict(data)})
 
 
 def user_data_by_id(request):
@@ -29,31 +29,30 @@ def user_data_by_id(request):
     except (KeyError, Users.DoesNotExist):
         return JsonResponse({"user_data": None})
     else:
-        return JsonResponse({"user_data": list(data)})
+        return JsonResponse({"user_data": model_to_dict(data)})
 
 
 def salons_list(request):
-    salons = Salons.objects.all()
-    json_value = serializers.serialize('json', salons)
-    return JsonResponse({"salons_list": json_value})
+    salons = Salons.objects.values()
+    return JsonResponse({"salons_list": list(salons)})
 
 
 def all_services(request):
-    services = Services.objects.all()
+    services = Services.objects.values()
     return JsonResponse({"all_services": list(services)})
 
 
 def salon_services(request):
     salon_id = request.POST['salon_id']
 
-    services = Services.objects.filter(salon=salon_id)
+    services = Services.objects.filter(salon=salon_id).values()
     return JsonResponse({"salon_services": list(services)})
 
 
 def user_appointments(request):
     user_id = request.POST['user_id']
 
-    appts = Appointments.objects.filter(client=user_id)
+    appts = Appointments.objects.filter(client=user_id).values()
     return JsonResponse({"user_appointments": list(appts)})
 
 
@@ -63,7 +62,7 @@ def service_open_timeslots(request):
 
     open = Services.objects.get(id=service_id)
     # string de 0 si 1
-    return JsonResponse({"open_timeslots": open[0].open_timeslots})
+    return JsonResponse({"open_timeslots": open.open_timeslots})
 
 
 # timesloturile libere din orar
@@ -72,7 +71,7 @@ def service_available_timeslots(request):
 
     available = Services.objects.get(id=service_id)
     # string de 0 si 1
-    return JsonResponse({"open_timeslots": available[0].available_timeslots})
+    return JsonResponse({"open_timeslots": available.available_timeslots})
 
 
 # returneaza None daca nu exista sau un int ce reprezinta un timeslot
@@ -81,7 +80,7 @@ def service_next_available_timeslot(request):
     current_timeslot = request.POST['current_timeslot']
 
     available = Services.objects.get(id=service_id)
-    availablestr = available[0].available_timeslots
+    availablestr = available.available_timeslots
     for i in range(current_timeslot + 1, len(availablestr)):
         if availablestr[i] == 1:
             return JsonResponse({"next_available_timeslot": i})
@@ -149,7 +148,7 @@ def user_login(request):
             current_id = user.pk
         else:
             return JsonResponse({"check_password": False})
-        output = 'u' + current_id
+        output = 'u' + str(current_id)
         return JsonResponse({"user_id": output})
 
 
@@ -172,5 +171,5 @@ def salon_login(request):
             current_id = salon.pk
         else:
             return JsonResponse({"check_password": False})
-        output = 's' + current_id
+        output = 's' + str(current_id)
         return JsonResponse({"user_id": output})
