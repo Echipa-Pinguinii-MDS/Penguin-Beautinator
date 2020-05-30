@@ -21,8 +21,8 @@ def user_data_by_email(request):
         return JsonResponse({"user_data": model_to_dict(data)})
 
 
-def user_data_by_id(request, user_id):
-    #user_id = request.POST['pk']
+def user_data_by_id(request):
+    user_id = request.POST['user_id']
 
     try:
         data = Users.objects.get(id=user_id)
@@ -58,8 +58,8 @@ def salon_services(request, salon_id):
     return JsonResponse({"salon_services": list(services)})
 
 
-def user_appointments(request, user_id):
-    #user_id = request.POST['user_id']
+def user_appointments(request):
+    user_id = request.POST['user_id']
 
     appts = Appointments.objects.filter(client=user_id).values()
     return JsonResponse({"user_appointments": list(appts)})
