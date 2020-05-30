@@ -27,6 +27,7 @@ def user_data_by_email(request):
 def user_data_by_id(request):
     data = json.loads(request.body.decode('utf-8'))
     user_id = data['user_id']
+    user_id = int(user_id[1:])
 
     try:
         data = Users.objects.get(id=user_id)
@@ -49,6 +50,7 @@ def all_services(request):
 def salon_data_by_id(request, salon_id):
     # data = json.loads(request.body.decode('utf-8'))
     # salon_id = data['salon_id']
+    salon_id = int(salon_id[1:])
 
     try:
         data = Salons.objects.get(id=salon_id)
@@ -61,6 +63,7 @@ def salon_data_by_id(request, salon_id):
 def salon_services(request, salon_id):
     # data = json.loads(request.body.decode('utf-8'))
     # salon_id = data['salon_id']
+    salon_id = int(salon_id[1:])
 
     services = Services.objects.filter(salon=salon_id).values()
     return JsonResponse({"salon_services": list(services)})
@@ -69,6 +72,7 @@ def salon_services(request, salon_id):
 def user_appointments(request):
     data = json.loads(request.body.decode('utf-8'))
     user_id = data['user_id']
+    user_id = int(user_id[1:])
 
     appts = Appointments.objects.filter(client=user_id).values()
     return JsonResponse({"user_appointments": list(appts)})
@@ -151,6 +155,7 @@ def add_service(request):
     service = Services(salon=salon, employee=employee, title=title, description=description, price=price,
                        open_timeslots=open_timeslots, available_timeslots=available_timeslots)
     service.save()
+    # return JsonResponse(model_to_dict(service))
 
 
 """Daca user-ul si parola sunt bune returneaza
@@ -198,4 +203,4 @@ def salon_login(request):
         else:
             return JsonResponse({"check_password": False})
         output = 's' + str(current_id)
-        return JsonResponse({"user_id": output})
+        return JsonResponse({"salon_id": output})
