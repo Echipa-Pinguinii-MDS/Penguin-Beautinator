@@ -1,12 +1,20 @@
 import React from 'react';
-import PropTypes from "prop-types";
+import Scroll from 'react-scroll';
+import PropTypes from 'prop-types';
 
 const Menu = (props) => {
     return(
         <div className={'Menu'}>
             {props.salon.src !== '' && <img src={props.salon.src} className={'Logo'} alt={'Salon logo'}/>}
             {Object.keys(props.sections).map(key =>
-                props.hasContent(key, props.salon) && <h3 key={key}>{props.sections[key]}</h3>
+                props.hasContent(key, props.salon) &&
+                <Scroll.Link key={key}
+                             to={key}
+                             spy={true}
+                             smooth={true}
+                             duration={500}>
+                    <h3>{props.sections[key]}</h3>
+                </Scroll.Link>
             )}
         </div>
     )

@@ -3,9 +3,9 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import NavBar from './NavBar';
 import PenguinBeautinator from '../PenguinBeautinator/PenguinBeautinator';
 import SalonPicker from '../SalonPicker/SalonPicker';
+import SalonPage from '../SalonPage/SalonPage';
 import Login from '../Login/Login';
 import './Universal.css';
-import SalonPage from "../SalonPage/SalonPage";
 
 const MainApp = (props) => {
     return (

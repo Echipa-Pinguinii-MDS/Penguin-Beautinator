@@ -1,4 +1,5 @@
 import React from 'react';
+import {Element} from 'react-scroll';
 import PropTypes from 'prop-types';
 import Title from './Content/Title';
 import About from './Content/About';
@@ -8,24 +9,38 @@ import Services from './Content/Services';
 
 const Content = (props) => {
     return (
-        <div className={'Content'}>
-            <Title name={props.salon.name}
-                   noFullStars={props.salon.noFullStars}
-                   noReviews={props.salon.noReviews}
-                   noDollars={props.salon.noDollars}/>
-            {props.hasContent('about', props.salon) &&
-            <About title={props.sections.about}
-                   description={props.salon.description}/>}
-            <Services title={props.sections.services}
-                      services={props.services}/>
-            {props.hasContent('gallery', props.salon) &&
-            <Gallery title={props.sections.gallery}
-                     images={props.salon.images}/> }
-            <Contact title={props.sections.contact}
-                     program={props.salon.program}
-                     email={props.salon.email}
-                     phone={props.salon.phone}
-                     address={props.salon.address}/>
+        <div  className={'Content'}>
+            <React.Fragment>
+                <Title name={props.salon.name}
+                       noFullStars={props.salon.noFullStars}
+                       noReviews={props.salon.noReviews}
+                       noDollars={props.salon.noDollars}/>
+
+                <Element id={'about'}>
+                    {props.hasContent('about', props.salon) &&
+                    <About title={props.sections.about}
+                           description={props.salon.description}/>}
+                </Element>
+
+                <Element id={'services'}>
+                    <Services title={props.sections.services}
+                              services={props.services}/>
+                </Element>
+
+                <Element id={'gallery'}>
+                {props.hasContent('gallery', props.salon) &&
+                    <Gallery title={props.sections.gallery}
+                             images={props.salon.images}/> }
+                </Element>
+
+                <Element id={'contact'}>
+                    <Contact title={props.sections.contact}
+                             program={props.salon.program}
+                             email={props.salon.email}
+                             phone={props.salon.phone}
+                             address={props.salon.address}/>
+                </Element>
+            </React.Fragment>
         </div>
     )
 }
