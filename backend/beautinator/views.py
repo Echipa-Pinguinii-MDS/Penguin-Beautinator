@@ -1,28 +1,33 @@
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
+import json
 
 from .models import Users, Salons, Services, Appointments
 
 
 def check_email(request):
-    email = request.POST['user_email']
+    data = json.loads(request.body.decode('utf-8'))
+    email = data['user_email']
 
     return JsonResponse({"check_email": Users.objects.filter(email=email).exists()})
 
 
 def user_data_by_email(request):
-    user_email = request.POST['user_email']
+    data = json.loads(request.body.decode('utf-8'))
+    email = data['user_email']
 
     try:
-        data = Users.objects.get(email=user_email)
+        data = Users.objects.get(email=email)
     except (KeyError, Users.DoesNotExist):
         return JsonResponse({"user_data": None})
     else:
         return JsonResponse({"user_data": model_to_dict(data)})
 
 
-def user_data_by_id(request, user_id):
-    #user_id = request.POST['pk']
+def user_data_by_id(request):
+    data = json.loads(request.body.decode('utf-8'))
+    user_id = data['user_id']
+    user_id = int(user_id[1:])
 
     try:
         data = Users.objects.get(id=user_id)
@@ -43,6 +48,10 @@ def all_services(request):
 
 
 def salon_data_by_id(request, salon_id):
+    # data = json.loads(request.body.decode('utf-8'))
+    # salon_id = data['salon_id']
+    salon_id = int(salon_id[1:])
+
     try:
         data = Salons.objects.get(id=salon_id)
     except (KeyError, Salons.DoesNotExist):
@@ -52,14 +61,18 @@ def salon_data_by_id(request, salon_id):
 
 
 def salon_services(request, salon_id):
-    #salon_id = request.POST['salon_id']
+    # data = json.loads(request.body.decode('utf-8'))
+    # salon_id = data['salon_id']
+    salon_id = int(salon_id[1:])
 
     services = Services.objects.filter(salon=salon_id).values()
     return JsonResponse({"salon_services": list(services)})
 
 
-def user_appointments(request, user_id):
-    #user_id = request.POST['user_id']
+def user_appointments(request):
+    data = json.loads(request.body.decode('utf-8'))
+    user_id = data['user_id']
+    user_id = int(user_id[1:])
 
     appts = Appointments.objects.filter(client=user_id).values()
     return JsonResponse({"user_appointments": list(appts)})
@@ -67,7 +80,8 @@ def user_appointments(request, user_id):
 
 # timesloturile din orar
 def service_open_timeslots(request):
-    service_id = request.POST['service_id']
+    data = json.loads(request.body.decode('utf-8'))
+    service_id = data['service_id']
 
     open = Services.objects.get(id=service_id)
     # string de 0 si 1
@@ -76,7 +90,8 @@ def service_open_timeslots(request):
 
 # timesloturile libere din orar
 def service_available_timeslots(request):
-    service_id = request.POST['service_id']
+    data = json.loads(request.body.decode('utf-8'))
+    service_id = data['service_id']
 
     available = Services.objects.get(id=service_id)
     # string de 0 si 1
@@ -85,8 +100,9 @@ def service_available_timeslots(request):
 
 # returneaza None daca nu exista sau un int ce reprezinta un timeslot
 def service_next_available_timeslot(request):
-    service_id = request.POST['service_id']
-    current_timeslot = request.POST['current_timeslot']
+    data = json.loads(request.body.decode('utf-8'))
+    service_id = data['service_id']
+    current_timeslot = data['current_timeslot']
 
     available = Services.objects.get(id=service_id)
     availablestr = available.available_timeslots
@@ -97,20 +113,22 @@ def service_next_available_timeslot(request):
 
 
 def add_user(request):
-    email = request.POST['user_email']
-    password = request.POST['user_password']
-    first_name = request.POST['user_first_name']
-    last_name = request.POST['user_last_name']
+    data = json.loads(request.body.decode('utf-8'))
+    email = data['user_email']
+    password = data['user_password']
+    first_name = data['user_first_name']
+    last_name = data['user_last_name']
 
     user = Users(email=email, password=password, first_name=first_name, last_name=last_name)
     user.save()
 
 
 def add_salon(request):
-    email = request.POST['salon_email']
-    password = request.POST['salon_password']
-    name = request.POST['salon_name']
-    address = request.POST['salon_address']
+    data = json.loads(request.body.decode('utf-8'))
+    email = data['salon_email']
+    password = data['salon_password']
+    name = data['salon_name']
+    address = data['salon_address']
 
     # Cam asa ar trebui sa arate asta, altfel nu salveaza, dar nu-s sigura de sintaxa
     # salon = Salons.objects.create(email=email, password=password, name=name, address=address)
@@ -121,21 +139,23 @@ def add_salon(request):
 
 
 def add_service(request):
-    salon = request.POST['salon_id']
-    employee = request.POST['service_employee']
-    title = request.POST['service_title']
-    description = request.POST['service_description']
-    price = request.POST['service_price']
+    data = json.loads(request.body.decode('utf-8'))
+    salon = data['salon_id']
+    employee = data['service_employee']
+    title = data['service_title']
+    description = data['service_description']
+    price = data['service_price']
     # Tine cont ca e mai probabil sa primesti orar pentru tot salonul si sa trebuiasca mutat de mana aici
     # De asemenea ar trebui sa tinem cont ca probabil frontendul nu o sa fie sa trimita direct stringul pt asta
     # ci o lista de ore, dar vorbim cu ei
-    open_timeslots = request.POST['service_open_timeslots']
+    open_timeslots = data['service_open_timeslots']
     # Putin probabil sa vina deja cu chestii ocupate atunci cand e adaugat
-    available_timeslots = request.POST['service_available_timeslots']
+    available_timeslots = data['service_available_timeslots']
 
     service = Services(salon=salon, employee=employee, title=title, description=description, price=price,
                        open_timeslots=open_timeslots, available_timeslots=available_timeslots)
     service.save()
+    # return JsonResponse(model_to_dict(service))
 
 
 """Daca user-ul si parola sunt bune returneaza
@@ -145,8 +165,9 @@ Daca user-ul nu e bun returneaza check_user false"""
 
 
 def user_login(request):
-    email = request.POST['user_email']
-    password = request.POST['user_password']
+    data = json.loads(request.body.decode('utf-8'))
+    email = data['user_email']
+    password = data['user_password']
 
     try:
         user = Users.objects.get(email=email)
@@ -168,8 +189,9 @@ Daca salonul nu e bun returneaza check_user false"""
 
 
 def salon_login(request):
-    email = request.POST['user_email']
-    password = request.POST['user_password']
+    data = json.loads(request.body.decode('utf-8'))
+    email = data['user_email']
+    password = data['user_password']
 
     try:
         salon = Salons.objects.get(email=email)
@@ -181,4 +203,4 @@ def salon_login(request):
         else:
             return JsonResponse({"check_password": False})
         output = 's' + str(current_id)
-        return JsonResponse({"user_id": output})
+        return JsonResponse({"salon_id": output})
