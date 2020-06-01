@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, Label, Form, Input } from "reactstrap";
+import { Button, Form } from "react-bootstrap";
 import "./Login.css";
 import axios from "axios";
 
@@ -15,6 +15,9 @@ export default class Login extends Component{
             wrongEmail: false,
             wrongPassword: false,
         };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     resetWrong() {
@@ -72,37 +75,38 @@ export default class Login extends Component{
         }).catch(function (error) {
             console.log(error);
         });
+        event.preventDefault();
     }
 
     render() {
         return (
             <div className="Login">
-                <Form>
-                    <FormGroup>
-                        <Label>Email</Label>
-                        <Input
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group controlId="email">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
                             autoFocus
                             type="email"
                             name="email"
+                            placeholder="Enter email"
                             value={this.state.email}
-                            onChange={this.handleChange.bind(this)}
-                            placeholder="Enter your email"
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>Password</Label>
-                        <Input
+                            onChange={this.handleChange} />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
                             type="password"
                             name="password"
                             value={this.state.password}
-                            onChange={this.handleChange.bind(this)}
+                            onChange={this.handleChange}
                             placeholder="Enter your password"
                         />
-                    </FormGroup>
+                    </Form.Group>
+                    <Button block disabled={!this.validateForm()} type="submit">
+                        Login
+                    </Button>
                 </Form>
-                <Button block bssize="large" disabled={!this.validateForm()} onClick={this.handleSubmit.bind(this)}>
-                    Login
-                </Button>
+
                 {this.wrongEmail()}
                 {this.wrongPassword()}
             </div>
