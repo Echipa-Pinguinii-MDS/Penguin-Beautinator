@@ -37,6 +37,7 @@ MainApp.defaultProps = {
         contact: 'Contact'
     },
     salons: [{
+        id: 's5',
         src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
         name: 'Nume salon',
         noFullStars: 3,
@@ -51,12 +52,12 @@ MainApp.defaultProps = {
     }],
     services: {
         coafor: [
-            {title: 'Tuns - par scurt', price: 10, length: 20},
-            {title: 'Tuns - par mediu', price: 15, length: 25},
-            {title: 'Tuns - par lung', price: 20, length: 30}],
+            {id: 1, title: 'Tuns - par scurt', price: 10, length: 20},
+            {id: 2, title: 'Tuns - par mediu', price: 15, length: 25},
+            {id: 3, title: 'Tuns - par lung', price: 20, length: 30}],
         manichiura: [
-            {title: 'Clasic', price: 25, length: 15},
-            {title: 'Semipermanenta', price: 50, length: 30}]
+            {id: 4, title: 'Clasic', price: 25, length: 15},
+            {id: 5, title: 'Semipermanenta', price: 50, length: 30}]
     }
 }
 
