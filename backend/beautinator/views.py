@@ -56,7 +56,7 @@ def salon_data_by_id(request, salon_id):
     try:
         data = Salons.objects.get(id=salon_id)
     except (KeyError, Salons.DoesNotExist):
-        return JsonResponse({"salon_data": "False"})
+        return JsonResponse({"salon_data": False})
     else:
         return JsonResponse({"salon_data": model_to_dict(data)})
 
