@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./Login.css";
+import axios from "axios";
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -11,7 +15,30 @@ export default function Login() {
     }
 
     function handleSubmit(event) {
-        event.preventDefault();
+        axios({
+            method: 'post',
+            url: 'beautinator/user/login/',
+            data: {
+                'user_email': email,
+                'user_password': password
+            },
+            headers: {
+                "content-type": "application/json"
+            },
+        }).then(result => {
+            if (!result.data['check_user']) {
+            //    email gresit
+                console.log('email gresit');
+            } else if (!result.data['check_password']) {
+            //    parola gresita
+                console.log('parola gresita');
+            } else {
+            //    ok
+                console.log('ok');
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (
@@ -34,7 +61,7 @@ export default function Login() {
                         type="password"
                     />
                 </FormGroup>
-                <Button block bssize="large" disabled={!validateForm()} type="submit">
+                <Button block bssize="large" disabled={!validateForm()} type="submit" onClick={handleSubmit}>
                     Login
                 </Button>
             </form>

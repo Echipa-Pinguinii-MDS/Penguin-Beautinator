@@ -1,4 +1,5 @@
 from django.forms.models import model_to_dict
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 
@@ -164,6 +165,7 @@ Daca doar parola nu e buna returneaza check_password false
 Daca user-ul nu e bun returneaza check_user false"""
 
 
+@csrf_exempt
 def user_login(request):
     data = json.loads(request.body.decode('utf-8'))
     email = data['user_email']
@@ -177,9 +179,9 @@ def user_login(request):
         if password == user.password:
             current_id = user.pk
         else:
-            return JsonResponse({"check_password": False})
+            return JsonResponse({"check_user": True, "check_password": False})
         output = 'u' + str(current_id)
-        return JsonResponse({"user_id": output})
+        return JsonResponse({"check_user": True, "check_password": True, "user_id": output})
 
 
 """Daca salonul si parola sunt bune returneaza
@@ -201,6 +203,6 @@ def salon_login(request):
         if password == salon.password:
             current_id = salon.pk
         else:
-            return JsonResponse({"check_password": False})
+            return JsonResponse({"check_user": True, "check_password": False})
         output = 's' + str(current_id)
-        return JsonResponse({"salon_id": output})
+        return JsonResponse({"check_user": True, "check_password": True, "salon_id": output})
