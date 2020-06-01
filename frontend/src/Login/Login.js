@@ -23,19 +23,17 @@ export default class Login extends Component{
 
     wrongEmail() {
         if (this.state.wrongEmail) {
-            this.resetWrong();
-            return true;
+            return <p>Email gresit</p>;
         } else {
-            return false;
+            return null;
         }
     }
 
     wrongPassword() {
         if (this.state.wrongPassword) {
-            this.resetWrong();
-            return true;
+            return <p>Parola gresita</p>;
         } else {
-            return false;
+            return null;
         }
     }
 
@@ -49,6 +47,7 @@ export default class Login extends Component{
     }
 
     handleSubmit = (event) => {
+        this.resetWrong();
         axios({
             method: 'post',
             url: 'user/login/',
@@ -78,7 +77,7 @@ export default class Login extends Component{
     render() {
         return (
             <div className="Login">
-                <Form onSubmit={this.handleSubmit.bind(this)}>
+                <Form>
                     <FormGroup>
                         <Label>Email</Label>
                         <Input
@@ -87,7 +86,7 @@ export default class Login extends Component{
                             name="email"
                             value={this.state.email}
                             onChange={this.handleChange.bind(this)}
-                            placeholder="Enter email"
+                            placeholder="Enter your email"
                         />
                     </FormGroup>
                     <FormGroup>
@@ -97,15 +96,15 @@ export default class Login extends Component{
                             name="password"
                             value={this.state.password}
                             onChange={this.handleChange.bind(this)}
-                            placeholder="Enter password"
+                            placeholder="Enter your password"
                         />
                     </FormGroup>
-                    <Button block bssize="large" disabled={!this.validateForm()} type="submit">
-                        Login
-                    </Button>
                 </Form>
-                {this.wrongEmail() ? <p>Email gresit</p> : null}
-                {this.wrongPassword() ? <p>Parola gresita</p> : null}
+                <Button block bssize="large" disabled={!this.validateForm()} onClick={this.handleSubmit.bind(this)}>
+                    Login
+                </Button>
+                {this.wrongEmail()}
+                {this.wrongPassword()}
             </div>
         );
     }
