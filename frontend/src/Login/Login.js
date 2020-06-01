@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 import "./Login.css";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -14,14 +16,15 @@ export default class Login extends Component{
             password: "",
             wrongEmail: false,
             wrongPassword: false,
+            loggedIn: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    resetWrong() {
-        this.setState({wrongEmail: false, wrongPassword: false});
+    reset() {
+        this.setState({wrongEmail: false, wrongPassword: false, loggedIn: false});
     }
 
     wrongEmail() {
@@ -40,6 +43,14 @@ export default class Login extends Component{
         }
     }
 
+    loggedIn() {
+        if (this.state.loggedIn) {
+            return <Redirect to="/saloane" />;
+        } else {
+            return null;
+        }
+    }
+
     validateForm() {
         return this.state.email.length > 0 && this.state.password.length > 0;
     }
@@ -50,7 +61,7 @@ export default class Login extends Component{
     }
 
     handleSubmit = (event) => {
-        this.resetWrong();
+        this.reset();
         axios({
             method: 'post',
             url: 'user/login/',
@@ -69,7 +80,8 @@ export default class Login extends Component{
                 this.setState({wrongPassword: true});
                 console.log('parola gresita');
             } else {
-            //    ok
+                Cookies.set('user_id', result.data['user_id'], {expires: 7});
+                this.setState({loggedIn: true});
                 console.log('ok');
             }
         }).catch(function (error) {
@@ -109,6 +121,7 @@ export default class Login extends Component{
 
                 {this.wrongEmail()}
                 {this.wrongPassword()}
+                {this.loggedIn()}
             </div>
         );
     }
