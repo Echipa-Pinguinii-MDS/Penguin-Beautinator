@@ -17,7 +17,7 @@ export default function Login() {
     function handleSubmit(event) {
         axios({
             method: 'post',
-            url: 'beautinator/user/login/',
+            url: 'user/login/',
             data: {
                 'user_email': email,
                 'user_password': password
