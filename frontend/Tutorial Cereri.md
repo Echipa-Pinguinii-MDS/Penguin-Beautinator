@@ -52,4 +52,9 @@ Cookies.set('label', 'value');
 Cookies.set('label', 'value', {expires: 7});
 ```
 
+Verificare ca un cookie exista:
+```javascript
+let isLoggedIn = (Cookies.get('user_id') !== undefined);
+```
+
 Mai multe detalii [aici](https://www.npmjs.com/package/js-cookie).
