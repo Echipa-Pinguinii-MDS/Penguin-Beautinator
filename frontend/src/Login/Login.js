@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Button, FormGroup, Label, Form, Input } from "reactstrap";
+import { Button, Form } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 import "./Login.css";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -14,28 +16,38 @@ export default class Login extends Component{
             password: "",
             wrongEmail: false,
             wrongPassword: false,
+            loggedIn: false,
         };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    resetWrong() {
-        this.setState({wrongEmail: false, wrongPassword: false});
+    reset() {
+        this.setState({wrongEmail: false, wrongPassword: false, loggedIn: false});
     }
 
     wrongEmail() {
         if (this.state.wrongEmail) {
-            this.resetWrong();
-            return true;
+            return <p>Email gresit</p>;
         } else {
-            return false;
+            return null;
         }
     }
 
     wrongPassword() {
         if (this.state.wrongPassword) {
-            this.resetWrong();
-            return true;
+            return <p>Parola gresita</p>;
         } else {
-            return false;
+            return null;
+        }
+    }
+
+    loggedIn() {
+        if (this.state.loggedIn) {
+            return <Redirect to="/saloane" />;
+        } else {
+            return null;
         }
     }
 
@@ -49,6 +61,7 @@ export default class Login extends Component{
     }
 
     handleSubmit = (event) => {
+        this.reset();
         axios({
             method: 'post',
             url: 'user/login/',
@@ -67,45 +80,48 @@ export default class Login extends Component{
                 this.setState({wrongPassword: true});
                 console.log('parola gresita');
             } else {
-            //    ok
+                Cookies.set('user_id', result.data['user_id'], {expires: 7});
+                this.setState({loggedIn: true});
                 console.log('ok');
             }
         }).catch(function (error) {
             console.log(error);
         });
+        event.preventDefault();
     }
 
     render() {
         return (
             <div className="Login">
-                <Form onSubmit={this.handleSubmit.bind(this)}>
-                    <FormGroup>
-                        <Label>Email</Label>
-                        <Input
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group controlId="email">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
                             autoFocus
                             type="email"
                             name="email"
-                            value={this.state.email}
-                            onChange={this.handleChange.bind(this)}
                             placeholder="Enter email"
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>Password</Label>
-                        <Input
+                            value={this.state.email}
+                            onChange={this.handleChange} />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
                             type="password"
                             name="password"
                             value={this.state.password}
-                            onChange={this.handleChange.bind(this)}
-                            placeholder="Enter password"
+                            onChange={this.handleChange}
+                            placeholder="Enter your password"
                         />
-                    </FormGroup>
-                    <Button block bssize="large" disabled={!this.validateForm()} type="submit">
+                    </Form.Group>
+                    <Button block disabled={!this.validateForm()} type="submit">
                         Login
                     </Button>
                 </Form>
-                {this.wrongEmail() ? <p>Email gresit</p> : null}
-                {this.wrongPassword() ? <p>Parola gresita</p> : null}
+
+                {this.wrongEmail()}
+                {this.wrongPassword()}
+                {this.loggedIn()}
             </div>
         );
     }
