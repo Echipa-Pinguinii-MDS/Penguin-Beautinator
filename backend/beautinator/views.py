@@ -20,7 +20,7 @@ def user_data_by_email(request):
     try:
         data = Users.objects.get(email=email)
     except (KeyError, Users.DoesNotExist):
-        return JsonResponse({"user_data": None})
+        return JsonResponse({"user_data": False})
     else:
         return JsonResponse({"user_data": model_to_dict(data)})
 
