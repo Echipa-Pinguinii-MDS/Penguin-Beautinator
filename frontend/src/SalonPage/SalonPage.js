@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Menu from './Menu.js';
 import Content from './Content';
+import ShoppingCart from './ShoppingCart/ShoppingCart';
 import './SalonPage.css';
-import ShoppingCart from "./ShoppingCart";
 
 function SalonPage (props) {
     function hasContent(section, salon) {
