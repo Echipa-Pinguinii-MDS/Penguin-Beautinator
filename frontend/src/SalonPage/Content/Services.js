@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const Info = (props) => {
     return (
         <div className={'Info'}>
-            <GrFormCheckmark className={'gr'}/>
+            <GrFormCheckmark className={'gr'} onClick={() => props.handleClick(props.id)}/>
             <p>{props.title}</p>
             <p>{props.price} lei</p>
             <p>{props.length} minute</p>
@@ -16,6 +16,8 @@ const Info = (props) => {
 }
 
 Info.propTypes = {
+    handleClick: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     length: PropTypes.number.isRequired
@@ -27,6 +29,8 @@ const Section = (props) => {
             <h4>{props.category}</h4>
             {props.service.map(service =>
                 <Info key={service.id}
+                      handleClick={props.handleClick}
+                      id={service.id}
                       title={service.title}
                       price={service.price}
                       length={service.length}/>
@@ -36,6 +40,7 @@ const Section = (props) => {
 }
 
 Section.propTypes = {
+    handleClick: PropTypes.func.isRequired,
     category: PropTypes.string.isRequired,
     service: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -51,7 +56,10 @@ const Services = (props) => {
             <h3 className={'Section-title'}>{props.title}</h3>
             <div className={'Services-categories'}>
                 {Object.keys(props.services).map(category =>
-                    <Section key={category} service={props.services[category]} category={category}/>
+                    <Section key={category}
+                             handleClick={props.handleClick}
+                             service={props.services[category]}
+                             category={category}/>
                 )}
             </div>
         </section>
@@ -59,6 +67,7 @@ const Services = (props) => {
 }
 
 Services.propTypes = {
+    handleClick: PropTypes.func.isRequired,
     services: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
