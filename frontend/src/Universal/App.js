@@ -18,7 +18,7 @@ const MainApp = (props) => {
                 <Route path={'/login'}> <Login/> </Route>
                 <Route path={'/signup'}/>
                 {props.salons.map(salon =>
-                    <Route key={salon.name} path={'/' + salon.name}>
+                    <Route key={salon.id} path={'/' + salon.name + salon.id}>
                         <SalonPage sections={props.sections}
                                    salon={salon}
                                    services={props.services}/>

@@ -8,7 +8,7 @@ const SalonPicker = (props) => {
     return (
         <div className={'SalonPicker'}>
             {props.salons.map(salon =>
-                <Link to={salon.name} key={salon.name}>
+                <Link key={salon.id} to={salon.name + salon.id}>
                     <SalonCard src={salon.src}
                                name={salon.name}
                                address={salon.address}
