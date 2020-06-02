@@ -9,7 +9,7 @@ import Services from './Content/Services';
 
 const Content = (props) => {
     return (
-        <div  className={'Content'}>
+        <div className={'Content'}>
             <React.Fragment>
                 <Title name={props.salon.name}
                        noFullStars={props.salon.noFullStars}

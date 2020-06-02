@@ -22,7 +22,7 @@ const Section = (props) => {
         <div className={'Services-infos'}>
             <h4>{props.category}</h4>
             {props.service.map(service =>
-                <Info key={service.title}
+                <Info key={service.id}
                       title={service.title}
                       price={service.price}
                       length={service.length}/>
@@ -33,7 +33,12 @@ const Section = (props) => {
 
 Section.propTypes = {
     category: PropTypes.string.isRequired,
-    service: PropTypes.array.isRequired
+    service: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        length: PropTypes.number.isRequired
+    }).isRequired).isRequired
 }
 
 const Services = (props) => {
@@ -50,8 +55,12 @@ const Services = (props) => {
 }
 
 Services.propTypes = {
-    title: PropTypes.string.isRequired,
-    services: PropTypes.objectOf(PropTypes.array).isRequired
+    services: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        length: PropTypes.number.isRequired
+    }).isRequired).isRequired)
 }
 
 export default Services;

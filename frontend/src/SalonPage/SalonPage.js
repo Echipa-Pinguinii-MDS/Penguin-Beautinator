@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Menu from './Menu.js';
 import Content from './Content';
 import './SalonPage.css';
+import ShoppingCart from "./ShoppingCart";
 
 function SalonPage (props) {
     function hasContent(section, salon) {
@@ -15,6 +16,8 @@ function SalonPage (props) {
             <Menu sections={props.sections} salon={props.salon} hasContent={hasContent}/>
             <div className={'VerticalLine'}/>
             <Content sections={props.sections} salon={props.salon} services={props.services} hasContent={hasContent}/>
+            <div className={'VerticalLine'}/>
+            <ShoppingCart/>
         </article>
     )
 }
