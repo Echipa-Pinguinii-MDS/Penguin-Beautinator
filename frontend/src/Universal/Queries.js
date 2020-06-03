@@ -113,8 +113,7 @@ export function salonsList(event) {
         if(result.data["salons_list"].empty())
             console.log("nu avem saloane")
         else {
-            salons.push()
-            for(let i=0; i<result.data["salons_list"].length(); i++){
+            for(let i=0; i<result.data["salons_list"].length; i++){
                 let aux_salon = {
                     //src: 'NULL',
                     id: result.data["salons_list"][i].id,
@@ -141,7 +140,7 @@ export function salonsList(event) {
 
 //salon_data_by_id
 export function salonData(event, salon_id) {
-    let salon = [] //il fac lista cu un singur element
+    let salon = []
     let s = 'salons/' + salon_id.toString() + '/';
     axios({
         method: 'get',
@@ -160,7 +159,7 @@ export function salonData(event, salon_id) {
                 //noFullStars: 'NULL',
                 //noReviews: 'NULL',
                 //noDollars: 'NULL',
-                description: 'NULL',
+                //description: 'NULL',
                 address: result.data["salon_data"].address,
                 images: [],
                 //program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
@@ -190,7 +189,7 @@ export function salonServices(event, salon_id) {
         if(!result.data["salon_services"])
             console.log("salon nu are date")
         else{
-            for(let i=0; i<result.data["salon_services"].length(); i++) {
+            for(let i=0; i<result.data["salon_services"].length; i++) {
                 let aux_serv = {
                     salon: result.data["salon_services"].salon,
                     employee: result.data["salon_services"].employee,
@@ -223,7 +222,7 @@ export function allServices(event) {
         if(!result.data["all_services"])
             console.log("salon nu are date")
         else{
-            for(let i=0; i<result.data["all_services"].length(); i++) {
+            for(let i=0; i<result.data["all_services"].length; i++) {
                 let aux_serv = {
                     salon: result.data["all_services"].salon,
                     employee: result.data["all_services"].employee,
