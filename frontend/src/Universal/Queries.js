@@ -17,10 +17,10 @@ export function userAppointments(event, user_id) {
             "content-type": "application/json"
         },
     }).then(result => {
-        if(result.data["user_appointments"].empty())
+        if(result.data["user_appointments"].empty)
             console.log("user nu are appointments")
         else {
-            for(let i=0; i<result.data["user_appointments"].length(); i++){
+            for(let i=0; i<result.data["user_appointments"].length; i++){
                 let aux_appointment = {
                     salon: result.data["user_appointments"][i].salon,
                     client: result.data["user_appointments"][i].client,
@@ -110,22 +110,22 @@ export function salonsList(event) {
             "content-type": "application/json"
         },
     }).then(result => {
-        if(result.data["salons_list"].empty())
+        if(result.data["salons_list"].empty)
             console.log("nu avem saloane")
         else {
             for(let i=0; i<result.data["salons_list"].length; i++){
                 let aux_salon = {
-                    //src: 'NULL',
+                    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
                     id: result.data["salons_list"][i].id,
                     name: result.data["salons_list"][i].name,
-                    //noFullStars: 'NULL',
-                    //noReviews: 'NULL',
-                    //noDollars: 'NULL',
-                    //description: 'NULL',
+                    noFullStars: 0,
+                    noReviews: 0,
+                    noDollars: 0,
+                    description: 'description',
                     address: result.data["salons_list"][i].address,
-                    //images: [],
-                    //program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
-                    //phone: ['07********', '031*******'],
+                    images: [],
+                    program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
+                    phone: ['07********', '031*******'],
                     email: result.data["salons_list"][i].email
                 }
                 salons.push(aux_salon)
@@ -141,7 +141,7 @@ export function salonsList(event) {
 //salon_data_by_id
 export function salonData(event, salon_id) {
     let salon = []
-    let s = 'salons/' + salon_id.toString() + '/';
+    let s = 'salons/' + salon_id + '/';
     axios({
         method: 'get',
         url: s,
@@ -153,17 +153,17 @@ export function salonData(event, salon_id) {
             console.log("salon nu are date")
         else {
             let aux_salon = {
-                //src: 'NULL',
+                src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
                 id: result.data["salon_data"].id,
                 name: result.data["salon_data"].name,
-                //noFullStars: 'NULL',
-                //noReviews: 'NULL',
-                //noDollars: 'NULL',
-                //description: 'NULL',
+                noFullStars: 0,
+                noReviews: 0,
+                noDollars: 0,
+                description: 'description',
                 address: result.data["salon_data"].address,
                 images: [],
-                //program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
-                //phone: ['07********', '031*******'],
+                program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
+                phone: ['07********', '031*******'],
                 email: result.data["salon_data"].email
             }
             salon.push(aux_salon)
@@ -178,7 +178,7 @@ export function salonData(event, salon_id) {
 //salon_services
 export function salonServices(event, salon_id) {
     let salon_serv = []
-    let s = 'salons/' + salon_id.toString() + '/services/';
+    let s = 'salons/' + salon_id + '/services/';
     axios({
         method: 'get',
         url: s,
