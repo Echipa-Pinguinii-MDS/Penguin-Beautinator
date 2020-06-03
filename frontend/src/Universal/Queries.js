@@ -9,7 +9,7 @@ export function userAppointments(event, user_id) {
     let appointments = []
     axios({
         method: 'post',
-        url: 'user/appointments/',
+        url: 'users/appointments/',
         data: {
             'user_id': user_id,
         },
@@ -43,7 +43,7 @@ export function userDataByEmail(event, user_email) {
     let userData = []
     axios({
         method: 'post',
-        url: 'user/profile/',
+        url: 'users/profile/',
         data: {
             'user_email': user_email,
         },
@@ -74,7 +74,7 @@ export function userDataById(event, user_id) {
     let userData = []
     axios({
         method: 'post',
-        url: 'user/profile/',
+        url: 'users/profile/',
         data: {
             'user_id': user_id,
         },
