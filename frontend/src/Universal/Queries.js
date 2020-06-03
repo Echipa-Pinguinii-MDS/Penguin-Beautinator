@@ -150,17 +150,17 @@ function salonData(event, salon_id) {
             console.log("salon nu are date")
         else {
             let aux_salon = {
-                src: 'NULL',
+                //src: 'NULL',
                 id: result.data["salon_data"].id,
                 name: result.data["salon_data"].name,
-                noFullStars: 'NULL',
-                noReviews: 'NULL',
-                noDollars: 'NULL',
+                //noFullStars: 'NULL',
+                //noReviews: 'NULL',
+                //noDollars: 'NULL',
                 description: 'NULL',
                 address: result.data["salon_data"].address,
                 images: [],
-                program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
-                phone: ['07********', '031*******'],
+                //program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
+                //phone: ['07********', '031*******'],
                 email: result.data["salon_data"].email
             }
             salon.push(aux_salon)
