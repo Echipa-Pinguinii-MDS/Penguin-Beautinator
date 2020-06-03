@@ -1,11 +1,11 @@
 //fiecare functie are deasupra comentata functia din views care ii corespunde
-import axios from "axios";
+import axios from 'axios';
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 //user_appointments
-function userAppointments(event, user_id) {
+export function userAppointments(event, user_id) {
     let appointments = []
     axios({
         method: 'post',
@@ -37,8 +37,9 @@ function userAppointments(event, user_id) {
 
     return appointments;
 }
+
 //user_data_by_email
-function userDataByEmail(event, user_email) {
+export function userDataByEmail(event, user_email) {
     let userData = []
     axios({
         method: 'post',
@@ -67,8 +68,9 @@ function userDataByEmail(event, user_email) {
 
     return userData;
 }
+
 //user_data_by_email
-function userDataById(event, user_id) {
+export function userDataById(event, user_id) {
     let userData = []
     axios({
         method: 'post',
@@ -97,8 +99,9 @@ function userDataById(event, user_id) {
 
     return userData;
 }
+
 //salons_list
-function salonsList(event) {
+export function salonsList(event) {
     let salons = [];
     axios({
         method: 'get',
@@ -135,8 +138,9 @@ function salonsList(event) {
 
     return salons
 }
+
 //salon_data_by_id
-function salonData(event, salon_id) {
+export function salonData(event, salon_id) {
     let salon = [] //il fac lista cu un singur element
     let s = 'salons/' + salon_id.toString() + '/';
     axios({
@@ -171,8 +175,9 @@ function salonData(event, salon_id) {
 
     return salon;
 }
+
 //salon_services
-function salonServices(event, salon_id) {
+export function salonServices(event, salon_id) {
     let salon_serv = []
     let s = 'salons/' + salon_id.toString() + '/services/';
     axios({
@@ -204,8 +209,9 @@ function salonServices(event, salon_id) {
 
     return salon_serv;
 }
+
 //all_services
-function allServices(event) {
+export function allServices(event) {
     let serv = []
     axios({
         method: 'get',
