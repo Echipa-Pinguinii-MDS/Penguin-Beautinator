@@ -116,17 +116,17 @@ export function salonsList(event) {
             salons.push()
             for(let i=0; i<result.data["salons_list"].length(); i++){
                 let aux_salon = {
-                    src: 'NULL',
+                    //src: 'NULL',
                     id: result.data["salons_list"][i].id,
                     name: result.data["salons_list"][i].name,
-                    noFullStars: 'NULL',
-                    noReviews: 'NULL',
-                    noDollars: 'NULL',
-                    description: 'NULL',
+                    //noFullStars: 'NULL',
+                    //noReviews: 'NULL',
+                    //noDollars: 'NULL',
+                    //description: 'NULL',
                     address: result.data["salons_list"][i].address,
-                    images: [],
-                    program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
-                    phone: ['07********', '031*******'],
+                    //images: [],
+                    //program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
+                    //phone: ['07********', '031*******'],
                     email: result.data["salons_list"][i].email
                 }
                 salons.push(aux_salon)
