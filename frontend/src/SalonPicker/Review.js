@@ -1,21 +1,15 @@
 import React from 'react';
+import {AiFillStar, AiOutlineStar} from 'react-icons/ai';
 import PropTypes from 'prop-types';
 
 const Stars = (props) => {
     return (
         <div className={'Stars'}>
             {[1, 2, 3, 4, 5].map(index =>
-                index <= props.noFullStars ?
-                    <img key={index.toString()} src={props.fullStar} alt={'Full Star'}/> :
-                    <img key={index.toString()} src={props.emptyStar} alt={'Empty Star'}/>
+                index <= props.noFullStars ? <AiFillStar key={index}/> : <AiOutlineStar key={index}/>
             )}
         </div>
     )
-}
-
-Stars.defaultProps = {
-    fullStar: 'https://www.seekicon.com/free-icon-download/star-icon_2.svg',
-    emptyStar: 'https://www.seekicon.com/free-icon-download/star-outlined-icon_1.svg'
 }
 
 Stars.propTypes = {

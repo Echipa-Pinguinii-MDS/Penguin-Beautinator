@@ -9,7 +9,7 @@ import Services from './Content/Services';
 
 const Content = (props) => {
     return (
-        <div  className={'Content'}>
+        <div className={'Content'}>
             <React.Fragment>
                 <Title name={props.salon.name}
                        noFullStars={props.salon.noFullStars}
@@ -24,7 +24,8 @@ const Content = (props) => {
 
                 <Element id={'services'}>
                     <Services title={props.sections.services}
-                              services={props.services}/>
+                              services={props.services}
+                              handleClick={props.handleClick}/>
                 </Element>
 
                 <Element id={'gallery'}>
@@ -46,6 +47,7 @@ const Content = (props) => {
 }
 
 Content.propTypes = {
+    handleClick: PropTypes.func.isRequired,
     sections: PropTypes.objectOf(PropTypes.string),
     salon: PropTypes.shape({
         name: PropTypes.string.isRequired,
