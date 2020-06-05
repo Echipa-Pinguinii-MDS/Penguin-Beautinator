@@ -3,14 +3,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 
-from .models import Users, Salons, Services, Appointments
+from .models import User, Salon, Service, Appointment
 
 
 def check_email(request):
     data = json.loads(request.body.decode('utf-8'))
     email = data['user_email']
 
-    return JsonResponse({"check_email": Users.objects.filter(email=email).exists()})
+    return JsonResponse({"check_email": User.objects.filter(email=email).exists()})
 
 
 def user_data_by_email(request):
@@ -18,8 +18,8 @@ def user_data_by_email(request):
     email = data['user_email']
 
     try:
-        data = Users.objects.get(email=email)
-    except (KeyError, Users.DoesNotExist):
+        data = User.objects.get(email=email)
+    except (KeyError, User.DoesNotExist):
         return JsonResponse({"user_data": None})
     else:
         return JsonResponse({"user_data": model_to_dict(data)})
@@ -31,20 +31,20 @@ def user_data_by_id(request):
     user_id = int(user_id[1:])
 
     try:
-        data = Users.objects.get(id=user_id)
-    except (KeyError, Users.DoesNotExist):
+        data = User.objects.get(id=user_id)
+    except (KeyError, User.DoesNotExist):
         return JsonResponse({"user_data": None})
     else:
         return JsonResponse({"user_data": model_to_dict(data)})
 
 
 def salons_list(request):
-    salons = Salons.objects.values()
+    salons = Salon.objects.values()
     return JsonResponse({"salons_list": list(salons)})
 
 
 def all_services(request):
-    services = Services.objects.values()
+    services = Service.objects.values()
     return JsonResponse({"all_services": list(services)})
 
 
@@ -54,8 +54,8 @@ def salon_data_by_id(request, salon_id):
     salon_id = int(salon_id[1:])
 
     try:
-        data = Salons.objects.get(id=salon_id)
-    except (KeyError, Salons.DoesNotExist):
+        data = Salon.objects.get(id=salon_id)
+    except (KeyError, Salon.DoesNotExist):
         return JsonResponse({"salon_data": False})
     else:
         return JsonResponse({"salon_data": model_to_dict(data)})
@@ -66,7 +66,7 @@ def salon_services(request, salon_id):
     # salon_id = data['salon_id']
     salon_id = int(salon_id[1:])
 
-    services = Services.objects.filter(salon=salon_id).values()
+    services = Service.objects.filter(salon=salon_id).values()
     return JsonResponse({"salon_services": list(services)})
 
 
@@ -75,7 +75,7 @@ def user_appointments(request):
     user_id = data['user_id']
     user_id = int(user_id[1:])
 
-    appts = Appointments.objects.filter(client=user_id).values()
+    appts = Appointment.objects.filter(client=user_id).values()
     return JsonResponse({"user_appointments": list(appts)})
 
 
@@ -84,7 +84,7 @@ def service_open_timeslots(request):
     data = json.loads(request.body.decode('utf-8'))
     service_id = data['service_id']
 
-    open = Services.objects.get(id=service_id)
+    open = Service.objects.get(id=service_id)
     # string de 0 si 1
     return JsonResponse({"open_timeslots": open.open_timeslots})
 
@@ -94,7 +94,7 @@ def service_available_timeslots(request):
     data = json.loads(request.body.decode('utf-8'))
     service_id = data['service_id']
 
-    available = Services.objects.get(id=service_id)
+    available = Service.objects.get(id=service_id)
     # string de 0 si 1
     return JsonResponse({"open_timeslots": available.available_timeslots})
 
@@ -105,7 +105,7 @@ def service_next_available_timeslot(request):
     service_id = data['service_id']
     current_timeslot = data['current_timeslot']
 
-    available = Services.objects.get(id=service_id)
+    available = Service.objects.get(id=service_id)
     availablestr = available.available_timeslots
     for i in range(current_timeslot + 1, len(availablestr)):
         if availablestr[i] == 1:
@@ -120,7 +120,7 @@ def add_user(request):
     first_name = data['user_first_name']
     last_name = data['user_last_name']
 
-    user = Users(email=email, password=password, first_name=first_name, last_name=last_name)
+    user = User(email=email, password=password, first_name=first_name, last_name=last_name)
     user.save()
 
 
@@ -132,10 +132,10 @@ def add_salon(request):
     address = data['salon_address']
 
     # Cam asa ar trebui sa arate asta, altfel nu salveaza, dar nu-s sigura de sintaxa
-    # salon = Salons.objects.create(email=email, password=password, name=name, address=address)
+    # salon = Salon.objects.create(email=email, password=password, name=name, address=address)
     # entry.salons.add(salon)
     # In schimb iti recomand forma asta
-    salon = Salons(email=email, password=password, name=name, address=address)
+    salon = Salon(email=email, password=password, name=name, address=address)
     salon.save()
 
 
@@ -153,7 +153,7 @@ def add_service(request):
     # Putin probabil sa vina deja cu chestii ocupate atunci cand e adaugat
     available_timeslots = data['service_available_timeslots']
 
-    service = Services(salon=salon, employee=employee, title=title, description=description, price=price,
+    service = Service(salon=salon, employee=employee, title=title, description=description, price=price,
                        open_timeslots=open_timeslots, available_timeslots=available_timeslots)
     service.save()
     # return JsonResponse(model_to_dict(service))
@@ -172,8 +172,8 @@ def user_login(request):
     password = data['user_password']
 
     try:
-        user = Users.objects.get(email=email)
-    except (KeyError, Users.DoesNotExist):
+        user = User.objects.get(email=email)
+    except (KeyError, User.DoesNotExist):
         return JsonResponse({"check_user": False})
     else:
         if password == user.password:
@@ -196,8 +196,8 @@ def salon_login(request):
     password = data['user_password']
 
     try:
-        salon = Salons.objects.get(email=email)
-    except (KeyError, Salons.DoesNotExist):
+        salon = Salon.objects.get(email=email)
+    except (KeyError, Salon.DoesNotExist):
         return JsonResponse({"check_user": False})
     else:
         if password == salon.password:
