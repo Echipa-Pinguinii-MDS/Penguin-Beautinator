@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 import Menu from './Menu.js';
 import Content from './Content';
 import ShoppingCart from './ShoppingCart/ShoppingCart';
+import Calendar from './Calendar/Calendar';
 import './SalonPage.css';
 
-class SalonPage extends React.Component{
+class SalonPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: new Set()
+            selected: new Set(),
+            calendarPage: false
         }
         this.hasContent = this.hasContent.bind(this);
         this.addService = this.addService.bind(this);
         this.deleteService = this.deleteService.bind(this);
+        this.openCalendarPage = this.openCalendarPage.bind(this);
     }
 
     hasContent(section, salon) {
@@ -50,23 +53,36 @@ class SalonPage extends React.Component{
         return services;
     }
 
+    openCalendarPage() {
+        this.setState({
+            calendarPage: true
+        })
+    }
+
     render() {
         return (
             <article className={'SalonPage'}>
+                {!this.state.calendarPage &&
                 <Menu sections={this.props.sections}
                       salon={this.props.salon}
-                      hasContent={this.hasContent}/>
-                <div className={'VerticalLine'}/>
+                      hasContent={this.hasContent}/>}
+                {!this.state.calendarPage &&
+                <div className={'VerticalLine'}/>}
+                {!this.state.calendarPage &&
                 <Content sections={this.props.sections}
                          salon={this.props.salon}
                          services={this.props.services}
                          hasContent={this.hasContent}
-                         handleClick={this.addService}/>
+                         handleClick={this.addService}/>}
+                {this.state.calendarPage &&
+                <Calendar/>}
                 {this.state.selected.size > 0 &&
                 <div className={'VerticalLine'}/>}
                 {this.state.selected.size > 0 &&
                 <ShoppingCart services={this.getServices()}
-                              handleClick={this.deleteService}/>}
+                              handleClick={this.deleteService}
+                              calendarPage={this.state.calendarPage}
+                              openCalendarPage={this.openCalendarPage}/>}
             </article>
         )
     }

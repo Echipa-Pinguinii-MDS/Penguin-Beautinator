@@ -4,6 +4,7 @@ import Services from './Services';
 import Total from './Total';
 import ScheduleButton from './ScheduleButton';
 import './ShoppingCart.css';
+import TimePickButton from "./TimePickButton";
 
 function ShoppingCart (props) {
     return (
@@ -11,7 +12,10 @@ function ShoppingCart (props) {
             <h4>Servicii selectate</h4>
             <Services services={props.services} handleClick={props.handleClick}/>
             <Total services={props.services}/>
-            <ScheduleButton/>
+            {props.calendarPage &&
+            <ScheduleButton/>}
+            {!props.calendarPage &&
+            <TimePickButton openCalendarPage={props.openCalendarPage}/>}
         </div>
     )
 }
