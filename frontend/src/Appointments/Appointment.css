@@ -1,0 +1,52 @@
+.Appointment {
+    width: 90%;
+    padding: 20px 10px 0;
+}
+
+.AppointmentMain {
+    display: flex;
+    flex-direction: row;
+    padding: 0 10px 10px;
+}
+
+.AppointmentMain img {
+    padding: 10px;
+    height: 100px;
+    width: 100px;
+}
+
+.AppointmentSalon {
+    padding: 10px;
+}
+
+.AppointmentDate {
+    padding: 10px;
+}
+
+.AppointmentTotal {
+    padding: 10px;
+}
+
+.AppointmentCategories {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.AppointmentCategory {
+    padding-left: 10px;
+}
+
+.AppointmentService {
+    padding-left: 10px;
+}
+
+.DetailsButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.io {
+    padding: 20px;
+}

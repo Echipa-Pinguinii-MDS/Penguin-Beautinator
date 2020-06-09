@@ -7,6 +7,7 @@ import SalonPage from '../SalonPage/SalonPage';
 import Login from '../Login/Login';
 import {salonData, salonsList} from './Queries';
 import './Universal.css';
+import Appointments from "../Appointments/Appointments";
 
 const MainApp = (props) => {
     // const salons = salonsList()
@@ -16,7 +17,7 @@ const MainApp = (props) => {
             <div className={'AppPage'}>
                 <Route path={'/desprenoi'}> <PenguinBeautinator/> </Route>
                 <Route exact path={'/saloane'}> <SalonPicker salons={props.salons}/> </Route>
-                <Route path={'/programari'}/>
+                <Route path={'/programari'}> <Appointments/> </Route>
                 <Route path={'/login'}> <Login/> </Route>
                 <Route path={'/signup'}/>
                 {props.salons.map(salon =>
