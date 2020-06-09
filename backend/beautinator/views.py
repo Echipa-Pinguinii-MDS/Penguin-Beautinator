@@ -6,6 +6,12 @@ import json
 from .models import Users, Salons, Services, Appointments
 
 
+def get_data_from_request(request, is_test=False):
+    if is_test==False:
+        return json.loads(request.body.decode('utf-8'))
+    return request.POST
+
+
 def check_email(request):
     data = json.loads(request.body.decode('utf-8'))
     email = data['user_email']
@@ -166,22 +172,34 @@ Daca user-ul nu e bun returneaza check_user false"""
 
 
 @csrf_exempt
-def user_login(request):
-    data = json.loads(request.body.decode('utf-8'))
+def user_login(request, is_test=False):
+    #print("value: ")
+    #print(request)
+    #print("env: ")
+    #print(request.environ)
+    #print("body: ")
+    #print(request.body)
+    data = get_data_from_request(request, is_test)
+    #json.loads(request.body.decode('utf-8'))
     email = data['user_email']
-    password = data['user_password']
 
     try:
         user = Users.objects.get(email=email)
     except (KeyError, Users.DoesNotExist):
         return JsonResponse({"check_user": False})
     else:
+        password = data['user_password']
         if password == user.password:
             current_id = user.pk
         else:
-            return JsonResponse({"check_user": True, "check_password": False})
+            return JsonResponse({
+                "check_user": True,
+                "check_password": False})
         output = 'u' + str(current_id)
-        return JsonResponse({"check_user": True, "check_password": True, "user_id": output})
+        return JsonResponse({
+            "check_user": True,
+            "check_password": True,
+            "user_id": output})
 
 
 """Daca salonul si parola sunt bune returneaza
@@ -190,19 +208,27 @@ Daca doar parola nu e buna returneaza check_password false
 Daca salonul nu e bun returneaza check_user false"""
 
 
-def salon_login(request):
-    data = json.loads(request.body.decode('utf-8'))
+def salon_login(request, is_test=False):
+    data = get_data_from_request(request, is_test)
+    #json.loads(request.body.decode('utf-8'))
     email = data['user_email']
-    password = data['user_password']
 
     try:
         salon = Salons.objects.get(email=email)
     except (KeyError, Salons.DoesNotExist):
         return JsonResponse({"check_user": False})
     else:
+        password = data['user_password']
         if password == salon.password:
             current_id = salon.pk
         else:
-            return JsonResponse({"check_user": True, "check_password": False})
+            return JsonResponse({
+                "check_user": True,
+                "check_password": False
+            })
         output = 's' + str(current_id)
-        return JsonResponse({"check_user": True, "check_password": True, "salon_id": output})
+        return JsonResponse({
+            "check_user": True,
+            "check_password": True,
+            "salon_id": output
+        })
