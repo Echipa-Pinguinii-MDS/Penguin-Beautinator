@@ -1,5 +1,5 @@
 import React from 'react';
-import AvailableSlots from './TimeSlots';
+import AvailableSlots from './AvailableSlots';
 import './Calendar.css'
 
 const Month = (props) => {

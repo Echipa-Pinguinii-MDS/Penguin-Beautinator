@@ -12,15 +12,11 @@ const PopUpNotLoggedIn = (props) => {
                     <a className={'Close'} onClick={close}>&times;</a>
                     Conecteaza-te pentru a putea face o programare!
                     <br/>
-                    <Link to={'/login'}>
-                        Intra in cont
-                    </Link>
+                    <Link to={'/login'}>Intra in cont</Link>
                     <br/>
                     Nu ai cont?
                     <br/>
-                    <Link to={'/signup'}>
-                        Inregistreaza-te
-                    </Link>
+                    <Link to={'/signup'}>Inregistreaza-te</Link>
                 </div>
             )}
         </Popup>
@@ -37,7 +33,9 @@ const PopUpLoggedIn = (props) => {
             {close => (
                 <div className={'PopupLoggedIn'}>
                     <a className={'Close'} onClick={close}>&times;</a>
-                    Programarea a fost facuta cu succes!
+                    Programarea din data de {props.time} a fost facuta cu succes!
+                    <br/>
+                    O poti vizualiza in <Link to={'/programari'}>Programarile mele</Link>
                 </div>
             )}
         </Popup>
@@ -45,7 +43,8 @@ const PopUpLoggedIn = (props) => {
 }
 
 PopUpLoggedIn.propTypes = {
-    disabled: PropTypes.bool.isRequired
+    disabled: PropTypes.bool.isRequired,
+    time: PropTypes.string.isRequired
 }
 
 const ScheduleButton = (props) => {
@@ -54,13 +53,14 @@ const ScheduleButton = (props) => {
         {(Cookies.get('user_id') === undefined) &&
             <PopUpNotLoggedIn disabled={props.disabled}/>}
         {(Cookies.get('user_id') !== undefined) &&
-            <PopUpLoggedIn disabled={props.disabled}/>}
+            <PopUpLoggedIn disabled={props.disabled} time={'0'}/>}
         </div>
     )
 }
 
 ScheduleButton.propTypes = {
-    disabled: PropTypes.bool.isRequired
+    disabled: PropTypes.bool.isRequired,
+    time: PropTypes.string
 }
 
 export default ScheduleButton;

@@ -107,6 +107,7 @@ class SalonPage extends React.Component {
                               calendarPage={this.state.calendarPage}
                               openCalendarPage={this.openCalendarPage}
                               closeCalendarPage={this.closeCalendarPage}
+                              disabled={this.state.time == null}
                               time={this.state.time}/>}
             </article>
         )

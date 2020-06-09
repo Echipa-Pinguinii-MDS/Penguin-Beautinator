@@ -5,7 +5,7 @@ const TimeSlots = (props) => {
     return (
         <div className={'TimeSlots'}>
             {props.timeSlots.map(timeSlot =>
-                <p key={timeSlot} onClick={() => props.setTime({timeSlot})}>{timeSlot}</p>
+                <p key={timeSlot} onClick={() => props.setTime({timeSlot}.timeSlot)}>{timeSlot}</p>
             )}
         </div>
     )
