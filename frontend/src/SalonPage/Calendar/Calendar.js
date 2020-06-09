@@ -51,6 +51,7 @@ class Calendar extends React.Component {
             day: day
         })
         this.props.setTime(null)
+        this.props.setDate(day + '.' + this.state.month + '.' + this.state.year)
     }
 
     render() {
@@ -58,12 +59,17 @@ class Calendar extends React.Component {
         const lastMonday = date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1)
         return (
             <div className={'Calendar'}>
-                <Month year={this.state.year} month={this.state.month}/>
-                <Week lastMonday={lastMonday} date={this.state.day} changeSelectedDate={this.changeSelectedDate}/>
+                <Month year={this.state.year}
+                       month={this.state.month}/>
+                <Week lastMonday={lastMonday}
+                      date={this.state.day}
+                      changeSelectedDate={this.changeSelectedDate}/>
                 {this.state.day < new Date().getDate() &&
-                    <AvailableSlots timeSlots={[]} setTime={this.props.setTime}/>}
+                    <AvailableSlots timeSlots={[]}
+                                    setTime={this.props.setTime}/>}
                 {this.state.day >= new Date().getDate() &&
-                    <AvailableSlots timeSlots={['11:00', '12:05', '13:00', '13:30']} setTime={this.props.setTime}/>}
+                    <AvailableSlots timeSlots={['11:00', '12:05', '13:00', '13:30']}
+                                    setTime={this.props.setTime}/>}
                 </div>
         )
     }

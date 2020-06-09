@@ -22,8 +22,8 @@ const AvailableSlots = (props) => {
             {props.timeSlots.length === 0 &&
                 <p>Nu exista ore libere pentru data si serviciile selectate</p>}
             {props.timeSlots.length > 0 &&
-                <TimeSlots timeSlots={props.timeSlots} setTime={props.setTime}/>
-            }
+                <TimeSlots timeSlots={props.timeSlots}
+                           setTime={props.setTime}/>}
         </div>
     )
 }

@@ -16,7 +16,7 @@ function ShoppingCart (props) {
             {!props.calendarPage &&
             <TimePickButton openCalendarPage={props.openCalendarPage}/>}
             {props.calendarPage &&
-                <ScheduleButton disabled={props.disabled} time={props.time}/>}
+                <ScheduleButton disabled={props.disabled} data={props.data}/>}
             {props.calendarPage &&
             <BackButton closeCalendarPage={props.closeCalendarPage}/>}
         </div>
@@ -29,7 +29,7 @@ ShoppingCart.propTypes = {
     closeCalendarPage: PropTypes.func.isRequired,
     services: PropTypes.object.isRequired,
     disabled: PropTypes.bool.isRequired,
-    time: PropTypes.string
+    data: PropTypes.string
 }
 
 export default ShoppingCart;

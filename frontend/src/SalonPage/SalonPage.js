@@ -12,7 +12,8 @@ class SalonPage extends React.Component {
         this.state = {
             selected: new Set(),
             calendarPage: false,
-            time: null
+            time: null,
+            date: null
         }
         this.hasContent = this.hasContent.bind(this);
         this.addService = this.addService.bind(this);
@@ -20,6 +21,7 @@ class SalonPage extends React.Component {
         this.openCalendarPage = this.openCalendarPage.bind(this);
         this.closeCalendarPage = this.closeCalendarPage.bind(this);
         this.setTime = this.setTime.bind(this);
+        this.setDate = this.setDate.bind(this);
     }
 
     hasContent(section, salon) {
@@ -81,6 +83,12 @@ class SalonPage extends React.Component {
         })
     }
 
+    setDate(date) {
+        this.setState({
+            date: date
+        })
+    }
+
     render() {
         return (
             <article className={'SalonPage'}>
@@ -98,7 +106,8 @@ class SalonPage extends React.Component {
                          handleClick={this.addService}
                          selected={this.state.selected}/>}
                 {this.state.calendarPage &&
-                <Calendar setTime={this.setTime}/>}
+                <Calendar setTime={this.setTime}
+                          setDate={this.setDate}/>}
                 {this.state.selected.size > 0 &&
                 <div className={'VerticalLine'}/>}
                 {this.state.selected.size > 0 &&
@@ -108,7 +117,7 @@ class SalonPage extends React.Component {
                               openCalendarPage={this.openCalendarPage}
                               closeCalendarPage={this.closeCalendarPage}
                               disabled={this.state.time == null}
-                              time={this.state.time}/>}
+                              data={this.state.date + ', ora ' + this.state.time + ' la ' + this.props.salon.name}/>}
             </article>
         )
     }
