@@ -18,29 +18,29 @@ def create_user(email, password):
     """
     Creates a user with the given email and password
     """
-    return Users.objects.create(email=email, password=password)
+    return User.objects.create(email=email, password=password)
 
 def create_salon(email, password):
     """
     Creates a salon with the given email and password
     """
-    return Salons.objects.create(email=email, password=password)
+    return Salon.objects.create(email=email, password=password)
 
 
 #class AppointmentsModelTests(TestCase):
 
 
-#class ServicesModelTests(TestCase):
+#class ServiceModelTests(TestCase):
 
 
-class UsersModelTests(TestCase):
+class UserModelTests(TestCase):
     def test_user_login_wrong_email(self):
         """
         Checks what a wrong email will produce when
         trying to login
         """
         current = ''.join(random.choices(string.printable, k=12))
-        while len(Users.objects.filter(email=current)) > 0:
+        while len(User.objects.filter(email=current)) > 0:
             current = ''.join(random.choices(string.printable, k=12))
 
         dictionary = {"user_email" : current}
@@ -57,7 +57,7 @@ class UsersModelTests(TestCase):
         when trying to login
         """
         current = ''.join(random.choices(string.printable, k=12))
-        while len(Users.objects.filter(email=current)) > 0:
+        while len(User.objects.filter(email=current)) > 0:
             current = ''.join(random.choices(string.printable, k=12))
 
         create_user(current, "123456789")
@@ -78,7 +78,7 @@ class UsersModelTests(TestCase):
         Checks how a good login attempt will behave
         """
         current = ''.join(random.choices(string.printable, k=12))
-        while len(Users.objects.filter(email=current)) > 0:
+        while len(User.objects.filter(email=current)) > 0:
             current = ''.join(random.choices(string.printable, k=12))
 
         create_user(current, "123456789")
@@ -93,19 +93,19 @@ class UsersModelTests(TestCase):
         self.assertIs(res.status_code, 200)
         self.assertIs(dictionary["check_user"], True)
         self.assertIs(dictionary["check_password"], True)
-        user = Users.objects.filter(email=current)[0]
+        user = User.objects.filter(email=current)[0]
         expected = 'u' + str(user.pk)
         self.assertEqual(dictionary["user_id"], expected)
 
 
-class SalonsModelTests(TestCase):
+class SalonModelTests(TestCase):
     def test_salon_login_wrong_email(self):
         """
         Checks what a wrong email will produce when
         trying to login
         """
         current = ''.join(random.choices(string.printable, k=12))
-        while len(Salons.objects.filter(email=current)) > 0:
+        while len(Salon.objects.filter(email=current)) > 0:
             current = ''.join(random.choices(string.printable, k=12))
 
         dictionary = {"user_email" : current}
@@ -122,7 +122,7 @@ class SalonsModelTests(TestCase):
         when trying to login
         """
         current = ''.join(random.choices(string.printable, k=12))
-        while len(Salons.objects.filter(email=current)) > 0:
+        while len(Salon.objects.filter(email=current)) > 0:
             current = ''.join(random.choices(string.printable, k=12))
 
         create_salon(current, "123456789")
@@ -143,7 +143,7 @@ class SalonsModelTests(TestCase):
         Checks how a good login attempt will behave
         """
         current = ''.join(random.choices(string.printable, k=12))
-        while len(Salons.objects.filter(email=current)) > 0:
+        while len(Salon.objects.filter(email=current)) > 0:
             current = ''.join(random.choices(string.printable, k=12))
 
         create_salon(current, "123456789")
@@ -163,7 +163,7 @@ class SalonsModelTests(TestCase):
         self.assertIs(res.status_code, 200)
         self.assertIs(dictionary["check_user"], True)
         self.assertIs(dictionary["check_password"], True)
-        user = Salons.objects.filter(email=current)[0]
+        user = Salon.objects.filter(email=current)[0]
         expected = 's' + str(user.pk)
         self.assertEqual(dictionary["salon_id"], expected)
 

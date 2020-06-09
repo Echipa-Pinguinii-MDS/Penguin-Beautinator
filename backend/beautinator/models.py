@@ -25,7 +25,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_no = models.CharField(max_length=15, blank=True)
-    birthday = models.DateField(blank=True)
+    birthday = models.DateField(blank=True, null=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
 
 
