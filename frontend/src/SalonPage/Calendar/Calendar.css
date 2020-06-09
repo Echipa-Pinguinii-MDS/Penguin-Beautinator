@@ -1,0 +1,16 @@
+.Calendar {
+    padding: 10px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Week {
+    display: flex;
+    flex-direction: row;
+}
+
+.Day {
+    display: flex;
+    flex-direction: column;
+}

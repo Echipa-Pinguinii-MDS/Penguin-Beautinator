@@ -69,7 +69,7 @@ export function userDataByEmail(event, user_email) {
     return userData;
 }
 
-//user_data_by_email
+//user_data_by_id
 export function userDataById(event, user_id) {
     let userData = []
     axios({
@@ -101,7 +101,7 @@ export function userDataById(event, user_id) {
 }
 
 //salons_list
-export function salonsList(event) {
+export function salonsList() {
     let salons = [];
     axios({
         method: 'get',
@@ -110,13 +110,13 @@ export function salonsList(event) {
             "content-type": "application/json"
         },
     }).then(result => {
-        if(result.data["salons_list"].empty)
+        if (result.data["salons_list"].empty)
             console.log("nu avem saloane")
         else {
-            for(let i=0; i<result.data["salons_list"].length; i++){
+            for (let i=0; i<result.data["salons_list"].length; i++){
                 let aux_salon = {
                     src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
-                    id: result.data["salons_list"][i].id,
+                    id: String(result.data["salons_list"][i].id),
                     name: result.data["salons_list"][i].name,
                     noFullStars: 0,
                     noReviews: 0,
@@ -126,20 +126,20 @@ export function salonsList(event) {
                     images: [],
                     program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
                     phone: ['07********', '031*******'],
-                    email: result.data["salons_list"][i].email
+                    email: [result.data["salons_list"][i].email]
                 }
                 salons.push(aux_salon)
             }
         }
     }).catch(function (error) {
         console.log(error);
-    });
+    })
 
     return salons
 }
 
 //salon_data_by_id
-export function salonData(event, salon_id) {
+export function salonData(salon_id) {
     let salon = []
     let s = 'salons/' + salon_id + '/';
     axios({
@@ -154,7 +154,7 @@ export function salonData(event, salon_id) {
         else {
             let aux_salon = {
                 src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
-                id: result.data["salon_data"].id,
+                id: String(result.data["salon_data"].id),
                 name: result.data["salon_data"].name,
                 noFullStars: 0,
                 noReviews: 0,
@@ -164,7 +164,7 @@ export function salonData(event, salon_id) {
                 images: [],
                 program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
                 phone: ['07********', '031*******'],
-                email: result.data["salon_data"].email
+                email: [result.data["salon_data"].email]
             }
             salon.push(aux_salon)
         }

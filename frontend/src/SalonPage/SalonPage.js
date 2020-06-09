@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 import Menu from './Menu.js';
 import Content from './Content';
 import ShoppingCart from './ShoppingCart/ShoppingCart';
+import Calendar from './Calendar/Calendar';
 import './SalonPage.css';
 
-class SalonPage extends React.Component{
+class SalonPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: new Set()
+            selected: new Set(),
+            calendarPage: false
         }
         this.hasContent = this.hasContent.bind(this);
         this.addService = this.addService.bind(this);
         this.deleteService = this.deleteService.bind(this);
+        this.openCalendarPage = this.openCalendarPage.bind(this);
     }
 
     hasContent(section, salon) {
@@ -34,6 +37,12 @@ class SalonPage extends React.Component{
         this.setState({
             selected: selected
         })
+
+        if (selected.size === 0) {
+            this.setState({
+                calendarPage: false
+            })
+        }
     }
 
     getServices() {
@@ -41,8 +50,9 @@ class SalonPage extends React.Component{
         Object.keys(this.props.services).map(category => {
             let list = []
             this.props.services[category].map(service => {
-                if (this.state.selected.has(service.id))
+                if (this.state.selected.has(service.id)) {
                     list.push(service)
+                }
             })
             if (list.length)
                 services[category] = list
@@ -50,23 +60,37 @@ class SalonPage extends React.Component{
         return services;
     }
 
+    openCalendarPage() {
+        this.setState({
+            calendarPage: true
+        })
+    }
+
     render() {
         return (
             <article className={'SalonPage'}>
+                {!this.state.calendarPage &&
                 <Menu sections={this.props.sections}
                       salon={this.props.salon}
-                      hasContent={this.hasContent}/>
-                <div className={'VerticalLine'}/>
+                      hasContent={this.hasContent}/>}
+                {!this.state.calendarPage &&
+                <div className={'VerticalLine'}/>}
+                {!this.state.calendarPage &&
                 <Content sections={this.props.sections}
                          salon={this.props.salon}
                          services={this.props.services}
                          hasContent={this.hasContent}
-                         handleClick={this.addService}/>
+                         handleClick={this.addService}
+                         selected={this.state.selected}/>}
+                {this.state.calendarPage &&
+                <Calendar/>}
                 {this.state.selected.size > 0 &&
                 <div className={'VerticalLine'}/>}
                 {this.state.selected.size > 0 &&
                 <ShoppingCart services={this.getServices()}
-                              handleClick={this.deleteService}/>}
+                              handleClick={this.deleteService}
+                              calendarPage={this.state.calendarPage}
+                              openCalendarPage={this.openCalendarPage}/>}
             </article>
         )
     }
@@ -74,16 +98,7 @@ class SalonPage extends React.Component{
 
 SalonPage.propTypes = {
     sections: PropTypes.objectOf(PropTypes.string).isRequired,
-    salon: PropTypes.shape({
-        src: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        images: PropTypes.array.isRequired,
-        program: PropTypes.array.isRequired,
-        phone: PropTypes.array.isRequired,
-        email: PropTypes.array.isRequired,
-        address: PropTypes.string.isRequired
-    }).isRequired,
+    salon: PropTypes.object.isRequired,
     services: PropTypes.objectOf(PropTypes.array).isRequired
 }
 

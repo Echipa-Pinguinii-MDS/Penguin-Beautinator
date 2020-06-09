@@ -5,9 +5,11 @@ import PenguinBeautinator from '../PenguinBeautinator/PenguinBeautinator';
 import SalonPicker from '../SalonPicker/SalonPicker';
 import SalonPage from '../SalonPage/SalonPage';
 import Login from '../Login/Login';
+import {salonData, salonsList} from './Queries';
 import './Universal.css';
 
 const MainApp = (props) => {
+    // const salons = salonsList()
     return (
         <Router className={'MainApp'}>
             <NavBar/>
@@ -20,6 +22,7 @@ const MainApp = (props) => {
                 {props.salons.map(salon =>
                     <Route key={salon.id} path={'/' + salon.name + salon.id}>
                         <SalonPage sections={props.sections}
+                                   // salon={salonData(salon.id)}
                                    salon={salon}
                                    services={props.services}/>
                     </Route>
@@ -37,7 +40,7 @@ MainApp.defaultProps = {
         contact: 'Contact'
     },
     salons: [{
-        id: 's5',
+        id: '1',
         src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
         name: 'Nume salon',
         noFullStars: 3,

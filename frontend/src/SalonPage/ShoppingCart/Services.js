@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 const Info = (props) => {
     return (
-        <div className={'Info'}>
+        <div className={'Info'} onClick={() => props.handleClick(props.id)}>
             <p>{props.title}</p>
             <p>{props.price} lei</p>
-            <GrFormClose className={'gr'} onClick={() => props.handleClick(props.id)}/>
+            <GrFormClose className={'gr'}/>
         </div>
     )
 }
