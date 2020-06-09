@@ -8,6 +8,7 @@ import Login from '../Login/Login';
 import {salonData, salonsList} from './Queries';
 import './Universal.css';
 import Appointments from "../Appointments/Appointments";
+import SignUp from "../SignUp/SignUp";
 
 const MainApp = (props) => {
     // const salons = salonsList()
@@ -19,7 +20,7 @@ const MainApp = (props) => {
                 <Route exact path={'/saloane'}> <SalonPicker salons={props.salons}/> </Route>
                 <Route path={'/programari'}> <Appointments/> </Route>
                 <Route path={'/login'}> <Login/> </Route>
-                <Route path={'/signup'}/>
+                <Route path={'/signup'}> <SignUp/> </Route>
                 {props.salons.map(salon =>
                     <Route key={salon.id} path={'/' + salon.name + salon.id}>
                         <SalonPage sections={props.sections}

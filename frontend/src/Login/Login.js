@@ -1,54 +1,48 @@
-import React, { Component } from "react";
-import { Button, Form } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
-import "./Login.css";
-import axios from "axios";
+import React, { Component } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import './Login.css';
+import axios from 'axios';
 import Cookies from 'js-cookie';
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
-export default class Login extends Component{
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
-            password: "",
+            email: '',
+            password: '',
             wrongEmail: false,
             wrongPassword: false,
             loggedIn: false,
-        };
-
+        }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     reset() {
-        this.setState({wrongEmail: false, wrongPassword: false, loggedIn: false});
+        this.setState({
+            wrongEmail: false,
+            wrongPassword: false,
+            loggedIn: false
+        })
     }
 
     wrongEmail() {
-        if (this.state.wrongEmail) {
-            return <p>Email gresit</p>;
-        } else {
-            return null;
-        }
+        if (this.state.wrongEmail)
+            return <p>Email gresit</p>
     }
 
     wrongPassword() {
-        if (this.state.wrongPassword) {
-            return <p>Parola gresita</p>;
-        } else {
-            return null;
-        }
+        if (this.state.wrongPassword)
+            return <p>Parola gresita</p>
     }
 
     loggedIn() {
-        if (this.state.loggedIn) {
-            return <Redirect to="/saloane" />;
-        } else {
-            return null;
-        }
+        if (this.state.loggedIn)
+            return <Redirect to='/saloane'/>
     }
 
     validateForm() {
@@ -57,7 +51,9 @@ export default class Login extends Component{
 
     handleChange = event => {
         let {name, value} = event.target;
-        this.setState({[name]: value});
+        this.setState({
+            [name]: value
+        })
     }
 
     handleSubmit = (event) => {
@@ -70,7 +66,7 @@ export default class Login extends Component{
                 'user_password': this.state.password
             },
             headers: {
-                "content-type": "application/json"
+                'content-type': 'application/json'
             },
         }).then(result => {
             if (!result.data['check_user']) {
@@ -92,29 +88,26 @@ export default class Login extends Component{
 
     render() {
         return (
-            <div className="Login">
+            <div className='Login'>
                 <Form onSubmit={this.handleSubmit}>
-                    <Form.Group controlId="email">
+                    <Form.Group controlId='email'>
                         <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            autoFocus
-                            type="email"
-                            name="email"
-                            placeholder="Enter email"
-                            value={this.state.email}
-                            onChange={this.handleChange} />
+                        <Form.Control autoFocus
+                                      type='email'
+                                      name='email'
+                                      placeholder='Enter email'
+                                      value={this.state.email}
+                                      onChange={this.handleChange}/>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                            placeholder="Enter your password"
-                        />
+                        <Form.Control type='password'
+                                      name='password'
+                                      value={this.state.password}
+                                      onChange={this.handleChange}
+                                      placeholder='Enter your password'/>
                     </Form.Group>
-                    <Button block disabled={!this.validateForm()} type="submit">
+                    <Button block disabled={!this.validateForm()} type='submit'>
                         Login
                     </Button>
                 </Form>
@@ -123,6 +116,8 @@ export default class Login extends Component{
                 {this.wrongPassword()}
                 {this.loggedIn()}
             </div>
-        );
+        )
     }
-};
+}
+
+export default Login;
