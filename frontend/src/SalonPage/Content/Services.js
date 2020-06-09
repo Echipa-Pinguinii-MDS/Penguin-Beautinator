@@ -1,13 +1,14 @@
 import React from 'react';
-import {GrFormCheckmark} from 'react-icons/gr';
+import {GrFormCheckmark, GrFormAdd} from 'react-icons/gr';
 import PropTypes from 'prop-types';
-
-// alternativ: GrFormAdd
 
 const Info = (props) => {
     return (
-        <div className={'Info'}>
-            <GrFormCheckmark className={'gr'} onClick={() => props.handleClick(props.id)}/>
+        <div className={'Info'} onClick={() => props.handleClick(props.id)}>
+            {props.selected.has(props.id) &&
+                <GrFormCheckmark className={'gr'}/>}
+            {!props.selected.has(props.id) &&
+                <GrFormAdd className={'gr'}/>}
             <p>{props.title}</p>
             <p>{props.price} lei</p>
             <p>{props.length} minute</p>
@@ -20,7 +21,8 @@ Info.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    length: PropTypes.number.isRequired
+    length: PropTypes.number.isRequired,
+    selected: PropTypes.object.isRequired
 }
 
 const Section = (props) => {
@@ -33,7 +35,8 @@ const Section = (props) => {
                       id={service.id}
                       title={service.title}
                       price={service.price}
-                      length={service.length}/>
+                      length={service.length}
+                      selected={props.selected}/>
             )}
         </div>
     )
@@ -42,12 +45,8 @@ const Section = (props) => {
 Section.propTypes = {
     handleClick: PropTypes.func.isRequired,
     category: PropTypes.string.isRequired,
-    service: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        length: PropTypes.number.isRequired
-    }).isRequired).isRequired
+    service: PropTypes.array.isRequired,
+    selected: PropTypes.object.isRequired
 }
 
 const Services = (props) => {
@@ -59,7 +58,8 @@ const Services = (props) => {
                     <Section key={category}
                              handleClick={props.handleClick}
                              service={props.services[category]}
-                             category={category}/>
+                             category={category}
+                             selected={props.selected}/>
                 )}
             </div>
         </section>
@@ -68,12 +68,8 @@ const Services = (props) => {
 
 Services.propTypes = {
     handleClick: PropTypes.func.isRequired,
-    services: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        length: PropTypes.number.isRequired
-    }).isRequired).isRequired).isRequired
+    services: PropTypes.object.isRequired,
+    selected: PropTypes.object.isRequired
 }
 
 export default Services;

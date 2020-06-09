@@ -25,7 +25,8 @@ const Content = (props) => {
                 <Element id={'services'}>
                     <Services title={props.sections.services}
                               services={props.services}
-                              handleClick={props.handleClick}/>
+                              handleClick={props.handleClick}
+                              selected={props.selected}/>
                 </Element>
 
                 <Element id={'gallery'}>
@@ -49,19 +50,9 @@ const Content = (props) => {
 Content.propTypes = {
     handleClick: PropTypes.func.isRequired,
     sections: PropTypes.objectOf(PropTypes.string),
-    salon: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        noFullStars: PropTypes.number.isRequired,
-        noReviews: PropTypes.number.isRequired,
-        noDollars: PropTypes.number.isRequired,
-        description: PropTypes.string.isRequired,
-        images: PropTypes.array.isRequired,
-        program: PropTypes.array.isRequired,
-        phone: PropTypes.array.isRequired,
-        email: PropTypes.array.isRequired,
-        address: PropTypes.string.isRequired
-    }).isRequired,
-    services: PropTypes.objectOf(PropTypes.array).isRequired
+    salon: PropTypes.object.isRequired,
+    services: PropTypes.objectOf(PropTypes.array).isRequired,
+    selected: PropTypes.object.isRequired
 }
 
 export default Content;

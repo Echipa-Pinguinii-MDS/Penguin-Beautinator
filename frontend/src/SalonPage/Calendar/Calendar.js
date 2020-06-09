@@ -1,5 +1,6 @@
 import React from 'react';
 import './Calendar.css'
+import AvailableSlots from "./TimeSlots";
 
 const Month = (props) => {
     const months = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie',
@@ -13,9 +14,9 @@ const Month = (props) => {
 
 const Day = (props) => {
     return (
-        <div className={'Day'}>
+        <div className={'Day'} onClick={() => props.changeSelectedDate(props.dayNo)}>
             <h1>{props.day}</h1>
-            <h1 onClick={() => props.changeSelectedDate(props.dayNo)}>{props.dayNo}</h1>
+            <h1>{props.dayNo}</h1>
         </div>
     )
 }
@@ -52,16 +53,17 @@ class Calendar extends React.Component {
     }
 
     render() {
-        console.log(this.state.day)
-        console.log(this.state.month)
         const date = new Date()
         const lastMonday = date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1)
         return (
             <div className={'Calendar'}>
                 <Month year={this.state.year} month={this.state.month}/>
                 <Week lastMonday={lastMonday} date={this.state.day} changeSelectedDate={this.changeSelectedDate}/>
-                <p>Nu exista sloturi libere pentru data de {this.state.day}.{this.state.month}.{this.state.year}</p>
-            </div>
+                {this.state.day < new Date().getDate() &&
+                    <AvailableSlots timeSlots={[]}/>}
+                {this.state.day >= new Date().getDate() &&
+                    <AvailableSlots timeSlots={['11:00', '12:05', '13:00', '13:30']}/>}
+                </div>
         )
     }
 }

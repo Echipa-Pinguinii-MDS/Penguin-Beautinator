@@ -37,6 +37,12 @@ class SalonPage extends React.Component {
         this.setState({
             selected: selected
         })
+
+        if (selected.size === 0) {
+            this.setState({
+                calendarPage: false
+            })
+        }
     }
 
     getServices() {
@@ -44,8 +50,9 @@ class SalonPage extends React.Component {
         Object.keys(this.props.services).map(category => {
             let list = []
             this.props.services[category].map(service => {
-                if (this.state.selected.has(service.id))
+                if (this.state.selected.has(service.id)) {
                     list.push(service)
+                }
             })
             if (list.length)
                 services[category] = list
@@ -73,7 +80,8 @@ class SalonPage extends React.Component {
                          salon={this.props.salon}
                          services={this.props.services}
                          hasContent={this.hasContent}
-                         handleClick={this.addService}/>}
+                         handleClick={this.addService}
+                         selected={this.state.selected}/>}
                 {this.state.calendarPage &&
                 <Calendar/>}
                 {this.state.selected.size > 0 &&
@@ -90,16 +98,7 @@ class SalonPage extends React.Component {
 
 SalonPage.propTypes = {
     sections: PropTypes.objectOf(PropTypes.string).isRequired,
-    salon: PropTypes.shape({
-        src: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        images: PropTypes.array.isRequired,
-        program: PropTypes.array.isRequired,
-        phone: PropTypes.array.isRequired,
-        email: PropTypes.array.isRequired,
-        address: PropTypes.string.isRequired
-    }).isRequired,
+    salon: PropTypes.object.isRequired,
     services: PropTypes.objectOf(PropTypes.array).isRequired
 }
 
