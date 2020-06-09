@@ -18,6 +18,7 @@ class SalonPage extends React.Component {
         this.addService = this.addService.bind(this);
         this.deleteService = this.deleteService.bind(this);
         this.openCalendarPage = this.openCalendarPage.bind(this);
+        this.closeCalendarPage = this.closeCalendarPage.bind(this);
         this.setTime = this.setTime.bind(this);
     }
 
@@ -68,6 +69,12 @@ class SalonPage extends React.Component {
         })
     }
 
+    closeCalendarPage() {
+        this.setState({
+            calendarPage: false
+        })
+    }
+
     setTime(time) {
         this.setState({
             time: time
@@ -99,6 +106,7 @@ class SalonPage extends React.Component {
                               handleClick={this.deleteService}
                               calendarPage={this.state.calendarPage}
                               openCalendarPage={this.openCalendarPage}
+                              closeCalendarPage={this.closeCalendarPage}
                               time={this.state.time}/>}
             </article>
         )

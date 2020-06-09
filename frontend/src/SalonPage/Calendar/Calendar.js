@@ -1,6 +1,6 @@
 import React from 'react';
+import AvailableSlots from './TimeSlots';
 import './Calendar.css'
-import AvailableSlots from "./TimeSlots";
 
 const Month = (props) => {
     const months = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie',
