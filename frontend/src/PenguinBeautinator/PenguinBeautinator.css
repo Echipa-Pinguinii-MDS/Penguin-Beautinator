@@ -1,0 +1,18 @@
+body {
+    background-color: grey;
+}
+
+.homepage_Logo {
+    position: absolute;
+    width: 50%;
+    height: 25vw;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.Homepage_Gif {
+    position: static;
+    width: 100%;
+    margin-top: 11vw;
+    height: 16vw;
+}
