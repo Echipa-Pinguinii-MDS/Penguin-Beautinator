@@ -11,12 +11,14 @@ class SalonPage extends React.Component {
         super(props);
         this.state = {
             selected: new Set(),
-            calendarPage: false
+            calendarPage: false,
+            time: null
         }
         this.hasContent = this.hasContent.bind(this);
         this.addService = this.addService.bind(this);
         this.deleteService = this.deleteService.bind(this);
         this.openCalendarPage = this.openCalendarPage.bind(this);
+        this.setTime = this.setTime.bind(this);
     }
 
     hasContent(section, salon) {
@@ -66,6 +68,12 @@ class SalonPage extends React.Component {
         })
     }
 
+    setTime(time) {
+        this.setState({
+            time: time
+        })
+    }
+
     render() {
         return (
             <article className={'SalonPage'}>
@@ -83,14 +91,15 @@ class SalonPage extends React.Component {
                          handleClick={this.addService}
                          selected={this.state.selected}/>}
                 {this.state.calendarPage &&
-                <Calendar/>}
+                <Calendar setTime={this.setTime}/>}
                 {this.state.selected.size > 0 &&
                 <div className={'VerticalLine'}/>}
                 {this.state.selected.size > 0 &&
                 <ShoppingCart services={this.getServices()}
                               handleClick={this.deleteService}
                               calendarPage={this.state.calendarPage}
-                              openCalendarPage={this.openCalendarPage}/>}
+                              openCalendarPage={this.openCalendarPage}
+                              time={this.state.time}/>}
             </article>
         )
     }

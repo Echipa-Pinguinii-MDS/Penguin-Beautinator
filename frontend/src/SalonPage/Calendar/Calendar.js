@@ -50,6 +50,7 @@ class Calendar extends React.Component {
         this.setState({
             day: day
         })
+        this.props.setTime(null)
     }
 
     render() {
@@ -60,9 +61,9 @@ class Calendar extends React.Component {
                 <Month year={this.state.year} month={this.state.month}/>
                 <Week lastMonday={lastMonday} date={this.state.day} changeSelectedDate={this.changeSelectedDate}/>
                 {this.state.day < new Date().getDate() &&
-                    <AvailableSlots timeSlots={[]}/>}
+                    <AvailableSlots timeSlots={[]} setTime={this.props.setTime}/>}
                 {this.state.day >= new Date().getDate() &&
-                    <AvailableSlots timeSlots={['11:00', '12:05', '13:00', '13:30']}/>}
+                    <AvailableSlots timeSlots={['11:00', '12:05', '13:00', '13:30']} setTime={this.props.setTime}/>}
                 </div>
         )
     }

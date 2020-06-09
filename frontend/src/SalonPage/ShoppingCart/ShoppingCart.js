@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Services from './Services';
 import Total from './Total';
-import ScheduleButton from './ScheduleButton';
+import ScheduleButton from '../Calendar/ScheduleButton';
+import TimePickButton from './TimePickButton';
 import './ShoppingCart.css';
-import TimePickButton from "./TimePickButton";
 
 function ShoppingCart (props) {
     return (
@@ -13,20 +13,17 @@ function ShoppingCart (props) {
             <Services services={props.services} handleClick={props.handleClick}/>
             <Total services={props.services}/>
             {props.calendarPage &&
-            <ScheduleButton/>}
+                <ScheduleButton disabled={props.time == null}/>}
             {!props.calendarPage &&
-            <TimePickButton openCalendarPage={props.openCalendarPage}/>}
+                <TimePickButton openCalendarPage={props.openCalendarPage}/>}
         </div>
     )
 }
 
 ShoppingCart.propTypes = {
     handleClick: PropTypes.func.isRequired,
-    services: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            title: PropTypes.string.isRequired,
-            price: PropTypes.number.isRequired
-        }).isRequired).isRequired).isRequired
+    services: PropTypes.object.isRequired,
+    time: PropTypes.object
 }
 
 ShoppingCart.defaultProps = {
