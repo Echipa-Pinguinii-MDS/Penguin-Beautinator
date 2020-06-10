@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {Navbar} from 'react-bootstrap';
 import './Universal.css';
 
 const Item = (props) => {
@@ -13,7 +14,7 @@ const Item = (props) => {
 
 const NavBar = () => {
     return (
-        <div className={'NavBar'}>
+        <Navbar className={'NavBar'}>
             <Link to={'/desprenoi'}>
                 <Item section={'Penguin Beautinator'}
                       className={'Left'}
@@ -43,7 +44,7 @@ const NavBar = () => {
                       className={'Right'}
                       src={'https://img.pngio.com/top-club-penguin-stickers-for-android-ios-find-the-best-gif-club-penguin-transparent-606_648.gif'}/>
             </Link>
-        </div>
+        </Navbar>
     )
 }
 
