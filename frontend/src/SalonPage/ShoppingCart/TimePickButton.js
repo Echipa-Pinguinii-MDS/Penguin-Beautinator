@@ -4,14 +4,15 @@ import {Button} from 'react-bootstrap';
 
 const TimePickButton = (props) => {
     return (
-        <Button className={'TimePickButton'} onClick={props.openCalendarPage}>
+        <Button className={'TimePickButton'} disabled={props.disabled} onClick={props.openCalendarPage}>
             📅Alege data
         </Button>
     )
 }
 
 TimePickButton.propTypes = {
-    openCalendarPage: PropTypes.func.isRequired
+    openCalendarPage: PropTypes.func.isRequired,
+    disabled: PropTypes.bool.isRequired
 }
 
 export default TimePickButton;

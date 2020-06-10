@@ -110,14 +110,13 @@ class SalonPage extends React.Component {
                           setDate={this.setDate}/>}
                 {this.state.selected.size > 0 &&
                 <div className={'VerticalLine'}/>}
-                {this.state.selected.size > 0 &&
                 <ShoppingCart services={this.getServices()}
                               handleClick={this.deleteService}
                               calendarPage={this.state.calendarPage}
                               openCalendarPage={this.openCalendarPage}
                               closeCalendarPage={this.closeCalendarPage}
                               disabled={this.state.time == null}
-                              data={this.state.date + ', ora ' + this.state.time + ' la ' + this.props.salon.name}/>}
+                              data={this.state.date + ', ora ' + this.state.time + ' la ' + this.props.salon.name}/>
             </article>
         )
     }

@@ -11,12 +11,15 @@ function ShoppingCart (props) {
     return (
         <div className={'ShoppingCart'}>
             <h4 className = {'ServiciiSelectate'}>Servicii selectate</h4>
-            <Services services={props.services} handleClick={props.handleClick}/>
+            <Services services={props.services}
+                      handleClick={props.handleClick}/>
             <Total services={props.services}/>
             {!props.calendarPage &&
-            <TimePickButton openCalendarPage={props.openCalendarPage}/>}
+                <TimePickButton disabled={Object.keys(props.services).length === 0}
+                                openCalendarPage={props.openCalendarPage}/>}
             {props.calendarPage &&
-                <ScheduleButton disabled={props.disabled} data={props.data}/>}
+                <ScheduleButton disabled={props.disabled}
+                                data={props.data}/>}
             {props.calendarPage &&
             <BackButton closeCalendarPage={props.closeCalendarPage}/>}
         </div>

@@ -47,6 +47,8 @@ Section.propTypes = {
 const Services = (props) => {
     return (
         <div className={'Services'}>
+            {Object.keys(props.services).length === 0 &&
+            <p>Nu ati selectat niciun serviciu inca.</p>}
             {Object.keys(props.services).map(category =>
                 <Section key={category}
                          handleClick={props.handleClick}
