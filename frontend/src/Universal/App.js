@@ -3,12 +3,12 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import NavBar from './NavBar';
 import PenguinBeautinator from '../PenguinBeautinator/PenguinBeautinator';
 import SalonPicker from '../SalonPicker/SalonPicker';
+import Appointments from '../Appointments/Appointments';
 import SalonPage from '../SalonPage/SalonPage';
 import Login from '../Login/Login';
-import {salonData, salonsList} from './Queries';
+import SignUp from '../SignUp/SignUp';
+// import {salonData, salonsList} from './Queries';
 import './Universal.css';
-import Appointments from "../Appointments/Appointments";
-import SignUp from "../SignUp/SignUp";
 
 const MainApp = (props) => {
     // const salons = salonsList()
