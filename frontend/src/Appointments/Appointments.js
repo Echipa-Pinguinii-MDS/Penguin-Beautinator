@@ -50,7 +50,8 @@ class AppointmentDetails extends React.Component {
                                opened={this.state.opened}/>
                 {this.state.opened &&
                     Object.keys(this.props.services).map(category =>
-                        <AppointmentCategories category={category}
+                        <AppointmentCategories key={category}
+                                               category={category}
                                                services={this.props.services[category]}/>)}
             </div>
         )
