@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 
 const PopUpNotLoggedIn = (props) => {
     return (
-        <Popup trigger={<button disabled={props.disabled}>Rezerva</button>} modal>
+        <Popup trigger={<button className='ScheduleButton' disabled={props.disabled}>🛒Rezerva</button>} modal>
             {close => (
                 <div className={'PopupNotLoggedIn'}>
                     <a className={'Close'} onClick={close}>&times;</a>
@@ -29,7 +29,7 @@ PopUpNotLoggedIn.propTypes = {
 
 const PopUpLoggedIn = (props) => {
     return (
-        <Popup trigger={<button disabled={props.disabled}>Rezerva</button>} modal>
+        <Popup trigger={<button className='ScheduleButton' disabled={props.disabled}>Rezerva</button>} modal>
             {close => (
                 <div className={'PopupLoggedIn'}>
                     <a className={'Close'} onClick={close}>&times;</a>

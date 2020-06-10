@@ -3,10 +3,16 @@ h5 {
 }
 
 .ShoppingCart {
-    padding: 10px;
+    position: fixed;
+    margin-left: 67.3%;
+    margin-right: 2%;
+    padding: 10px 0 0 0;
     text-align: start;
     width: 30%;
-    font-size: 1vw;
+    height: 80%;
+    font-size:calc(10px + 0.5vw);
+    border-style: hidden;
+    box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .ShoppingCart .Info {
@@ -33,6 +39,11 @@ h5 {
     padding: 10px;
 }
 
+.PopupNotLoggedIn {
+    text-align: center;
+    color: black;
+}
+
 .Close {
     cursor: pointer;
     position: absolute;
@@ -45,4 +56,68 @@ h5 {
     background: #ffffff;
     border-radius: 18px;
     border: 1px solid #cfcece;
+}
+
+.Services {
+    padding: 0 10px 0 10px;
+}
+
+.Total {
+    padding: 0 10px 0 10px;
+}
+
+.ServiciiSelectate {
+    padding: 0 10px 0 10px;
+}
+
+.TimePickButton{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: calc(7px + 0.6vw);
+    cursor: pointer;
+    width: 100%;
+    bottom: 0;
+}
+
+.ScheduleButton {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: calc(7px + 0.7vw);
+    cursor: pointer;
+    width: 100%;
+    height: calc(25px + 0.3vw);
+}
+
+.ScheduleButton:disabled {
+    background-color: grey;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: calc(7px + 0.7vw);
+    width: 100%;
+    height: calc(25px + 0.3vw);
+}
+
+.BackButton {
+    background-color: red;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: calc(4px + 0.7vw);
+    cursor: pointer;
+    width: 100%;
+    height: calc(25px + 0.3vw);
 }

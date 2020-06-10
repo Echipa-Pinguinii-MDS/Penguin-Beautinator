@@ -10,7 +10,7 @@ import './ShoppingCart.css';
 function ShoppingCart (props) {
     return (
         <div className={'ShoppingCart'}>
-            <h4>Servicii selectate</h4>
+            <h4 className = {'ServiciiSelectate'}>Servicii selectate</h4>
             <Services services={props.services} handleClick={props.handleClick}/>
             <Total services={props.services}/>
             {!props.calendarPage &&

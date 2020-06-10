@@ -5,7 +5,7 @@ import {Button} from 'react-bootstrap';
 const TimePickButton = (props) => {
     return (
         <Button className={'TimePickButton'} onClick={props.openCalendarPage}>
-            Alege o data
+            📅Alege data
         </Button>
     )
 }
