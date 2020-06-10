@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Navbar} from 'react-bootstrap';
-import './Universal.css';
+import './App.css';
 
 const Item = (props) => {
     return (
