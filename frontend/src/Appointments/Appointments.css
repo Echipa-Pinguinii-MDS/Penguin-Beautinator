@@ -8,20 +8,20 @@
     font-size:calc(13px + 0.5vw);
 }
 
-.AppointmentMain {
+.AppointmentCard {
     display: flex;
     flex-direction: row;
     padding: 0 10px 10px;
     justify-content: space-around;
 }
 
-.AppointmentMain img {
+.AppointmentCard img {
     padding: 10px;
     height: 100px;
     width: 100px;
 }
 
-.AppointmentSalon {
+.AppointmentContact {
     padding: 10px;
 }
 
@@ -29,11 +29,23 @@
     padding: 10px;
 }
 
-.AppointmentTotal {
+.AppointmentPrice {
     padding: 10px;
 }
 
-.AppointmentCategories {
+.DetailsButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-style: ridge;
+    border-width: 1px 0 0 0;
+}
+
+.io {
+    padding: 20px;
+}
+
+.AppointmentServices {
     display: flex;
     flex-direction: row;
     padding: 10px;
@@ -48,16 +60,4 @@
 
 .AppointmentService {
     padding-left: 10px;
-}
-
-.DetailsButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    border-style: ridge;
-    border-width: 1px 0 0 0;
-}
-
-.io {
-    padding: 20px;
 }
