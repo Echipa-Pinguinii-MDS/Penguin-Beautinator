@@ -97,8 +97,6 @@ class SalonPage extends React.Component {
                       salon={this.props.salon}
                       hasContent={this.hasContent}/>}
                 {!this.state.calendarPage &&
-                <div className={'VerticalLine'}/>}
-                {!this.state.calendarPage &&
                 <Content sections={this.props.sections}
                          salon={this.props.salon}
                          services={this.props.services}
@@ -108,8 +106,6 @@ class SalonPage extends React.Component {
                 {this.state.calendarPage &&
                 <Calendar setTime={this.setTime}
                           setDate={this.setDate}/>}
-                {this.state.selected.size > 0 &&
-                <div className={'VerticalLine'}/>}
                 <ShoppingCart services={this.getServices()}
                               handleClick={this.deleteService}
                               calendarPage={this.state.calendarPage}

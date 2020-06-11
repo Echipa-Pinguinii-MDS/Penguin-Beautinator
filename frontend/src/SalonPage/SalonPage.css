@@ -12,11 +12,6 @@ h3, h4 {
     padding: 20px;
 }
 
-.VerticalLine {
-    padding: 10px;
-    border-left: 2px hidden silver;
-}
-
 .Menu {
     position: fixed;
     padding-top: 15px;
