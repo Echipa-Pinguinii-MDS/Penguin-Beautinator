@@ -34,7 +34,6 @@ def user_data_by_email(request):
 def user_data_by_id(request):
     data = json.loads(request.body.decode('utf-8'))
     user_id = data['user_id']
-    user_id = int(user_id[1:])
 
     try:
         data = User.objects.get(id=user_id)
@@ -49,15 +48,9 @@ def salons_list(request):
     return JsonResponse({"salons_list": list(salons)})
 
 
-def all_services(request):
-    services = Service.objects.values()
-    return JsonResponse({"all_services": list(services)})
-
-
 def salon_data_by_id(request, salon_id):
     # data = json.loads(request.body.decode('utf-8'))
     # salon_id = data['salon_id']
-    salon_id = int(salon_id[1:])
 
     try:
         data = Salon.objects.get(id=salon_id)
@@ -70,7 +63,6 @@ def salon_data_by_id(request, salon_id):
 def salon_services(request, salon_id):
     # data = json.loads(request.body.decode('utf-8'))
     # salon_id = data['salon_id']
-    salon_id = int(salon_id[1:])
 
     services = Service.objects.filter(salon=salon_id).values()
     return JsonResponse({"salon_services": list(services)})
@@ -79,44 +71,9 @@ def salon_services(request, salon_id):
 def user_appointments(request):
     data = json.loads(request.body.decode('utf-8'))
     user_id = data['user_id']
-    user_id = int(user_id[1:])
 
     appts = Appointment.objects.filter(client=user_id).values()
     return JsonResponse({"user_appointments": list(appts)})
-
-
-# # timesloturile din orar
-# def service_open_timeslots(request):
-#     data = json.loads(request.body.decode('utf-8'))
-#     service_id = data['service_id']
-#
-#     open = Service.objects.get(id=service_id)
-#     # string de 0 si 1
-#     return JsonResponse({"open_timeslots": open.open_timeslots})
-#
-#
-# # timesloturile libere din orar
-# def service_available_timeslots(request):
-#     data = json.loads(request.body.decode('utf-8'))
-#     service_id = data['service_id']
-#
-#     available = Service.objects.get(id=service_id)
-#     # string de 0 si 1
-#     return JsonResponse({"open_timeslots": available.available_timeslots})
-#
-#
-# # returneaza None daca nu exista sau un int ce reprezinta un timeslot
-# def service_next_available_timeslot(request):
-#     data = json.loads(request.body.decode('utf-8'))
-#     service_id = data['service_id']
-#     current_timeslot = data['current_timeslot']
-#
-#     available = Service.objects.get(id=service_id)
-#     availablestr = available.available_timeslots
-#     for i in range(current_timeslot + 1, len(availablestr)):
-#         if availablestr[i] == 1:
-#             return JsonResponse({"next_available_timeslot": i})
-#     return JsonResponse({"next_available_timeslot": None})
 
 
 def add_user(request):

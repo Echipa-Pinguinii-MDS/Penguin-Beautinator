@@ -26,7 +26,7 @@ class SalonPage extends React.Component {
 
     hasContent(section, salon) {
         return !((section === 'about' && salon.description === '') ||
-            (section === 'gallery' && salon.images.length === 0));
+            (section === 'gallery' && salon.images.size === 0));
     }
 
     addService(id) {

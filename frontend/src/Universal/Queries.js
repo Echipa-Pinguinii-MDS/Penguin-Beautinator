@@ -176,7 +176,7 @@ export function salonData(salon_id) {
 }
 
 //salon_services
-export function salonServices(event, salon_id) {
+export function salonServices(salon_id) {
     let salon_serv = []
     let s = 'salons/' + salon_id + '/services/';
     axios({

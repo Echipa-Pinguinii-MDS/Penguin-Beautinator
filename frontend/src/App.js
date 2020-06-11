@@ -7,26 +7,28 @@ import Appointments from './Appointments/Appointments';
 import SalonPage from './SalonPage/SalonPage';
 import Login from './Login/Login';
 import SignUp from './SignUp/SignUp';
-// import {salonData, salonsList} from './Queries';
+import {salonData, salonServices, salonsList} from './Universal/Queries';
 import './Universal/App.css';
 
 const App = (props) => {
-    // const salons = salonsList()
+    const salons = salonsList()
     return (
         <Router className={'App'}>
             <NavBar/>
             <div className={'AppPage'}>
                 <Route path={'/desprenoi'}> <PenguinBeautinator/> </Route>
-                <Route exact path={'/saloane'}> <SalonPicker salons={props.salons}/> </Route>
+                <Route exact path={'/saloane'}> <SalonPicker salons={salons}/> </Route>
                 <Route path={'/programari'}> <Appointments/> </Route>
                 <Route path={'/login'}> <Login/> </Route>
                 <Route path={'/signup'}> <SignUp/> </Route>
                 {props.salons.map(salon =>
                     <Route key={salon.id} path={'/' + salon.name + salon.id}>
                         <SalonPage sections={props.sections}
-                                   // salon={salonData(salon.id)}
-                                   salon={salon}
-                                   services={props.services}/>
+                                   salon={salonData(salon.id)}
+                                   // salon={salon}
+                                   // services={salonServices(salon.id)}
+                                   services={props.services}
+                        />
                     </Route>
                 )}
             </div>
