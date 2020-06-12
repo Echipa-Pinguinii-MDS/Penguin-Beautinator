@@ -4,15 +4,16 @@ h5 {
 
 .ShoppingCart {
     position: fixed;
-    margin-left: 67.3%;
-    margin-right: 2%;
-    padding: 10px 0 0 0;
+    display: block;
+    right: 5%;
     text-align: start;
-    width: 30%;
-    height: 80%;
+    width: 20%;
+    height: auto;
+    max-height: 80%;
     font-size:calc(10px + 0.5vw);
     border-style: hidden;
     box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    overflow: auto;
 }
 
 .ShoppingCart .Info {
@@ -33,6 +34,7 @@ h5 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    color: #ff000a;
 }
 
 .Popup {
@@ -41,7 +43,7 @@ h5 {
 
 .PopupNotLoggedIn {
     text-align: center;
-    color: black;
+    color: #ff000a;
 }
 
 .Close {
@@ -68,10 +70,25 @@ h5 {
 
 .ServiciiSelectate {
     padding: 0 10px 0 10px;
+    color: #ff000a;
 }
 
-.TimePickButton{
+.TimePickButton {
     background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: calc(7px + 0.6vw);
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.TimePickButton:disabled {
+    background-color: grey;
     border: none;
     color: white;
     padding: 15px 32px;

@@ -2,6 +2,7 @@
     position: absolute;
     width: 50%;
     height: 25vw;
+    margin-top: 30px;
     margin-left: 25%;
     margin-right: 25%;
 }
@@ -9,6 +10,14 @@
 .Homepage_Gif {
     position: static;
     width: 100%;
-    margin-top: 11vw;
+    margin-top: calc(40px + 11vw);
     height: 16vw;
+    border-style: outset;
+    border-width: 0 0 1px 0;
+}
+
+p {
+    text-align: center;
+    font-weight: bold;
+    color: #ff000a;
 }

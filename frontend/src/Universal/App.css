@@ -1,3 +1,7 @@
+body {
+    background-color: #dce3e5;
+}
+
 .App {
     font-family: 'Open Sans', sans-serif;
     width: auto;
@@ -15,14 +19,16 @@
     right: 0;
     position: fixed;
     overflow: hidden;
-    background-color: white;
     align-items: center;
+    justify-content: space-around;
+    background-color: #263543;
 }
 
 .Item {
     padding: 10px;
     display: flex;
     justify-content: center;
+    background-color: #263543;
 }
 
 .Item img {
@@ -32,17 +38,18 @@
 
 .Item h2 {
     font-size: 15px;
-    color: grey;
+    color: #ff000a;
     text-decoration: none;
 }
 
 .Item:hover {
-    background-color: red;
+    background-color: #2c4654;
 }
 
 .Left {
     height: 15px;
     width: 15px;
+    color: #f7f5f7;
 }
 
 .Right {

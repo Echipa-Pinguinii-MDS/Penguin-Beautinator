@@ -1,6 +1,6 @@
 import React from 'react';
 import './PenguinBeautinator.css';
-import Logo from "../Images/logo-transparent.png";
+import Logo from "../Images/logo.png";
 import Gif from "../Images/giphy_transparent.gif";
 
 const PenguinBeautinator = () => {
