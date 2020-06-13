@@ -16,6 +16,10 @@ urlpatterns = [
     path('users/profile/', views.user_data_by_id, name='user_data'),
     # /beautinator/users/appointments/
     path('users/appointments/', views.user_appointments, name='user_appointments'),
-    # /user/login/
-    path('user/login/', views.user_login, name='user_login')
+    # /beautinator/salons/appointments/
+    path('salons/appointments/', views.salon_appointments, name='salon_appointments'),
+    # /beautinator/user/login/
+    path('user/login/', views.user_login, name='user_login'),
+    # /beautinator/available/
+    path('available/', views.available_hours, name='available_hours'),
 ]

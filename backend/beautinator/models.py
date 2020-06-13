@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import timedelta
+from datetime import timedelta, time, date
 
 
 # When edited modify the admin too
@@ -146,13 +146,14 @@ class Appointment(models.Model):
         to=Service,
         on_delete=models.CASCADE
     )
-    start_date_time = models.DateTimeField()
+    start_date = models.DateField()
+    start_time = models.TimeField()
 
-    def start_date_time_to_int(self):
-        return time_to_int(self.start_date_time.time())
+    def start_time_to_int(self):
+        return time_to_int(self.start_time)
 
     def duration_to_int(self):
-        return duration_to_int(self.duration)
+        return duration_to_int(self.service.duration)
 
     def duration_in_minutes(self):
-        return self.duration.total_seconds() // 60
+        return self.service.duration.total_seconds() // 60

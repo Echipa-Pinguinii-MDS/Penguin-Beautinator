@@ -1,8 +1,10 @@
 from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import json
-from datetime import timedelta, date
+from datetime import timedelta, date, time
+
+from itertools import permutations
 
 from .models import User, Salon, Service, Appointment, Location
 
@@ -23,6 +25,11 @@ def int_to_duration(duration):
     return timedelta(minutes=(15 * duration))
 
 
+def int_to_time(index):
+    minutes = index * 15
+    return time(hour=minutes // 60, minute=minutes % 60)
+
+
 def get_data_from_request(request, is_test=False):
     if not is_test:
         return json.loads(request.body.decode('utf-8'))
@@ -36,7 +43,7 @@ def user_data_by_email(request, is_test=False):
     try:
         data = User.objects.get(email=email)
     except (KeyError, User.DoesNotExist):
-        return JsonResponse({"user_data": None})
+        return HttpResponse("No user with email: " + email, status=404)
     else:
         user = model_to_dict(data)
         user.pop('password')
@@ -56,7 +63,7 @@ def user_data_by_id(request, is_test=False):
     try:
         data = User.objects.get(id=user_id)
     except (KeyError, User.DoesNotExist):
-        return JsonResponse({"user_data": None})
+        return HttpResponse("User " + user_id + " does not exist", status=404)
     else:
         user = model_to_dict(data)
         user.pop('password')
@@ -78,7 +85,7 @@ def salon_data_by_id(request, salon_id):
     try:
         data = Salon.objects.get(id=salon_id)
     except (KeyError, Salon.DoesNotExist):
-        return JsonResponse({"salon_data": None})
+        return HttpResponse("Salon " + salon_id + " does not exist", status=404)
     else:
         salon = model_to_dict(data)
         salon.pop('password')
@@ -91,7 +98,8 @@ def salon_services(request, salon_id):
     services = list(Service.objects.filter(salon=salon_id).values())
     for service in services:
         service['duration'] = duration_in_minutes(service['duration'])
-        # service['category'] = service
+        service['category'] = Service.objects.get(pk=service['id']).get_category()
+        service.pop('salon_id')
     return JsonResponse({"salon_services": services})
 
 
@@ -113,8 +121,81 @@ def user_appointments(request):
     return JsonResponse({"user_appointments": appointments})
 
 
-# def available_hours(request, is_test=False):
-#     data = get_data_from_request(request, is_test)
+def salon_appointments(request, is_test = False):
+    data = get_data_from_request(request, is_test)
+    salon_id = data['salon_id']
+
+    services = Service.objects.filter(salon_id=salon_id)
+    appointments = []
+    for service in services:
+        service_appointments = Appointment.objects.filter(service=service).values()
+        for appointment in service_appointments:
+            appointment['start_date_time'] = appointment['start_date_time'].__str__()
+            appointment['price'] = service.price
+            appointment['duration'] = service.duration_in_minutes()
+            appointment['service'] = service.get_category() + ': ' + service.title
+            appointment.pop('service_id')
+        appointments.extend(service_appointments)
+
+    return JsonResponse({"salon_appointments": appointments})
+
+
+def available_hours(request, is_test=False):
+    data = get_data_from_request(request, is_test)
+
+    day = date.fromisoformat(data['date'])
+
+    salon_id = data['salon_id']
+    try:
+        salon = Salon.objects.get(pk=salon_id)
+    except (KeyError, Salon.DoesNotExist):
+        return HttpResponse("Salon " + salon_id + " does not exist", status=418)
+
+    services_id = data['services']
+    services = {}
+    for service_id in services_id:
+        try:
+            service = Service.objects.get(pk=service_id)
+        except (KeyError, Service.DoesNotExist):
+            return HttpResponse("Service " + services_id + " does not exist", status=418)
+
+        if service.category not in services.keys():
+            services[service.category] = 0
+        services[service.category] += service.duration_to_int()
+
+    categories = []
+    booked_hours = {}
+    for (key, value) in services:
+        booked_hours[key] = [True] * (4 * 9)
+        booked_hours[key].extend([False] * (4 * 10))
+        booked_hours[key].extend([True] * (4 * 5))
+        categories.append(key)
+
+    appointments = Appointment.objects.filter(start_date=day, salon=salon)
+    for appointment in appointments:
+        category = appointment.service.category
+        if category in booked_hours.keys():
+            start = appointment.start_time_to_int()
+            size = appointment.duration_to_int()
+            for i in range(start, start + size):
+                booked_hours[category][i] = True
+
+    start_hours = []
+    for hour in range(4 * 24):
+        for perm in permutations(categories):
+            current_hour = hour
+            check = True
+            for category in perm:
+                for i in range(current_hour, current_hour + services[category]):
+                    if booked_hours[category][i]:
+                        check = False
+                current_hour += services[category]
+
+            if check:
+                start_hours.append(int_to_time(hour).__str__())
+                break
+
+    return JsonResponse({'available_hours': start_hours})
 
 
 def add_user(request):

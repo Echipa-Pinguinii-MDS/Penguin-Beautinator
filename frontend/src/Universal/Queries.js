@@ -221,3 +221,26 @@ export function salonServices(salon_id) {
 
     return salon_services;
 }
+
+export function availableHours(serviceList, salonId, day) {
+    let available_hours = [];
+    let url = 'available/';
+    axios({
+        method: 'post',
+        url: url,
+        headers: {
+            "content-type": "application/json"
+        },
+        data: {
+            date: day.toString(),
+            salon_id: salonId,
+            services: serviceList,
+        },
+    }).then(result => {
+        available_hours = result.data['available_hours'];
+    }).catch(function (error) {
+        console.log(error);
+    });
+
+    return available_hours;
+}
