@@ -208,6 +208,9 @@ def add_user(request):
     birthday = date.fromisoformat(data['birthday'])
     gender = data['gender']
 
+    if User.objects.filter(email=email).exists():
+        return JsonResponse({'added': False, 'message': 'Email already registered'})
+
     user = User(email=email,
                 password=password,
                 first_name=first_name,
@@ -216,6 +219,8 @@ def add_user(request):
                 birthday=birthday,
                 gender=gender)
     user.save()
+
+    return JsonResponse({'added': True})
 
 
 def add_salon(request):
@@ -231,6 +236,9 @@ def add_salon(request):
     kids_services = data['kids_services']
     location = Location.objects.get(pk=data['location_id'])
 
+    if Salon.objects.filter(email=email).exists():
+        return JsonResponse({'added': False, 'message': 'Email already registered'})
+
     salon = Salon(
         email=email,
         password=password,
@@ -243,6 +251,8 @@ def add_salon(request):
         men_services=men_services,
         kids_services=kids_services)
     salon.save()
+
+    return JsonResponse({'check': True})
 
 
 def add_service(request):
@@ -262,6 +272,10 @@ def add_service(request):
         price=price,
         duration=duration)
     service.save()
+
+
+# def add_appointment(request):
+
 
 
 """Daca user-ul si parola sunt bune returneaza
