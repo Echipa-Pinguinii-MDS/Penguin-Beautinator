@@ -7,11 +7,11 @@ import Appointments from './Appointments/Appointments';
 import SalonPage from './SalonPage/SalonPage';
 import Login from './Login/Login';
 import SignUp from './SignUp/SignUp';
-import {salonData, salonServices, salonsList} from './Universal/Queries';
+// import {salonData, salonServices, salonsList} from './Universal/Queries';
 import './Universal/App.css';
 
 const App = (props) => {
-    const salons = salonsList()
+    // const salons = salonsList()
     return (
         <Router className={'App'}>
             <NavBar/>
@@ -24,8 +24,8 @@ const App = (props) => {
                 {props.salons.map(salon =>
                     <Route key={salon.id} path={'/' + salon.name + salon.id}>
                         <SalonPage sections={props.sections}
-                                   salon={salonData(salon.id)}
-                                   // salon={salon}
+                                   // salon={salonData(salon.id)}
+                                   salon={salon}
                                    // services={salonServices(salon.id)}
                                    services={props.services}
                         />

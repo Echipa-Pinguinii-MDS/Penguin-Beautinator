@@ -133,6 +133,9 @@ class Service(models.Model):
     def duration_in_minutes(self):
         return self.duration.total_seconds() // 60
 
+    def get_category(self):
+        return self.get_category_display()
+
 
 class Appointment(models.Model):
     client = models.ForeignKey(
@@ -144,7 +147,6 @@ class Appointment(models.Model):
         on_delete=models.CASCADE
     )
     start_date_time = models.DateTimeField()
-    duration = models.DurationField(default=timedelta(minutes=15))
 
     def start_date_time_to_int(self):
         return time_to_int(self.start_date_time.time())

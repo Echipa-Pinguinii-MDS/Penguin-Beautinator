@@ -2,17 +2,21 @@ from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
-from datetime import timedelta
+from datetime import timedelta, date
 
 from .models import User, Salon, Service, Appointment, Location
 
 
 def time_to_int(gvn_time):
-    return (gvn_time.hour * 60 + gvn_time.minute) // 15
+    return int((gvn_time.hour * 60 + gvn_time.minute) // 15)
 
 
 def duration_to_int(duration):
-    return (duration.total_seconds() // 60) // 15
+    return int((duration.total_seconds() // 60) // 15)
+
+
+def duration_in_minutes(duration):
+    return int(duration.total_seconds() // 60)
 
 
 def int_to_duration(duration):
@@ -54,12 +58,20 @@ def user_data_by_id(request, is_test=False):
     except (KeyError, User.DoesNotExist):
         return JsonResponse({"user_data": None})
     else:
-        return JsonResponse({"user_data": model_to_dict(data)})
+        user = model_to_dict(data)
+        user.pop('password')
+        user['birthday'] = user['birthday'].__str__()
+        user['gender'] = data.get_gender()
+        return JsonResponse({"user_data": user})
 
 
 def salons_list(request):
-    salons = Salon.objects.values()
-    return JsonResponse({"salons_list": list(salons)})
+    salons = list(Salon.objects.values())
+    for i in range(len(salons)):
+        salons[i].pop('password')
+        salons[i]['location'] = Location.objects.get(pk=salons[i]['location_id']).__str__()
+        salons[i].pop('location_id')
+    return JsonResponse({"salons_list": salons})
 
 
 def salon_data_by_id(request, salon_id):
@@ -76,16 +88,29 @@ def salon_data_by_id(request, salon_id):
 
 
 def salon_services(request, salon_id):
-    services = Service.objects.filter(salon=salon_id).values()
-    return JsonResponse({"salon_services": list(services)})
+    services = list(Service.objects.filter(salon=salon_id).values())
+    for service in services:
+        service['duration'] = duration_in_minutes(service['duration'])
+        # service['category'] = service
+    return JsonResponse({"salon_services": services})
 
 
 def user_appointments(request):
     data = json.loads(request.body.decode('utf-8'))
     user_id = data['user_id']
 
-    appts = Appointment.objects.filter(client=user_id).values()
-    return JsonResponse({"user_appointments": list(appts)})
+    appointments = list(Appointment.objects.filter(client_id=user_id).values())
+    for appointment in appointments:
+        appointment['start_date_time'] = appointment['start_date_time'].__str__()
+        appointment.pop('client_id')
+        service = Service.objects.get(pk=appointment['service_id'])
+        appointment.pop('service_id')
+        appointment['price'] = service.price
+        appointment['duration'] = service.duration_in_minutes()
+        appointment['service'] = service.get_category() + ': ' + service.title
+        appointment['salon_id'] = service.salon_id
+
+    return JsonResponse({"user_appointments": appointments})
 
 
 # def available_hours(request, is_test=False):
@@ -99,7 +124,7 @@ def add_user(request):
     first_name = data['user_first_name']
     last_name = data['user_last_name']
     phone = data['phone']
-    # birthday = data['birthday']
+    birthday = date.fromisoformat(data['birthday'])
     gender = data['gender']
 
     user = User(email=email,
@@ -107,7 +132,7 @@ def add_user(request):
                 first_name=first_name,
                 last_name=last_name,
                 phone=phone,
-                # birthday=birthday,
+                birthday=birthday,
                 gender=gender)
     user.save()
 
