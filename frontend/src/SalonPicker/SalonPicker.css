@@ -49,7 +49,6 @@
     margin: 10px 0 0 0;
     display: flex;
     justify-content: flex-end;
-    color: #263543;
 }
 
 .Stars {
@@ -57,7 +56,6 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    color: #263543;
 }
 
 .Stars img {

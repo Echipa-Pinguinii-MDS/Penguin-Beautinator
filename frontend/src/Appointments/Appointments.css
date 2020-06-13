@@ -49,6 +49,10 @@
     border-width: 1px 0 0 0;
 }
 
+.DetailsButton:hover {
+    cursor: pointer;
+}
+
 .io {
     padding: 20px;
 }
@@ -73,4 +77,5 @@
 
 h3 {
     text-align: center;
+    position: sticky;
 }

@@ -4,8 +4,10 @@
     display: flex;
     flex-direction: column;
     width: 65%;
+    /*max-height: 100%;                                                                              DE MODIFICAT!*/
     box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     color: #ff000a;
+    overflow: auto;
 }
 
 .Week {
@@ -15,6 +17,11 @@
     border-left: 1px;
     border-right: 1px;
     border-color: black;
+}
+
+
+.Week h1:hover {
+    cursor: pointer;
 }
 
 .Day {
@@ -28,15 +35,19 @@ h1 {
 }
 
 .Day:active {
-    color: red;
+    color: green;
 }
 
 .TimeSlots {
     font-size: 2vw;
+    overflow: auto;
 }
 
-/*
-.TimeSlots:active {
-    color: red;
+.TimeSlots p:hover {
+    cursor: pointer;
 }
-*/
+
+
+.TimeSlots p:active {
+    color: green;
+}

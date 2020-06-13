@@ -18,7 +18,6 @@ body {
     left: 0;
     right: 0;
     position: fixed;
-    overflow: hidden;
     align-items: center;
     justify-content: space-around;
     background-color: #263543;

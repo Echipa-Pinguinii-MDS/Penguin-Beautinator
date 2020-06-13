@@ -68,7 +68,7 @@ class Calendar extends React.Component {
                     <AvailableSlots timeSlots={[]}
                                     setTime={this.props.setTime}/>}
                 {this.state.day >= new Date().getDate() &&
-                    <AvailableSlots timeSlots={['11:00', '12:05', '13:00', '13:30']}
+                    <AvailableSlots timeSlots={['11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30']}
                                     setTime={this.props.setTime}/>}
                 </div>
         )

@@ -63,8 +63,40 @@ Appointments.defaultProps = {
             coafor: ['Tuns - par scurt', 'Spalat'],
             manichiura: ['Clasic']
         }
-    }],
-    pastAppointments: []
+    },
+        {
+            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
+            name: 'Salon1',
+            contact: ['Lorem Ipsum 10', '0712345678', 'salon@salon.com'],
+            time: ['20.06.2020', '11.00-12.00'],
+            price: 100,
+            services: {
+                coafor: ['Tuns - par scurt', 'Spalat'],
+                manichiura: ['Clasic']
+            }
+        }],
+    pastAppointments: [{
+        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
+        name: 'Salon1',
+        contact: ['Lorem Ipsum 10', '0712345678', 'salon@salon.com'],
+        time: ['20.06.2020', '11.00-12.00'],
+        price: 100,
+        services: {
+            coafor: ['Tuns - par scurt', 'Spalat'],
+            manichiura: ['Clasic']
+        }
+    },
+        {
+        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
+        name: 'Salon1',
+        contact: ['Lorem Ipsum 10', '0712345678', 'salon@salon.com'],
+        time: ['20.06.2020', '11.00-12.00'],
+        price: 100,
+        services: {
+            coafor: ['Tuns - par scurt', 'Spalat'],
+            manichiura: ['Clasic']
+        }
+    }]
 }
 
 Appointments.propTypes = {
