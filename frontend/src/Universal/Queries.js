@@ -17,7 +17,7 @@ export function userAppointments(event, user_id) {
             "content-type": "application/json"
         },
     }).then(result => {
-        if(result.data["user_appointments"].empty)
+        if (result.data["user_appointments"].empty)
             console.log("user nu are appointments")
         else {
             for(let i = 0; i < result.data["user_appointments"].length; i++){
@@ -52,7 +52,7 @@ export function userDataByEmail(event, user_email) {
             "content-type": "application/json"
         },
     }).then(result => {
-        if(result.data["user_data"].empty)
+        if (!result.data.hasOwnProperty('user_data'))
             console.log("user nu exista")
         else {
             let data = result.data["user_data"];
@@ -85,7 +85,7 @@ export function userDataById(event, user_id) {
             "content-type": "application/json"
         },
     }).then(result => {
-        if(result.data["user_data"].empty)
+        if (!result.data.hasOwnProperty('user_data'))
             console.log("user nu exista")
         else {
             let data = result.data["user_data"];
@@ -148,7 +148,7 @@ export function salonsList() {
 
 //salon_data_by_id
 export function salonData(salon_id) {
-    let salon = {};
+    let salon = [];
     let s = 'salons/' + salon_id + '/';
     axios({
         method: 'get',
@@ -157,11 +157,11 @@ export function salonData(salon_id) {
             "content-type": "application/json"
         },
     }).then(result => {
-        if(result.data["salon_data"].empty)
+        if (!result.data.hasOwnProperty('salon_data'))
             console.log("salon nu exista")
         else {
             let data = result.data["salon_data"];
-            salon = {
+            salon.push({
                 src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
                 id: data.id,
                 name: data.name,
@@ -175,13 +175,14 @@ export function salonData(salon_id) {
                 program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
                 phone: [data.phone],
                 email: [data.email]
-            };
+            });
         }
     }).catch(function (error) {
         console.log(error);
     });
 
-    return salon;
+    console.log(salon[0]);
+    return salon[0];
 }
 
 //salon_services
@@ -195,7 +196,7 @@ export function salonServices(salon_id) {
             "content-type": "application/json"
         },
     }).then(result => {
-        if(result.data["salon_services"].empty)
+        if (result.data["salon_services"].empty)
             console.log("salon nu are servicii")
         else {
             for(let i = 0; i < result.data["salon_services"].length; i++) {
