@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form } from 'react-bootstrap';
+// noinspection ES6CheckImport
 import { Redirect } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
