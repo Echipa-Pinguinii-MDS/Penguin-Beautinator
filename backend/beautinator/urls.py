@@ -7,7 +7,7 @@ urlpatterns = [
     # /beautinator/
     path('', views.salons_list, name='index'),
     # /beautinator/salons/
-    path('salons/', views.salons_list, name='index'),
+    path('salons/', views.salons_list, name='salons_list'),
     # /beautinator/salons/3/
     path('salons/<int:salon_id>/', views.salon_data_by_id, name='salon_data'),
     # /beautinator/salons/3/services/

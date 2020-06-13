@@ -19,8 +19,9 @@ def check_email(request):
     return JsonResponse({"check_email": User.objects.filter(email=email).exists()})
 
 
-def user_data_by_email(request):
-    data = json.loads(request.body.decode('utf-8'))
+def user_data_by_email(request, is_test=False):
+    data = get_data_from_request(request, is_test)
+    #data = json.loads(request.body.decode('utf-8'))
     email = data['user_email']
 
     try:
@@ -31,9 +32,13 @@ def user_data_by_email(request):
         return JsonResponse({"user_data": model_to_dict(data)})
 
 
-def user_data_by_id(request):
-    data = json.loads(request.body.decode('utf-8'))
-    user_id = data['user_id']
+def user_data_by_id(request, is_test=False):
+    data = get_data_from_request(request, is_test)
+    #data = json.loads(request.body.decode('utf-8'))
+    full_id = data['user_id']
+    user_id = full_id[1:len(full_id)]
+    if full_id[0] != 'u':
+        return JsonResponse({"user_data": None})
 
     try:
         data = User.objects.get(id=user_id)
@@ -55,9 +60,11 @@ def salon_data_by_id(request, salon_id):
     try:
         data = Salon.objects.get(id=salon_id)
     except (KeyError, Salon.DoesNotExist):
-        return JsonResponse({"salon_data": False})
+        return JsonResponse({"salon_data": None})
     else:
-        return JsonResponse({"salon_data": model_to_dict(data)})
+        dict = model_to_dict(data)
+        dict.pop("password")
+        return JsonResponse({"salon_data": dict})
 
 
 def salon_services(request, salon_id):
@@ -130,14 +137,7 @@ Daca user-ul nu e bun returneaza check_user false"""
 
 @csrf_exempt
 def user_login(request, is_test=False):
-    #print("value: ")
-    #print(request)
-    #print("env: ")
-    #print(request.environ)
-    #print("body: ")
-    #print(request.body)
     data = get_data_from_request(request, is_test)
-    #json.loads(request.body.decode('utf-8'))
     email = data['user_email']
 
     try:
