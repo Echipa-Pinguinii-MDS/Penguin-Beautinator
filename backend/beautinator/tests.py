@@ -307,7 +307,7 @@ class SalonModelTests(TestCase):
         self.assertEqual("password" in answer.keys(), False)
         self.assertEqual(answer["name"], '')
         self.assertEqual(answer["description"], '')
-        self.assertEqual(answer["phone_no"], '')
+        self.assertEqual(answer["phone"], '')
         self.assertEqual(answer["location"], 777777)
         self.assertEqual(answer["address"], '')
         self.assertEqual(answer["women_services"], False)

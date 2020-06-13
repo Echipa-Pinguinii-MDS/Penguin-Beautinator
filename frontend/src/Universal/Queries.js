@@ -150,21 +150,22 @@ export function salonData(salon_id) {
         },
     }).then(result => {
         if(!result.data["salon_data"])
-            console.log("salon nu are date")
+            console.log("salon nu exista")
         else {
+            let data = result.data["salon_data"]
             let aux_salon = {
                 src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
-                id: String(result.data["salon_data"].id),
-                name: result.data["salon_data"].name,
+                id: data.id,
+                name: data.name,
                 noFullStars: 0,
                 noReviews: 0,
                 noDollars: 0,
-                description: 'description',
-                address: result.data["salon_data"].address,
+                description: data.description,
+                address: data.address,
                 images: [],
                 program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
-                phone: ['07********', '031*******'],
-                email: [result.data["salon_data"].email]
+                phone: [data.phone],
+                email: [data.email]
             }
             salon.push(aux_salon)
         }

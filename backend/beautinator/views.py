@@ -25,16 +25,8 @@ def get_data_from_request(request, is_test=False):
     return request.POST
 
 
-def check_email(request):
-    data = json.loads(request.body.decode('utf-8'))
-    email = data['user_email']
-
-    return JsonResponse({"check_email": User.objects.filter(email=email).exists()})
-
-
 def user_data_by_email(request, is_test=False):
     data = get_data_from_request(request, is_test)
-    #data = json.loads(request.body.decode('utf-8'))
     email = data['user_email']
 
     try:
@@ -42,15 +34,20 @@ def user_data_by_email(request, is_test=False):
     except (KeyError, User.DoesNotExist):
         return JsonResponse({"user_data": None})
     else:
-        return JsonResponse({"user_data": model_to_dict(data)})
+        user = model_to_dict(data)
+        user.pop('password')
+        user['birthday'] = user['birthday'].__str__()
+        user['gender'] = data.get_gender()
+        return JsonResponse({"user_data": user})
 
 
 def user_data_by_id(request, is_test=False):
     data = get_data_from_request(request, is_test)
-    full_id = data['user_id']
-    user_id = full_id[1:len(full_id)]
-    if full_id[0] != 'u':
-        return JsonResponse({"user_data": None})
+    user_id = data['user_id']
+    # full_id = data['user_id']
+    # user_id = full_id[1:len(full_id)]
+    # if full_id[0] != 'u':
+    #     return JsonResponse({"user_data": None})
 
     try:
         data = User.objects.get(id=user_id)
@@ -67,12 +64,15 @@ def salons_list(request):
 
 def salon_data_by_id(request, salon_id):
     try:
-        data = Salon.objects.values().get(id=salon_id)
+        data = Salon.objects.get(id=salon_id)
     except (KeyError, Salon.DoesNotExist):
         return JsonResponse({"salon_data": None})
     else:
-        data.pop("password")
-        return JsonResponse({"salon_data": data})
+        salon = model_to_dict(data)
+        salon.pop('password')
+        salon['location'] = data.get_location()
+
+        return JsonResponse({"salon_data": salon})
 
 
 def salon_services(request, salon_id):
@@ -92,15 +92,13 @@ def user_appointments(request):
 #     data = get_data_from_request(request, is_test)
 
 
-
-
 def add_user(request):
     data = json.loads(request.body.decode('utf-8'))
     email = data['user_email']
     password = data['user_password']
     first_name = data['user_first_name']
     last_name = data['user_last_name']
-    phone_no = data['phone_no']
+    phone = data['phone']
     # birthday = data['birthday']
     gender = data['gender']
 
@@ -108,7 +106,7 @@ def add_user(request):
                 password=password,
                 first_name=first_name,
                 last_name=last_name,
-                phone_no=phone_no,
+                phone=phone,
                 # birthday=birthday,
                 gender=gender)
     user.save()
@@ -121,7 +119,7 @@ def add_salon(request):
     name = data['salon_name']
     description = data['description']
     address = data['salon_address']
-    phone_no = data['phone_no']
+    phone = data['phone']
     women_services = data['women_services']
     men_services = data['men_services']
     kids_services = data['kids_services']
@@ -133,7 +131,7 @@ def add_salon(request):
         name=name,
         description=description,
         address=address,
-        phone_no=phone_no,
+        phone=phone,
         location=location,
         women_services=women_services,
         men_services=men_services,

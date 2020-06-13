@@ -16,11 +16,11 @@ class UserAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Login info', {'fields': ['email', 'password']}),
         ('Personal info', {'fields': ['first_name', 'last_name', 'birthday', 'gender']}),
-        ('Contact info', {'fields': ['phone_no']}),
+        ('Contact info', {'fields': ['phone']}),
     ]
     inlines = [AppointmentInLine]
 
-    list_display = ('email', 'first_name', 'last_name', 'phone_no')
+    list_display = ('email', 'first_name', 'last_name', 'phone')
     list_filter = [
         ('gender', ChoiceDropdownFilter),
         ('birthday', ChoiceDropdownFilter)
@@ -37,12 +37,12 @@ class SalonAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Login info', {'fields': ['email', 'password']}),
         ('General info', {'fields': ['name', 'description']}),
-        ('Contact info', {'fields': ['phone_no', 'location', 'address']}),
+        ('Contact info', {'fields': ['phone', 'location', 'address']}),
         ('Service types', {'fields': ['women_services', 'men_services', 'kids_services']})
     ]
     inlines = [ServiceInLine]
 
-    list_display = ('email', 'name', 'phone_no', 'get_location', 'address')
+    list_display = ('email', 'name', 'phone', 'get_location', 'address')
     list_filter = [
         ('location__country', ChoiceDropdownFilter),
         ('location__county', ChoiceDropdownFilter),

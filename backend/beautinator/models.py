@@ -24,16 +24,19 @@ class User(models.Model):
     password = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    phone_no = models.CharField(max_length=15, blank=True)
+    phone = models.CharField(max_length=15, blank=True)
     birthday = models.DateField(blank=True, null=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
 
+    def get_gender(self):
+        return self.get_gender_display()
+
 
 class Location(models.Model):
-    COUNTRY_CHOICES = [
+    COUNTRY_CHOICES = (
         ('RO', 'Romania'),
-    ]
-    COUNTY_CHOICES = [
+    )
+    COUNTY_CHOICES = (
         ('AB', 'ALBA'),
         ('AR', 'ARAD'),
         ('AG', 'ARGES'),
@@ -76,11 +79,14 @@ class Location(models.Model):
         ('B', 'BUCURESTI'),
         ('CL', 'CALARASI'),
         ('GR', 'GIURGIU'),
-    ]
+    )
 
     country = models.CharField(max_length=3, choices=COUNTRY_CHOICES, default='RO')
     county = models.CharField(max_length=2, choices=COUNTY_CHOICES, default='B')
     city = models.CharField(max_length=20, default='Bucuresti')
+
+    def __str__(self):
+        return str(self.get_country_display() + ", " + self.get_county_display() + ", " + self.city)
 
 
 class Salon(models.Model):
@@ -88,7 +94,7 @@ class Salon(models.Model):
     password = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=400, blank=True)
-    phone_no = models.CharField(max_length=15, blank=True)
+    phone = models.CharField(max_length=15, blank=True)
     location = models.ForeignKey(
         to=Location,
         on_delete=models.PROTECT
@@ -99,10 +105,7 @@ class Salon(models.Model):
     kids_services = models.BooleanField(default=False)
 
     def get_location(self):
-        return str(
-            self.location.get_country_display() + ', ' +
-            self.location.get_county_display() + ', ' +
-            self.location.city)
+        return self.location.__str__()
     get_location.short_description = 'Location'
 
 
