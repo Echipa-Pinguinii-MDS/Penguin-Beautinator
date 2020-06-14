@@ -63,7 +63,7 @@ def user_data_by_id(request, is_test=False):
     try:
         data = User.objects.get(id=user_id)
     except (KeyError, User.DoesNotExist):
-        return HttpResponse("User " + user_id + " does not exist", status=404)
+        return HttpResponse("User " + str(user_id) + " does not exist", status=404)
     else:
         user = model_to_dict(data)
         user.pop('password')
@@ -85,7 +85,7 @@ def salon_data_by_id(request, salon_id):
     try:
         data = Salon.objects.get(id=salon_id)
     except (KeyError, Salon.DoesNotExist):
-        return HttpResponse("Salon " + salon_id + " does not exist", status=404)
+        return HttpResponse("Salon " + str(salon_id) + " does not exist", status=404)
     else:
         salon = model_to_dict(data)
         salon.pop('password')

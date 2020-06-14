@@ -99,25 +99,26 @@ class UserModelTests(TestCase):
         expected = 'u' + str(user.pk)
         self.assertEqual(dictionary["user_id"], expected)
 
-    def test_user_data_by_id_bad_id(self):
-        """
-        Checks what the function will return if
-        the id provided is not in the good format
-        """
-        current = ''.join(random.choices(string.printable, k=12))
-        while len(User.objects.filter(email=current)) > 0:
-            current = ''.join(random.choices(string.printable, k=12))
+    # def test_user_data_by_id_bad_id(self):
+    #     """
+    #     Checks what the function will return if
+    #     the id provided is not in the good format
+    #     """
+    #     current = ''.join(random.choices(string.printable, k=12))
+    #     while len(User.objects.filter(email=current)) > 0:
+    #         current = ''.join(random.choices(string.printable, k=12))
+    #
+    #     create_user(current, "123456789")
+    #     user = User.objects.filter(email=current)[0]
+    #     dictionary = {"user_id": 's' + str(user.pk)}
+    #     req = HttpRequest()
+    #     req.POST = dictionary
+    #     res = user_data_by_id(req, True)
+    #     dictionary = json.loads(res.getvalue().decode('utf-8'))
+    #     self.assertIs(res.status_code, 200)
+    #     self.assertIs(dictionary["user_data"], None)
 
-        create_user(current, "123456789")
-        user = User.objects.filter(email=current)[0]
-        dictionary = {"user_id": 's' + str(user.pk)}
-        req = HttpRequest()
-        req.POST = dictionary
-        res = user_data_by_id(req, True)
-        dictionary = json.loads(res.getvalue().decode('utf-8'))
-        self.assertIs(res.status_code, 200)
-        self.assertIs(dictionary["user_data"], None)
-
+    """vezi ce apare in res"""
     def test_user_data_by_id_id_not_in_database(self):
         """
         Checks what the function will return if
@@ -129,13 +130,14 @@ class UserModelTests(TestCase):
 
         create_user(current, "123456789")
         user = User.objects.filter(email=current)[0]
-        dictionary = {"user_id": 'u' + str(user.pk + 1)}
+        dictionary = {"user_id": (user.pk + 1)}
         req = HttpRequest()
         req.POST = dictionary
         res = user_data_by_id(req, True)
-        dictionary = json.loads(res.getvalue().decode('utf-8'))
-        self.assertIs(res.status_code, 200)
-        self.assertIs(dictionary["user_data"], None)
+        #dictionary = json.loads(res.getvalue().decode('utf-8'))
+        self.assertEqual(res.status_code, 404)
+        #verifica ce intoarce res
+        #self.assertEqual(res.)
 
     def test_user_data_by_id_good_attempt(self):
         """
@@ -148,18 +150,18 @@ class UserModelTests(TestCase):
 
         create_user(current, "123456789")
         user = User.objects.filter(email=current)[0]
-        dictionary = {"user_id": 'u' + str(user.pk)}
+        dictionary = {"user_id": user.pk}
         req = HttpRequest()
         req.POST = dictionary
         res = user_data_by_id(req, True)
-        dictionary = json.loads(res.getvalue().decode('utf-8'))
         self.assertIs(res.status_code, 200)
+        dictionary = json.loads(res.getvalue().decode('utf-8'))
         answer = dictionary["user_data"]
         self.assertEqual(answer["id"], user.pk)
         self.assertEqual(answer["email"], current)
-        self.assertEqual(answer["password"], "123456789")
+        self.assertEqual("password" in answer.keys(), False)
         self.assertEqual(answer["first_name"], '')
-        self.assertEqual(answer["birthday"], None)
+        self.assertEqual(answer["birthday"], 'None')
         self.assertEqual(answer["gender"], '')
 
     def test_user_data_by_email_email_not_in_database(self):
@@ -176,9 +178,7 @@ class UserModelTests(TestCase):
         req = HttpRequest()
         req.POST = dictionary
         res = user_data_by_email(req, True)
-        dictionary = json.loads(res.getvalue().decode('utf-8'))
-        self.assertIs(res.status_code, 200)
-        self.assertIs(dictionary["user_data"], None)
+        self.assertEqual(res.status_code, 404)
 
     def test_user_data_by_email_good_attempt(self):
         """
@@ -200,9 +200,9 @@ class UserModelTests(TestCase):
         user = User.objects.filter(email=current)[0]
         self.assertEqual(answer["id"], user.pk)
         self.assertEqual(answer["email"], current)
-        self.assertEqual(answer["password"], "123456789")
+        self.assertEqual("password" in answer.keys(), False)
         self.assertEqual(answer["first_name"], '')
-        self.assertEqual(answer["birthday"], None)
+        self.assertEqual(answer["birthday"], 'None')
         self.assertEqual(answer["gender"], '')
 
 class SalonModelTests(TestCase):
@@ -282,9 +282,7 @@ class SalonModelTests(TestCase):
         salon = Salon.objects.filter(email=current)[0]
         req = HttpRequest()
         res = salon_data_by_id(req, salon.pk + 1)
-        dictionary = json.loads(res.getvalue().decode('utf-8'))
-        self.assertIs(res.status_code, 200)
-        self.assertIs(dictionary["salon_data"], None)
+        self.assertEqual(res.status_code, 404)
 
     def test_salon_data_by_id_good_attempt(self):
         """
@@ -308,7 +306,7 @@ class SalonModelTests(TestCase):
         self.assertEqual(answer["name"], '')
         self.assertEqual(answer["description"], '')
         self.assertEqual(answer["phone"], '')
-        self.assertEqual(answer["location"], 777777)
+        self.assertEqual(answer["location"], str(Location(777777)))
         self.assertEqual(answer["address"], '')
         self.assertEqual(answer["women_services"], False)
         self.assertEqual(answer["men_services"], False)
