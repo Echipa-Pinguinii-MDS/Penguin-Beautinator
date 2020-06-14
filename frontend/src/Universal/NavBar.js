@@ -33,16 +33,10 @@ const NavBar = () => {
                       src={'https://thumbs.gfycat.com/BossyCarelessHake.webp'}/>
             </Link>
 
-            <Link to={'/signup'} className = {'Right'}>
-                <Item section={'Sign Up'}
+            <Link to={'/account'} className = {'Right'}>
+                <Item section={'Account'}
                       className={'SmallGif'}
                       src={'https://img.pngio.com/top-club-penguin-stickers-for-android-ios-find-the-best-gif-club-penguin-transparent-606_648.gif'}/>
-            </Link>
-
-            <Link to={'/login'} className = {'Right'}>
-                <Item section={'Login'}
-                      className={'SmallGif'}
-                      src={'https://cdn.lowgif.com/full/a749cd2097670166-image-mediawiki-emoticons-cj-bow-gif-club-penguin.gif'}/>
             </Link>
         </Navbar>
     )

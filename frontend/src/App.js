@@ -6,8 +6,7 @@ import PenguinBeautinator from './PenguinBeautinator/PenguinBeautinator';
 import SalonPicker from './SalonPicker/SalonPicker';
 import Appointments from './Appointments/Appointments';
 import SalonPage from './SalonPage/SalonPage';
-import Login from './Login/Login';
-import SignUp from './SignUp/SignUp';
+import Account from './Account/Account';
 import {salonsList} from './Universal/Queries';
 import './Universal/App.css';
 
@@ -42,8 +41,7 @@ class App extends React.Component {
                     <Route path={'/desprenoi'}> <PenguinBeautinator/> </Route>
                     <Route exact path={'/saloane'}> <SalonPicker salons={this.state.salons}/> </Route>
                     <Route path={'/programari'}> <Appointments/> </Route>
-                    <Route path={'/login'}> <Login/> </Route>
-                    <Route path={'/signup'}> <SignUp/> </Route>
+                    <Route path={'/account'}> <Account/> </Route>
                     {this.state.salons.map(salon =>
                         <Route key={salon.id} path={'/' + salon.name + salon.id}>
                             <SalonPage sections={this.state.sections} salon={salon}/>
