@@ -9,6 +9,8 @@
 
 .Homepage_Gif {
     position: static;
+    right: 0;
+    left: 0;
     width: 100%;
     margin-top: calc(40px + 11vw);
     height: 16vw;
@@ -20,4 +22,8 @@ p {
     text-align: center;
     font-weight: bold;
     color: #ff000a;
+}
+
+.Description {
+    font-size: calc(10px + 1vw);
 }

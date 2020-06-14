@@ -12,7 +12,7 @@ h5 {
     font-size:calc(10px + 0.5vw);
     border-style: hidden;
     box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    overflow: auto;
+    background-color: #f7f5f7;
 }
 
 .ShoppingCart .Info {
@@ -67,8 +67,14 @@ h5 {
     display: flex;
     justify-content: space-between;
     position: absolute;
-    bottom: 10%;
+    bottom: calc(50px + 0.6vw);
     padding: 0 10px 0 10px;
+    width: 90%;
+}
+
+.Total h4 {
+    display: flex;
+    justify-content: space-around;
 }
 
 .ServiciiSelectate {
@@ -85,6 +91,7 @@ h5 {
     text-decoration: none;
     display: inline-block;
     font-size: calc(7px + 0.6vw);
+    height: calc(50px + 0.6vw);
     cursor: pointer;
     width: 100%;
     position: absolute;
@@ -105,6 +112,10 @@ h5 {
     bottom: 0;
 }
 
+.datePick {
+    font-size: 100px;
+}
+
 .ScheduleButton {
     background-color: #4CAF50;
     border: none;
@@ -116,6 +127,12 @@ h5 {
     cursor: pointer;
     width: 100%;
     height: calc(25px + 0.3vw);
+    position: absolute;
+    bottom: calc(25px + 0.3vw);
+}
+
+.TimePickButton p {
+    font-size: 50%;
 }
 
 .ScheduleButton:disabled {
@@ -128,6 +145,8 @@ h5 {
     font-size: calc(7px + 0.7vw);
     width: 100%;
     height: calc(25px + 0.3vw);
+    position: absolute;
+    bottom: calc(25px + 0.3vw);
 }
 
 .BackButton {
@@ -141,4 +160,6 @@ h5 {
     cursor: pointer;
     width: 100%;
     height: calc(25px + 0.3vw);
+    position: absolute;
+    bottom: 0;
 }

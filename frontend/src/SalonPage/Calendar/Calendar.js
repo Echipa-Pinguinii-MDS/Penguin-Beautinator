@@ -97,7 +97,7 @@ class Calendar extends React.Component {
                       date={this.state.day}
                       changeSelectedDate={this.changeSelectedDate}/>
                 <AvailableSlots timeSlots={this.state.day >= new Date().getDate() ?
-                    ['11:00', '12:05', '13:00', '13:30'] : []}
+                    ['11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30'] : []}
                                 month={this.state.month}
                                 year={this.state.year}
                                 setTime={this.props.setTime}/>

@@ -12,14 +12,11 @@ body {
 }
 
 .NavBar {
-    display: flex;
-    flex-direction: row;
     top: 0;
     left: 0;
     right: 0;
     position: fixed;
     align-items: center;
-    justify-content: space-around;
     background-color: #263543;
 }
 
@@ -36,7 +33,7 @@ body {
 }
 
 .Item h2 {
-    font-size: 15px;
+    font-size: calc(4px + 0.6vw);
     color: #ff000a;
     text-decoration: none;
 }
@@ -46,14 +43,16 @@ body {
 }
 
 .Left {
-    height: 15px;
-    width: 15px;
-    color: #f7f5f7;
+    float: left;
 }
 
 .Right {
-    height: 20px;
-    width: 20px;
+    float: right;
+}
+
+.SmallGif {
+    height: calc(4px + 0.8vw);
+    width: calc(4px + 0.8vw);
 }
 
 .AppPage {
