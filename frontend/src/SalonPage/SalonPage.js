@@ -5,16 +5,20 @@ import Content from './Content';
 import ShoppingCart from './ShoppingCart/ShoppingCart';
 import Calendar from './Calendar/Calendar';
 import './SalonPage.css';
+import {salonServices} from "../Universal/Queries";
 
 class SalonPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            salon: props.salon,
+            services: {},
+            sections: props.sections,
             selected: new Set(),
             calendarPage: false,
             time: null,
-            date: null
-        }
+            date: null,
+        };
         this.hasContent = this.hasContent.bind(this);
         this.addService = this.addService.bind(this);
         this.deleteService = this.deleteService.bind(this);
@@ -23,6 +27,14 @@ class SalonPage extends React.Component {
         this.setTime = this.setTime.bind(this);
         this.setDate = this.setDate.bind(this);
     }
+
+    componentDidMount() {
+        this.refreshServices()
+    }
+
+    refreshServices = () => {
+        salonServices(this.state.salon.id).then(result => this.setState({services: result}));
+    };
 
     hasContent(section, salon) {
         return !((section === 'about' && salon.description === '') ||
@@ -52,9 +64,9 @@ class SalonPage extends React.Component {
 
     getServices() {
         let services = {}
-        Object.keys(this.props.services).map(category => {
+        Object.keys(this.state.services).map(category => {
             let list = []
-            this.props.services[category].map(service => {
+            this.state.services[category].map(service => {
                 if (this.state.selected.has(service.id)) {
                     list.push(service)
                 }
@@ -93,13 +105,13 @@ class SalonPage extends React.Component {
         return (
             <article className={'SalonPage'}>
                 {!this.state.calendarPage &&
-                <Menu sections={this.props.sections}
-                      salon={this.props.salon}
+                <Menu sections={this.state.sections}
+                      salon={this.state.salon}
                       hasContent={this.hasContent}/>}
                 {!this.state.calendarPage &&
-                <Content sections={this.props.sections}
-                         salon={this.props.salon}
-                         services={this.props.services}
+                <Content sections={this.state.sections}
+                         salon={this.state.salon}
+                         services={this.state.services}
                          hasContent={this.hasContent}
                          handleClick={this.addService}
                          selected={this.state.selected}/>}
@@ -112,7 +124,7 @@ class SalonPage extends React.Component {
                               openCalendarPage={this.openCalendarPage}
                               closeCalendarPage={this.closeCalendarPage}
                               disabled={this.state.time == null}
-                              data={this.state.date + ', ora ' + this.state.time + ' la ' + this.props.salon.name}/>
+                              data={this.state.date + ', ora ' + this.state.time + ' la ' + this.state.salon.name}/>
             </article>
         )
     }
@@ -120,8 +132,7 @@ class SalonPage extends React.Component {
 
 SalonPage.propTypes = {
     sections: PropTypes.objectOf(PropTypes.string).isRequired,
-    salon: PropTypes.object.isRequired,
-    services: PropTypes.objectOf(PropTypes.array).isRequired
+    salon: PropTypes.object.isRequired
 }
 
 export default SalonPage;

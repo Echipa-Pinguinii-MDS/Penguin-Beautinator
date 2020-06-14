@@ -6,8 +6,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 //user_appointments
 export function userAppointments(event, user_id) {
-    let appointments = []
-    axios({
+    return axios({
         method: 'post',
         url: 'users/appointments/',
         data: {
@@ -17,6 +16,8 @@ export function userAppointments(event, user_id) {
             "content-type": "application/json"
         },
     }).then(result => {
+        let appointments = []
+
         if (result.data["user_appointments"].empty)
             console.log("user nu are appointments")
         else {
@@ -32,17 +33,16 @@ export function userAppointments(event, user_id) {
                 appointments.push(aux_appointment)
             }
         }
+
+        return appointments;
     }).catch(function (error) {
         console.log(error);
     });
-
-    return appointments;
 }
 
 //user_data_by_email
 export function userDataByEmail(event, user_email) {
-    let userData = {};
-    axios({
+    return axios({
         method: 'post',
         url: 'users/profile/',
         data: {
@@ -52,6 +52,7 @@ export function userDataByEmail(event, user_email) {
             "content-type": "application/json"
         },
     }).then(result => {
+        let userData = {};
         if (!result.data.hasOwnProperty('user_data'))
             console.log("user nu exista")
         else {
@@ -65,17 +66,16 @@ export function userDataByEmail(event, user_email) {
                 gender: data.gender
             };
         }
+
+        return userData;
     }).catch(function (error) {
         console.log(error);
     });
-
-    return userData;
 }
 
 //user_data_by_id
 export function userDataById(event, user_id) {
-    let userData = {};
-    axios({
+    return axios({
         method: 'post',
         url: 'users/profile/',
         data: {
@@ -85,6 +85,7 @@ export function userDataById(event, user_id) {
             "content-type": "application/json"
         },
     }).then(result => {
+        let userData = {};
         if (!result.data.hasOwnProperty('user_data'))
             console.log("user nu exista")
         else {
@@ -98,23 +99,23 @@ export function userDataById(event, user_id) {
                 gender: data.gender
             };
         }
+
+        return userData;
     }).catch(function (error) {
         console.log(error);
     });
-
-    return userData;
 }
 
 //salons_list
 export function salonsList() {
-    let salons = [];
-    axios({
+    return axios({
         method: 'get',
         url: 'salons/',
         headers: {
             "content-type": "application/json"
         },
     }).then(result => {
+        let salons = [];
         if (result.data["salons_list"].empty)
             console.log("nu avem saloane")
         else {
@@ -138,30 +139,29 @@ export function salonsList() {
                 salons.push(aux_salon)
             }
         }
+
+        return salons;
     }).catch(function (error) {
         console.log(error);
     });
-
-    console.log(salons);
-    return salons
 }
 
 //salon_data_by_id
 export function salonData(salon_id) {
-    let salon = [];
-    let s = 'salons/' + salon_id + '/';
+    let url = 'salons/' + salon_id + '/';
     axios({
         method: 'get',
-        url: s,
+        url: url,
         headers: {
             "content-type": "application/json"
         },
     }).then(result => {
+        let salon = {};
         if (!result.data.hasOwnProperty('salon_data'))
             console.log("salon nu exista")
         else {
             let data = result.data["salon_data"];
-            salon.push({
+            salon = {
                 src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
                 id: data.id,
                 name: data.name,
@@ -175,27 +175,27 @@ export function salonData(salon_id) {
                 program: ['Luni-Vineri: 9:00 - 21:00', 'Sambata: 9:00 - 14:00'],
                 phone: [data.phone],
                 email: [data.email]
-            });
+            };
         }
+
+        return salon;
     }).catch(function (error) {
         console.log(error);
     });
-
-    console.log(salon[0]);
-    return salon[0];
 }
 
 //salon_services
 export function salonServices(salon_id) {
-    let salon_services = {};
-    let s = 'salons/' + salon_id + '/services/';
-    axios({
+    let url = 'salons/' + salon_id + '/services/';
+    return axios({
         method: 'get',
-        url: s,
+        url: url,
         headers: {
             "content-type": "application/json"
         },
     }).then(result => {
+        let salon_services = {};
+
         if (result.data["salon_services"].empty)
             console.log("salon nu are servicii")
         else {
@@ -216,15 +216,14 @@ export function salonServices(salon_id) {
                 salon_services[category].push(aux_service)
             }
         }
+
+        return salon_services;
     }).catch(function (error) {
         console.log(error);
     });
-
-    return salon_services;
 }
 
 export function availableHours(serviceList, salonId, day) {
-    let available_hours = [];
     let url = 'available/';
     axios({
         method: 'post',
@@ -238,10 +237,8 @@ export function availableHours(serviceList, salonId, day) {
             services: serviceList,
         },
     }).then(result => {
-        available_hours = result.data['available_hours'];
+        return result.data['available_hours'];
     }).catch(function (error) {
         console.log(error);
     });
-
-    return available_hours;
 }

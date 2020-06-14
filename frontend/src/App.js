@@ -11,37 +11,47 @@ import SignUp from './SignUp/SignUp';
 import {salonData, salonServices, salonsList} from './Universal/Queries';
 import './Universal/App.css';
 
-const App = (props) => {
-    const salons = salonsList()
-    return (
-        <Router className={'App'}>
-            <NavBar/>
-            <div className={'AppPage'}>
-                <Route exact path={'/'}>
-                    <Redirect to={'/desprenoi'}/>
-                </Route>
-                <Route path={'/desprenoi'}> <PenguinBeautinator/> </Route>
-                <Route exact path={'/saloane'}> <SalonPicker salons={salons}/> </Route>
-                <Route path={'/programari'}> <Appointments/> </Route>
-                <Route path={'/login'}> <Login/> </Route>
-                <Route path={'/signup'}> <SignUp/> </Route>
-                {salons.map(salon =>
-                    <Route key={salon.id} path={'/' + salon.name + salon.id}>
-                        <SalonPage sections={props.sections}
-                                   // salon={salonData(salon.id)}
-                                   salon={salon}
-                                   services={salonServices(salon.id)}
-                                   // services={props.services}
-                        />
+class App extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            sections: props.sections,
+            salons: [],
+        }
+    }
+
+    componentDidMount() {
+        this.refreshSalons();
+    }
+
+    refreshSalons = () => {
+        salonsList().then(result => this.setState({salons: result}));
+    };
+
+    render() {
+        return (
+            <Router className={'App'}>
+                <NavBar/>
+                <div className={'AppPage'}>
+                    <Route exact path={'/'}>
+                        <Redirect to={'/desprenoi'}/>
                     </Route>
-                )}
-                {/*<SalonPage sections={props.sections}*/}
-                {/*           salon={salonData(1)}*/}
-                {/*           services={salonServices(1)}*/}
-                {/*/>*/}
-            </div>
-        </Router>
-    )
+                    <Route path={'/desprenoi'}> <PenguinBeautinator/> </Route>
+                    <Route exact path={'/saloane'}> <SalonPicker salons={this.state.salons}/> </Route>
+                    <Route path={'/programari'}> <Appointments/> </Route>
+                    <Route path={'/login'}> <Login/> </Route>
+                    <Route path={'/signup'}> <SignUp/> </Route>
+                    {this.state.salons.map(salon =>
+                        <Route key={salon.id} path={'/' + salon.name + salon.id}>
+                            <SalonPage sections={this.state.sections}
+                                       salon={salon}
+                            />
+                        </Route>
+                    )}
+                </div>
+            </Router>
+        )
+    }
 };
 
 App.defaultProps = {
