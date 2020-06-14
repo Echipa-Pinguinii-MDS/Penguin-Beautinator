@@ -146,7 +146,7 @@ class Appointment(models.Model):
         to=Service,
         on_delete=models.CASCADE
     )
-    date = models.DateField()
+    day = models.DateField()
     start_time = models.TimeField()
 
     def start_time_to_int(self):

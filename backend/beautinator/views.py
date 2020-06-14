@@ -55,10 +55,6 @@ def user_data_by_email(request, is_test=False):
 def user_data_by_id(request, is_test=False):
     data = get_data_from_request(request, is_test)
     user_id = data['user_id']
-    # full_id = data['user_id']
-    # user_id = full_id[1:len(full_id)]
-    # if full_id[0] != 'u':
-    #     return JsonResponse({"user_data": None})
 
     try:
         data = User.objects.get(id=user_id)
@@ -103,25 +99,27 @@ def salon_services(request, salon_id):
     return JsonResponse({"salon_services": services})
 
 
-def user_appointments(request):
-    data = json.loads(request.body.decode('utf-8'))
+def user_appointments(request, is_test=False):
+    data = get_data_from_request(request, is_test)
     user_id = data['user_id']
 
     appointments = list(Appointment.objects.filter(client_id=user_id).values())
     for appointment in appointments:
-        appointment['start_date_time'] = appointment['start_date_time'].__str__()
+        appointment['day'] = appointment['day'].__str__()
+        appointment['start_time'] = appointment['start_time'].__str__()
         appointment.pop('client_id')
         service = Service.objects.get(pk=appointment['service_id'])
         appointment.pop('service_id')
         appointment['price'] = service.price
-        appointment['duration'] = service.duration_in_minutes()
-        appointment['service'] = service.get_category() + ': ' + service.title
+        appointment['service'] = {service.get_category(): service.title}
         appointment['salon_id'] = service.salon_id
+        appointment['duration'] = service.duration_in_minutes()
+        appointment['salon_name'] = service.salon.name
 
     return JsonResponse({"user_appointments": appointments})
 
 
-def salon_appointments(request, is_test = False):
+def salon_appointments(request, is_test=False):
     data = get_data_from_request(request, is_test)
     salon_id = data['salon_id']
 
@@ -130,18 +128,21 @@ def salon_appointments(request, is_test = False):
     for service in services:
         service_appointments = Appointment.objects.filter(service=service).values()
         for appointment in service_appointments:
-            appointment['start_date_time'] = appointment['start_date_time'].__str__()
+            appointment['day'] = appointment['day'].__str__()
+            appointment['start_time'] = appointment['start_time'].__str__()
             appointment['price'] = service.price
             appointment['duration'] = service.duration_in_minutes()
             appointment['service'] = service.get_category() + ': ' + service.title
             appointment.pop('service_id')
+            user = User.objects.get(pk=appointment['client_id'])
+            appointment['client_name'] = user.first_name + ' ' + user.last_name
         appointments.extend(service_appointments)
 
     return JsonResponse({"salon_appointments": appointments})
 
 
 def available_hours_per_category(salon, day, categories):
-    appointments = Appointment.objects.filter(start_date=day, salon=salon)
+    appointments = Appointment.objects.filter(day=day, salon=salon)
     booked_hours = {}
 
     for category in categories:
@@ -197,7 +198,7 @@ def get_services_duration(services):
 def available_hours(request, is_test=False):
     data = get_data_from_request(request, is_test)
 
-    day = date.fromisoformat(data['date'])
+    day = date.fromisoformat(data['day'])
 
     salon_id = data['salon_id']
     try:
@@ -300,8 +301,8 @@ def add_appointment(request, is_test=False):
     client_id = data['user_id']
     salon_id = data['salon_id']
     services_id = data['services']
-    day = data['date']
-    start_time = data['time']
+    day = date.fromisoformat(data['day'])
+    start_time = time.fromisoformat(data['time'])
 
     try:
         salon = Salon.objects.get(pk=salon_id)
@@ -334,11 +335,11 @@ def add_appointment(request, is_test=False):
             appointment = Appointment(
                 client=user,
                 service=service,
-                date=day,
-                start_time=int_to_time(start_time)
+                day=day,
+                start_time=int_to_time(start_index)
             )
             appointment.save()
-            start_time += service.duration_to_int()
+            start_index += service.duration_to_int()
 
 
 """Daca user-ul si parola sunt bune returneaza
