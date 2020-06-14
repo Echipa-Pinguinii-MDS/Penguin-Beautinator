@@ -5,7 +5,8 @@ const TimeSlots = (props) => {
     return (
         <div className={'TimeSlots'}>
             {props.timeSlots.map(timeSlot =>
-                <p key={timeSlot} onClick={() => props.setTime({timeSlot}.timeSlot)}>{timeSlot}</p>
+                <p key={timeSlot + '.' + props.month + '.' + props.year}
+                   onClick={() => props.setTime({timeSlot}.timeSlot)}>{timeSlot}</p>
             )}
         </div>
     )
@@ -13,6 +14,8 @@ const TimeSlots = (props) => {
 
 TimeSlots.propTypes = {
     timeSlots: PropTypes.array.isRequired,
+    month: PropTypes.number.isRequired,
+    year: PropTypes.number.isRequired,
     setTime: PropTypes.func.isRequired
 }
 
@@ -23,6 +26,8 @@ const AvailableSlots = (props) => {
                 <p>Nu exista ore libere pentru data si serviciile selectate</p>}
             {props.timeSlots.length > 0 &&
                 <TimeSlots timeSlots={props.timeSlots}
+                           month={props.month}
+                           year={props.year}
                            setTime={props.setTime}/>}
         </div>
     )
@@ -30,6 +35,8 @@ const AvailableSlots = (props) => {
 
 AvailableSlots.propTypes = {
     timeSlots: PropTypes.array.isRequired,
+    month: PropTypes.number.isRequired,
+    year: PropTypes.number.isRequired,
     setTime: PropTypes.func.isRequired
 }
 
