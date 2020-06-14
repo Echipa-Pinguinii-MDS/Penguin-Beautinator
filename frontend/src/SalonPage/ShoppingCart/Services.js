@@ -1,6 +1,6 @@
 import React from 'react';
-import {GrFormClose} from 'react-icons/gr';
 import PropTypes from 'prop-types';
+import {GrFormClose} from 'react-icons/gr';
 
 const Info = (props) => {
     return (
@@ -49,6 +49,7 @@ const Services = (props) => {
         <div className={'Services'}>
             {Object.keys(props.services).length === 0 &&
             <p>Nu ati selectat niciun serviciu inca.</p>}
+
             {Object.keys(props.services).map(category =>
                 <Section key={category}
                          handleClick={props.handleClick}

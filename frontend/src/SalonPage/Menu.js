@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 const Menu = (props) => {
     return(
         <div className={'Menu'}>
-            {props.salon.src !== '' && <img src={props.salon.src} className={'Logo'} alt={'Salon logo'}/>}
+            {props.salon.src !== '' &&
+            <img src={props.salon.src} className={'Logo'} alt={'Salon logo'}/>}
+
             {Object.keys(props.sections).map(key =>
                 props.hasContent(key, props.salon) &&
                 <Scroll.Link key={key}

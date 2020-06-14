@@ -12,11 +12,11 @@ const Gallery = (props) => {
             </div>
         </section>
     )
-};
+}
 
 Gallery.propTypes = {
     title: PropTypes.string.isRequired,
     images: PropTypes.array.isRequired
-};
+}
 
 export default Gallery;

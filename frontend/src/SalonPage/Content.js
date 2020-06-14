@@ -30,7 +30,7 @@ const Content = (props) => {
                 </Element>
 
                 <Element id={'gallery'}>
-                {props.hasContent('gallery', props.salon) &&
+                    {props.hasContent('gallery', props.salon) &&
                     <Gallery title={props.sections.gallery}
                              images={props.salon.images}/> }
                 </Element>

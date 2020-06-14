@@ -11,7 +11,7 @@ const Contact = (props) => {
             <h5>Adresa: {props.address}</h5>
         </section>
     )
-};
+}
 
 Contact.propTypes = {
     title: PropTypes.string.isRequired,
@@ -19,6 +19,6 @@ Contact.propTypes = {
     phone: PropTypes.array.isRequired,
     email: PropTypes.array.isRequired,
     address: PropTypes.string.isRequired
-};
+}
 
 export default Contact;

@@ -25,6 +25,7 @@ class Appointment extends React.Component {
                 <AppointmentCard appointment={this.props.appointment}/>
                 <DetailsButton triggerButton={this.triggerButton}
                                opened={this.state.opened}/>
+
                 {this.state.opened &&
                     <AppointmentDetails services={this.props.appointment.services}/>}
             </div>

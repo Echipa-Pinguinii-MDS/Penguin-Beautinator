@@ -1,15 +1,17 @@
 import React from 'react';
-import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io';
 import PropTypes from 'prop-types';
+import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io';
 
 const DetailsButton = (props) => {
     return (
         <div className={'DetailsButton'}
              onClick={props.triggerButton}>
             {props.opened &&
-                <IoIosArrowUp className={'io'}/>}
+            <IoIosArrowUp className={'io'}/>}
+
             {!props.opened &&
-                <IoIosArrowDown className={'io'}/>}
+            <IoIosArrowDown className={'io'}/>}
+
             <p>Detalii</p>
         </div>
     )

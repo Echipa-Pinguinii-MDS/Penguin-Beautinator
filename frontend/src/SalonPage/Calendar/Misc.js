@@ -21,9 +21,9 @@ Month.propTypes = {
 export const CalendarTitle = (props) => {
     return (
         <div className={'CalendarTitle'}>
-            <GrPrevious onClick={props.previousWeek}>Saptamana anterioara</GrPrevious>
+            <GrPrevious onClick={props.previousWeek} className={'gr'}>Saptamana anterioara</GrPrevious>
             <Month month={props.month} year={props.year}/>
-            <GrNext onClick={props.nextWeek}>Saptamana viitoare</GrNext>
+            <GrNext onClick={props.nextWeek} className={'gr'}>Saptamana viitoare</GrNext>
         </div>
     )
 }

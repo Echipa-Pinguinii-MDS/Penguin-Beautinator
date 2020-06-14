@@ -24,6 +24,7 @@ const AvailableSlots = (props) => {
         <div className={'AvailableSlots'}>
             {props.timeSlots.length === 0 &&
                 <p>Nu exista ore libere pentru data si serviciile selectate</p>}
+
             {props.timeSlots.length > 0 &&
                 <TimeSlots timeSlots={props.timeSlots}
                            month={props.month}

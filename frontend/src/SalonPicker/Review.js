@@ -13,7 +13,7 @@ const Stars = (props) => {
 }
 
 Stars.propTypes = {
-    noFullStars: PropTypes.number.isRequired,
+    noFullStars: PropTypes.number.isRequired
 }
 
 const PriceRange = (props) => {

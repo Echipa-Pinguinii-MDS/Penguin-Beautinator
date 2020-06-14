@@ -1,14 +1,16 @@
 import React from 'react';
-import {GrFormCheckmark, GrFormAdd} from 'react-icons/gr';
 import PropTypes from 'prop-types';
+import {GrFormCheckmark, GrFormAdd} from 'react-icons/gr';
 
 const Info = (props) => {
     return (
         <div className={'Info'} onClick={() => props.handleClick(props.id)}>
             {props.selected.has(props.id) &&
-                <GrFormCheckmark className={'gr'}/>}
+            <GrFormCheckmark className={'gr'}/>}
+
             {!props.selected.has(props.id) &&
-                <GrFormAdd className={'gr'}/>}
+            <GrFormAdd className={'gr'}/>}
+
             <p>{props.title}</p>
             <p>{props.price} lei</p>
             <p>{props.length} minute</p>

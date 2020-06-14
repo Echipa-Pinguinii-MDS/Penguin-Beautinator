@@ -9,13 +9,13 @@ const Title = (props) => {
             <Review noFullStars={props.noFullStars} noReviews={props.noReviews} noDollars={props.noDollars}/>
         </section>
     )
-};
+}
 
 Title.propTypes = {
     name: PropTypes.string.isRequired,
     noFullStars: PropTypes.number.isRequired,
     noReviews: PropTypes.number.isRequired,
     noDollars: PropTypes.number.isRequired
-};
+}
 
 export default Title;

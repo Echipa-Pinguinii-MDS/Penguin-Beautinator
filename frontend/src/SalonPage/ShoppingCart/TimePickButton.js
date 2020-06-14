@@ -7,7 +7,7 @@ const TimePickButton = (props) => {
     return (
         <Button className={'TimePickButton'} disabled={props.disabled} onClick={props.openCalendarPage}>
             <FcCalendar className={'fc'}/>
-            Alege data
+            <p>Alege data</p>
         </Button>
     )
 }

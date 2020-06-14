@@ -4,12 +4,12 @@ import Menu from './Menu.js';
 import Content from './Content';
 import ShoppingCart from './ShoppingCart/ShoppingCart';
 import Calendar from './Calendar/Calendar';
+import {salonServices} from '../Universal/Queries';
 import './SalonPage.css';
-import {salonServices} from "../Universal/Queries";
 
 class SalonPage extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             salon: props.salon,
             services: {},
@@ -17,15 +17,15 @@ class SalonPage extends React.Component {
             selected: new Set(),
             calendarPage: false,
             time: null,
-            date: null,
-        };
-        this.hasContent = this.hasContent.bind(this);
-        this.addService = this.addService.bind(this);
-        this.deleteService = this.deleteService.bind(this);
-        this.openCalendarPage = this.openCalendarPage.bind(this);
-        this.closeCalendarPage = this.closeCalendarPage.bind(this);
-        this.setTime = this.setTime.bind(this);
-        this.setDate = this.setDate.bind(this);
+            date: null
+        }
+        this.hasContent = this.hasContent.bind(this)
+        this.addService = this.addService.bind(this)
+        this.deleteService = this.deleteService.bind(this)
+        this.openCalendarPage = this.openCalendarPage.bind(this)
+        this.closeCalendarPage = this.closeCalendarPage.bind(this)
+        this.setTime = this.setTime.bind(this)
+        this.setDate = this.setDate.bind(this)
     }
 
     componentDidMount() {
@@ -33,12 +33,15 @@ class SalonPage extends React.Component {
     }
 
     refreshServices = () => {
-        salonServices(this.state.salon.id).then(result => this.setState({services: result}));
-    };
+        salonServices(this.state.salon.id).then(result =>
+            this.setState({
+                services: result
+            }))
+    }
 
     hasContent(section, salon) {
         return !((section === 'about' && salon.description === '') ||
-            (section === 'gallery' && salon.images.size === 0));
+            (section === 'gallery' && salon.images.size === 0))
     }
 
     addService(id) {
@@ -66,15 +69,13 @@ class SalonPage extends React.Component {
         let services = {}
         Object.keys(this.state.services).map(category => {
             let list = []
-            this.state.services[category].map(service => {
-                if (this.state.selected.has(service.id)) {
-                    list.push(service)
-                }
-            })
+            this.state.services[category].map(service =>
+                this.state.selected.has(service.id) ? list.push(service) : null
+            )
             if (list.length)
                 services[category] = list
         })
-        return services;
+        return services
     }
 
     openCalendarPage() {
@@ -108,6 +109,7 @@ class SalonPage extends React.Component {
                 <Menu sections={this.state.sections}
                       salon={this.state.salon}
                       hasContent={this.hasContent}/>}
+
                 {!this.state.calendarPage &&
                 <Content sections={this.state.sections}
                          salon={this.state.salon}
@@ -115,9 +117,11 @@ class SalonPage extends React.Component {
                          hasContent={this.hasContent}
                          handleClick={this.addService}
                          selected={this.state.selected}/>}
+
                 {this.state.calendarPage &&
                 <Calendar setTime={this.setTime}
                           setDate={this.setDate}/>}
+
                 <ShoppingCart services={this.getServices()}
                               handleClick={this.deleteService}
                               calendarPage={this.state.calendarPage}

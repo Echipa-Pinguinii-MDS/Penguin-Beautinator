@@ -14,12 +14,15 @@ function ShoppingCart (props) {
             <Services services={props.services}
                       handleClick={props.handleClick}/>
             <Total services={props.services}/>
+
             {!props.calendarPage &&
-                <TimePickButton disabled={Object.keys(props.services).length === 0}
-                                openCalendarPage={props.openCalendarPage}/>}
+            <TimePickButton disabled={Object.keys(props.services).length === 0}
+                            openCalendarPage={props.openCalendarPage}/>}
+
             {props.calendarPage &&
-                <ScheduleButton disabled={props.disabled}
-                                data={props.data}/>}
+            <ScheduleButton disabled={props.disabled}
+                            data={props.data}/>}
+
             {props.calendarPage &&
             <BackButton closeCalendarPage={props.closeCalendarPage}/>}
         </div>

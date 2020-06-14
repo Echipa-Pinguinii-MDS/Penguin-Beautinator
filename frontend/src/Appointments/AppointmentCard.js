@@ -6,8 +6,7 @@ const AppointmentContact = (props) => {
         <div className={'AppointmentContact'}>
             <p>{props.name}</p>
             {props.contact.map(contact =>
-                <p key={contact}>{contact}</p>
-            )}
+                <p key={contact}>{contact}</p>)}
         </div>
     )
 }
@@ -21,8 +20,7 @@ const AppointmentTime = (props) => {
     return (
         <div className={'AppointmentTime'}>
             {props.time.map(time =>
-                <p key={time}>{time}</p>
-            )}
+                <p key={time}>{time}</p>)}
         </div>
     )
 }

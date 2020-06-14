@@ -17,13 +17,11 @@ const PopUpNotLoggedIn = (props) => {
             {close => (
                 <div className={'PopupNotLoggedIn'}>
                     <p className={'Close'} onClick={close}>&times;</p>
-                    Conecteaza-te pentru a putea face o programare!
-                    <br/>
-                    <Link to={'/login'}>Intra in cont</Link>
-                    <br/>
-                    Nu ai cont?
-                    <br/>
-                    <Link to={'/signup'}>Inregistreaza-te</Link>
+                    <p>Conecteaza-te pentru a putea face o programare!<br/>
+                        <Link to={'/login'}>Intra in cont</Link><br/>
+                        Nu ai cont?<br/>
+                        <Link to={'/signup'}>Inregistreaza-te</Link>
+                    </p>
                 </div>
             )}
         </Popup>
@@ -45,9 +43,9 @@ const PopUpLoggedIn = (props) => {
             {close => (
                 <div className={'PopupLoggedIn'}>
                     <p className={'Close'} onClick={close}>&times;</p>
-                    Programarea din data de {props.data} a fost facuta cu succes!
-                    <br/>
-                    O poti vizualiza in <Link to={'/programari'}>Programarile mele</Link>
+                    <p>Programarea din data de {props.data} a fost facuta cu succes!<br/>
+                        O poti vizualiza in <Link to={'/programari'}>Programarile mele</Link>
+                    </p>
                 </div>
             )}
         </Popup>
@@ -64,6 +62,7 @@ const ScheduleButton = (props) => {
         <div>
         {(Cookies.get('user_id') === undefined) &&
             <PopUpNotLoggedIn disabled={props.disabled}/>}
+
         {(Cookies.get('user_id') !== undefined) &&
             <PopUpLoggedIn disabled={props.disabled} data={props.data}/>}
         </div>

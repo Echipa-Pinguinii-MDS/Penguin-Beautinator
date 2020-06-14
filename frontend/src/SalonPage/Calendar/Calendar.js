@@ -5,18 +5,18 @@ import './Calendar.css'
 
 class Calendar extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             lastMonday: new Date().getDate() - new Date().getDay() + (new Date().getDay() === 0 ? -6 : 1),
             day: new Date().getDate(),
             month: new Date().getMonth(),
             year: new Date().getFullYear()
         }
-        this.changeSelectedDate = this.changeSelectedDate.bind(this);
-        this.daysInMonth = this.daysInMonth.bind(this);
-        this.daysInPreviousMonth = this.daysInPreviousMonth.bind(this);
-        this.nextWeek = this.nextWeek.bind(this);
-        this.previousWeek = this.previousWeek.bind(this);
+        this.changeSelectedDate = this.changeSelectedDate.bind(this)
+        this.daysInMonth = this.daysInMonth.bind(this)
+        this.daysInPreviousMonth = this.daysInPreviousMonth.bind(this)
+        this.nextWeek = this.nextWeek.bind(this)
+        this.previousWeek = this.previousWeek.bind(this)
     }
 
     changeSelectedDate(day) {

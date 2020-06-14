@@ -22,24 +22,6 @@ const SalonPicker = (props) => {
     )
 }
 
-SalonPicker.defaultProps = {
-    sections: {
-        about: 'Despre noi',
-        services: 'Servicii',
-        gallery: 'Galerie',
-        contact: 'Contact'
-    },
-    services: {
-        coafor: [
-            {title: 'Tuns - par scurt', price: 10, length: 20},
-            {title: 'Tuns - par mediu', price: 15, length: 25},
-            {title: 'Tuns - par lung', price: 20, length: 30}],
-        manichiura: [
-            {title: 'Clasic', price: 25, length: 15},
-            {title: 'Semipermanenta', price: 50, length: 30}]
-    }
-}
-
 SalonPicker.propTypes = {
     salons: PropTypes.array.isRequired
 }

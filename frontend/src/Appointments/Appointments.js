@@ -8,15 +8,17 @@ const FutureAppointments = (props) => {
     return (
         <div className={'FutureAppointments'}>
             <h3>Programari viitoare</h3>
+
             {props.appointments.length === 0 &&
-                <p className={'NoFutureAppointments'}>Nu ai nicio programare momentan.
-                    <br/>
-                    Iti poti face una la oricare <Link to={'/saloane'}>salon disponibil.</Link>
-                </p>}
+            <p className={'NoFutureAppointments'}>
+                Nu ai nicio programare momentan.<br/>
+                Iti poti face una la oricare <Link to={'/saloane'}>salon disponibil.</Link>
+            </p>}
+
             {props.appointments.length > 0 &&
-                props.appointments.map(appointment =>
-                    <Appointment key={appointment.time}
-                                 appointment={appointment}/>)}
+            props.appointments.map(appointment =>
+                <Appointment key={appointment.time}
+                             appointment={appointment}/>)}
         </div>
     )
 }
@@ -29,12 +31,14 @@ const PastAppointments = (props) => {
     return (
         <div className={'PastAppointments'}>
             <h3>Programari trecute</h3>
+
             {props.appointments.length === 0 &&
-                <p className={'NoPastAppointments'}>Nu ai avut nicio programare pana acum.</p>}
+            <p className={'NoPastAppointments'}>Nu ai avut nicio programare pana acum.</p>}
+
             {props.appointments.length > 0 &&
-                props.appointments.map(appointment =>
-                    <Appointment key={appointment.time}
-                                 appointment={appointment}/>)}
+            props.appointments.map(appointment =>
+                <Appointment key={appointment.time}
+                             appointment={appointment}/>)}
         </div>
     )
 }

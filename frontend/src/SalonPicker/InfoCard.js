@@ -14,10 +14,6 @@ const InfoCard = (props) => {
     )
 }
 
-InfoCard.defaultProps = {
-    src: ''
-}
-
 InfoCard.propTypes = {
     src: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

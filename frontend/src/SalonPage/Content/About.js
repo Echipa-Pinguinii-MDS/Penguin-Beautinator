@@ -8,11 +8,11 @@ const About = (props) => {
             <p className={'Section-description'}>{props.description}</p>
         </section>
     )
-};
+}
 
 About.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired
-};
+}
 
 export default About;
