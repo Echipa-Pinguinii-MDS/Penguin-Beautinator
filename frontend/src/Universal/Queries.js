@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -23,12 +24,16 @@ export function userAppointments(user_id) {
         } else {
             for (let i = 0; i < result.data['user_appointments'].length; i ++) {
                 let data = result.data['user_appointments'][i]
+                let day = moment(data.day, 'YYYY-MM-DD')
+                let start_time = moment(data.start_time, 'HH:mm:ss+-HH:mm')
+                let duration = data.duration
+                let end_time = start_time.add({minutes: duration})
                 let aux_appointment = {
-                    salon_id: data.salon_id,
-                    start_date_time: Date.parse(data.start_date_time),
-                    duration: data.duration,
+                    id: data.salon_id,
+                    name: data.salon_name,
+                    time: [day.format("ddd, DD-MM-YYYY"), start_time.format("HH:mm") + " - " + end_time.format("HH:mm")],
                     price: data.price,
-                    service: data.service
+                    services: data.service,
                 }
                 appointments.push(aux_appointment)
             }
@@ -233,7 +238,7 @@ export function availableHours(serviceList, salonId, day) {
             'content-type': 'application/json'
         },
         data: {
-            date: day.toISOString().split('T')[0],
+            day: day.format('YYYY-MM-DD'),
             salon_id: salonId,
             services: serviceList
         }
@@ -256,8 +261,8 @@ export function addAppointment(serviceList, salonId, userId, day, time) {
             user_id: userId,
             salon_id: salonId,
             services: serviceList,
-            date: day.toISOString().split('T')[0],
-            time: time.toISOString().split('T')[1],
+            day: day.format('YYYY-MM-DD'),
+            time: time.format('HH:mm:ss+-HH:mm'),
         },
     }).then(result => {
         return result.data['added']
