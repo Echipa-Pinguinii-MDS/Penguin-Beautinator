@@ -24,4 +24,6 @@ urlpatterns = [
     path('available/', views.available_hours, name='available_hours'),
     # /beautinator/add/user/
     path('add/user/', views.add_user, name='add_user'),
+    # beautinator/add/appointment/
+    path('add/appointment/', views.add_appointment, name='add_appointment'),
 ]

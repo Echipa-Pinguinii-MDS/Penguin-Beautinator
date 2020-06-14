@@ -5,7 +5,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 //fiecare functie are deasupra comentata functia din views care ii corespunde
 
 //user_appointments
-export function userAppointments(event, user_id) {
+export function userAppointments(user_id) {
     return axios({
         method: 'post',
         url: 'users/appointments/',
@@ -41,7 +41,7 @@ export function userAppointments(event, user_id) {
 }
 
 //user_data_by_email
-export function userDataByEmail(event, user_email) {
+export function userDataByEmail(user_email) {
     return axios({
         method: 'post',
         url: 'users/profile/',
@@ -74,7 +74,7 @@ export function userDataByEmail(event, user_email) {
 }
 
 //user_data_by_id
-export function userDataById(event, user_id) {
+export function userDataById(user_id) {
     return axios({
         method: 'post',
         url: 'users/profile/',
@@ -233,12 +233,34 @@ export function availableHours(serviceList, salonId, day) {
             'content-type': 'application/json'
         },
         data: {
-            date: day.toString(),
+            date: day.toISOString().split('T')[0],
             salon_id: salonId,
             services: serviceList
         }
     }).then(result => {
         return result.data['available_hours']
+    }).catch(function (error) {
+        console.log(error)
+    })
+}
+
+export function addAppointment(serviceList, salonId, userId, day, time) {
+    let url = 'add/appointment'
+    return axios({
+        method: 'post',
+        url: url,
+        headers: {
+            "content-type": "application/json"
+        },
+        data: {
+            user_id: userId,
+            salon_id: salonId,
+            services: serviceList,
+            date: day.toISOString().split('T')[0],
+            time: time.toISOString().split('T')[1],
+        },
+    }).then(result => {
+        return result.data['added']
     }).catch(function (error) {
         console.log(error)
     })

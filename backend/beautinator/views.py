@@ -140,6 +140,60 @@ def salon_appointments(request, is_test = False):
     return JsonResponse({"salon_appointments": appointments})
 
 
+def available_hours_per_category(salon, day, categories):
+    appointments = Appointment.objects.filter(start_date=day, salon=salon)
+    booked_hours = {}
+
+    for category in categories:
+        booked_hours[category] = [True] * (4 * 9)
+        booked_hours[category].extend([False] * (4 * 10))
+        booked_hours[category].extend([True] * (4 * 5))
+
+    for appointment in appointments:
+        category = appointment.service.category
+        if category in categories:
+            start = appointment.start_time_to_int()
+            size = appointment.duration_to_int()
+            for i in range(start, start + size):
+                booked_hours[category][i] = True
+
+    return booked_hours
+
+
+def get_services(services_id):
+    services = {}
+    for service_id in services_id:
+        try:
+            service = Service.objects.get(pk=service_id)
+        except (KeyError, Service.DoesNotExist):
+            return HttpResponse("Service " + services_id + " does not exist", status=418)
+
+        if service.category not in services.keys():
+            services[service.category] = []
+        services[service.category].append(service)
+
+    return services
+
+
+def is_available(categories, start_index, services, booked):
+    current_index = start_index
+    for category in categories:
+        for i in range(current_index, current_index + services[category]):
+            if booked[category][i]:
+                return False
+        current_index += services[category]
+    return True
+
+
+def get_services_duration(services):
+    services_duration = {}
+    for (key, value) in services:
+        services_duration[key] = 0
+        for service in value:
+            services_duration[service.category] += service.duration_to_int()
+    return services_duration
+
+
 def available_hours(request, is_test=False):
     data = get_data_from_request(request, is_test)
 
@@ -151,47 +205,14 @@ def available_hours(request, is_test=False):
     except (KeyError, Salon.DoesNotExist):
         return HttpResponse("Salon " + salon_id + " does not exist", status=418)
 
-    services_id = data['services']
-    services = {}
-    for service_id in services_id:
-        try:
-            service = Service.objects.get(pk=service_id)
-        except (KeyError, Service.DoesNotExist):
-            return HttpResponse("Service " + services_id + " does not exist", status=418)
-
-        if service.category not in services.keys():
-            services[service.category] = 0
-        services[service.category] += service.duration_to_int()
-
-    categories = []
-    booked_hours = {}
-    for (key, value) in services:
-        booked_hours[key] = [True] * (4 * 9)
-        booked_hours[key].extend([False] * (4 * 10))
-        booked_hours[key].extend([True] * (4 * 5))
-        categories.append(key)
-
-    appointments = Appointment.objects.filter(start_date=day, salon=salon)
-    for appointment in appointments:
-        category = appointment.service.category
-        if category in booked_hours.keys():
-            start = appointment.start_time_to_int()
-            size = appointment.duration_to_int()
-            for i in range(start, start + size):
-                booked_hours[category][i] = True
+    services_duration = get_services_duration(get_services(data['services']))
+    categories = services_duration.keys()
+    booked_hours = available_hours_per_category(salon, day, categories)
 
     start_hours = []
     for hour in range(4 * 24):
         for perm in permutations(categories):
-            current_hour = hour
-            check = True
-            for category in perm:
-                for i in range(current_hour, current_hour + services[category]):
-                    if booked_hours[category][i]:
-                        check = False
-                current_hour += services[category]
-
-            if check:
+            if is_available(perm, hour, services_duration, booked_hours):
                 start_hours.append(int_to_time(hour).__str__())
                 break
 
@@ -274,8 +295,50 @@ def add_service(request):
     service.save()
 
 
-# def add_appointment(request):
+def add_appointment(request, is_test=False):
+    data = get_data_from_request(request, is_test)
+    client_id = data['user_id']
+    salon_id = data['salon_id']
+    services_id = data['services']
+    day = data['date']
+    start_time = data['time']
 
+    try:
+        salon = Salon.objects.get(pk=salon_id)
+    except (KeyError, Salon.DoesNotExist):
+        return HttpResponse("Salon " + salon_id + " does not exist", status=418)
+
+    try:
+        user = User.objects.get(pk=client_id)
+    except (KeyError, User.DoesNotExist):
+        return HttpResponse("User " + client_id + " does not exist", status=418)
+
+    services = get_services(services_id)
+    services_duration = get_services_duration(services)
+    categories = services.keys()
+    booked_hours = available_hours_per_category(salon, day, categories)
+
+    check = False
+    start_index = time_to_int(start_time)
+    for perm in permutations(categories):
+        if is_available(perm, start_index, services_duration, booked_hours):
+            categories = perm
+            check = True
+            break
+
+    if not check:
+        return JsonResponse({'added': False, 'message': 'Time not available'})
+
+    for category in categories:
+        for service in services[category]:
+            appointment = Appointment(
+                client=user,
+                service=service,
+                date=day,
+                start_time=int_to_time(start_time)
+            )
+            appointment.save()
+            start_time += service.duration_to_int()
 
 
 """Daca user-ul si parola sunt bune returneaza
