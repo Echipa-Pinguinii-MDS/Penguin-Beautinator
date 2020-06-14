@@ -8,7 +8,7 @@ class Calendar extends React.Component {
         super(props)
         this.state = {
             lastMonday: new Date().getDate() - new Date().getDay() + (new Date().getDay() === 0 ? -6 : 1),
-            day: new Date().getDate(),
+            day: null,
             month: new Date().getMonth(),
             year: new Date().getFullYear()
         }
