@@ -23,6 +23,15 @@ class Login extends Component {
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.refreshLoggedIn = this.refreshLoggedIn.bind(this)
+    }
+
+    componentDidMount() {
+        this.refreshLoggedIn()
+    }
+
+    refreshLoggedIn = () => {
+        this.setState({loggedIn: Cookies.get('user_id') !== undefined})
     }
 
     reset() {
@@ -80,7 +89,7 @@ class Login extends Component {
                 console.log('parola gresita')
             } else {
                 Cookies.set('user_id', result.data['user_id'], {expires: 7})
-                this.setState({loggedIn: true})
+                window.location.reload(false)
                 console.log('ok')
             }
         }).catch(function (error) {
