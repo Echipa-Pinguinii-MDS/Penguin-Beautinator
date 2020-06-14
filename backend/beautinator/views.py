@@ -204,9 +204,9 @@ def add_user(request):
     password = data['user_password']
     first_name = data['user_first_name']
     last_name = data['user_last_name']
-    phone = data['phone']
-    birthday = date.fromisoformat(data['birthday'])
-    gender = data['gender']
+    phone = data['user_phone']
+    birthday = date.fromisoformat(data['user_birthday'])
+    gender = data['user_gender']
 
     if User.objects.filter(email=email).exists():
         return JsonResponse({'added': False, 'message': 'Email already registered'})

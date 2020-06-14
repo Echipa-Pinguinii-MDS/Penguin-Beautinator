@@ -17,11 +17,10 @@ class SignUp extends Component {
             firstName: '',
             lastName: '',
             phoneNo: '',
-            birthday: '',
+            birthday: new Date(),
             invalidEmail: false,
-            invalidPassword: false,
             signedIn: false,
-        }
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -29,7 +28,6 @@ class SignUp extends Component {
     reset() {
         this.setState({
             invalidEmail: false,
-            invalidPassword: false,
             signedIn: false
         })
     }
@@ -47,8 +45,20 @@ class SignUp extends Component {
     }
 
     checkPassword() {
-        if (this.state.password !== this.state.passwordConfirmation)
-            return <p>Cele doua parole nu se potrivesc</p>
+        if (this.state.password !== this.state.passwordConfirmation) {
+            return <p>Cele doua parole nu se potrivesc</p>;
+        } else {
+            return null;
+        }
+    }
+
+    wrongEmail() {
+        if (this.state.invalidEmail) {
+            this.reset();
+            return <p>Email-ul este deja asociat unui cont</p>;
+        } else {
+            return null;
+        }
     }
 
     handleChange = event => {
@@ -62,21 +72,23 @@ class SignUp extends Component {
         this.reset();
         axios({
             method: 'post',
-            url: 'user/SignUp/',
+            url: 'add/user/',
             data: {
                 'user_email': this.state.email,
-                'user_password': this.state.password
+                'user_password': this.state.password,
+                'user_first_name': this.state.firstName,
+                'user_last_name': this.state.lastName,
+                'user_phone': this.state.phoneNo,
+                'user_birthday': this.state.birthday.toISOString().split('T')[0],
+                'user_gender': 'N',
             },
             headers: {
                 'content-type': 'application/json'
             },
         }).then(result => {
-            if (!result.data['check_user']) {
+            if (!result.data['added']) {
                 this.setState({invalidEmail: true});
-                console.log('email gresit');
-            } else if (!result.data['check_password']) {
-                this.setState({invalidPassword: true});
-                console.log('parola gresita');
+                console.log('email deja inregistrat');
             } else {
                 this.setState({signedIn: true});
                 console.log('ok');
@@ -144,7 +156,7 @@ class SignUp extends Component {
                         <Form.Label>Data nasterii</Form.Label>
                         <Form.Control type='date'
                                       name='date'
-                                      value={this.state.firstName}
+                                      value={this.state.birthday}
                                       onChange={this.handleChange}
                                       placeholder='Data nasterii'/>
                     </Form.Group>
@@ -154,6 +166,7 @@ class SignUp extends Component {
                 </Form>
 
                 {this.checkPassword()}
+                {this.wrongEmail()}
                 {this.signedIn()}
             </div>
         )

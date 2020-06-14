@@ -22,4 +22,6 @@ urlpatterns = [
     path('user/login/', views.user_login, name='user_login'),
     # /beautinator/available/
     path('available/', views.available_hours, name='available_hours'),
+    # /beautinator/add/user/
+    path('add/user/', views.add_user, name='add_user'),
 ]
