@@ -5,7 +5,7 @@ import React from 'react';
 const Password = (props) => {
     return (
         <Form.Group>
-            <Form.Label>Parola*</Form.Label>
+            <Form.Label>Parola</Form.Label>
             <Form.Control type='password'
                           name='password'
                           value={props.password}

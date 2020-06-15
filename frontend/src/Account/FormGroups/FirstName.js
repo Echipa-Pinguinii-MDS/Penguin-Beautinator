@@ -5,7 +5,7 @@ import {Form} from 'react-bootstrap';
 const FirstName = (props) => {
     return (
         <Form.Group>
-            <Form.Label>Prenume*</Form.Label>
+            <Form.Label>Prenume</Form.Label>
             <Form.Control type='text'
                           name='firstName'
                           value={props.firstName}
