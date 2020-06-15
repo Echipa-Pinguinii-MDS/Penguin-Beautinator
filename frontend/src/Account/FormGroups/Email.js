@@ -4,7 +4,7 @@ import React from 'react';
 
 const Email = (props) => {
     return (
-        <Form.Group>
+        <Form.Group className={'Required'}>
             <Form.Label>Email</Form.Label>
             <Form.Control autoFocus
                           type='email'
