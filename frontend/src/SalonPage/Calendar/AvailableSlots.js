@@ -22,14 +22,10 @@ TimeSlots.propTypes = {
 const AvailableSlots = (props) => {
     return (
         <div className={'AvailableSlots'}>
-            {props.timeSlots.length === 0 &&
-                <p>Nu exista ore libere pentru data si serviciile selectate</p>}
-
-            {props.timeSlots.length > 0 &&
-                <TimeSlots timeSlots={props.timeSlots}
-                           month={props.month}
-                           year={props.year}
-                           setTime={props.setTime}/>}
+            <TimeSlots timeSlots={props.timeSlots}
+                       month={props.month}
+                       year={props.year}
+                       setTime={props.setTime}/>
         </div>
     )
 }

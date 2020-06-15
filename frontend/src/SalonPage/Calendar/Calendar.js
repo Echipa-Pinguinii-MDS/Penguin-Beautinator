@@ -17,6 +17,7 @@ class Calendar extends React.Component {
         this.daysInPreviousMonth = this.daysInPreviousMonth.bind(this)
         this.nextWeek = this.nextWeek.bind(this)
         this.previousWeek = this.previousWeek.bind(this)
+        this.getRelativeDate = this.getRelativeDate.bind(this)
     }
 
     changeSelectedDate(day) {
@@ -25,6 +26,26 @@ class Calendar extends React.Component {
         })
         this.props.setTime(null)
         this.props.setDate(day + '.' + this.state.month + '.' + this.state.year)
+    }
+
+    getRelativeDate() {
+        let date = new Date()
+
+        if (this.state.year === date.getFullYear()) {
+            if (this.state.month === date.getMonth()) {
+                if (this.state.day == date.getDate()) {
+                    return 0
+                } else if (this.state.day > date.getDate()) {
+                    return 1
+                }
+            } else if (this.state.month > date.getMonth()) {
+                return 1
+            }
+        } else if (this.state.year > date.getFullYear()) {
+            return 1
+        }
+
+        return -1
     }
 
     daysInMonth(year, month) {
@@ -96,12 +117,20 @@ class Calendar extends React.Component {
                       daysInMonth={this.daysInMonth(this.state.year, this.state.month)}
                       date={this.state.day}
                       changeSelectedDate={this.changeSelectedDate}/>
-                <AvailableSlots timeSlots={this.state.day >= new Date().getDate() ?
-                    ['11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30'] : []}
+
+                {this.getRelativeDate() === 1 &&
+                <AvailableSlots timeSlots={['11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30',
+                    '11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30']}
                                 month={this.state.month}
                                 year={this.state.year}
-                                setTime={this.props.setTime}/>
-                </div>
+                                setTime={this.props.setTime}/>}
+
+                {this.getRelativeDate() === 0 &&
+                <p className={'AvailableSlots'}>Pentru data de astazi se mai pot realiza doar programari telefonice</p>}
+
+                {this.getRelativeDate() === -1 &&
+                <p className={'AvailableSlots'}>Nu exista ore libere pentru data si serviciile selectate</p>}
+            </div>
         )
     }
 }
