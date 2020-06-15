@@ -3,8 +3,9 @@ import FirstName from './FormGroups/FirstName';
 import LastName from './FormGroups/LastName';
 import PhoneNo from './FormGroups/PhoneNo';
 import Birthday from './FormGroups/Birthday';
-import Cookies from "js-cookie";
-import {userDataById} from "../Universal/Queries";
+import Cookies from 'js-cookie';
+import {userDataById} from '../Universal/Queries';
+import {Button} from 'react-bootstrap';
 
 class Updates extends React.Component {
     constructor(props) {
@@ -18,9 +19,13 @@ class Updates extends React.Component {
             firstName: '',
             lastName: '',
             phoneNo: '',
-            birthday: new Date()
+            birthday: new Date(),
+            update: false
         }
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.refreshUserData = this.refreshUserData.bind(this)
+        this.checkPassword = this.checkPassword.bind(this)
     }
 
     componentDidMount() {
@@ -42,8 +47,21 @@ class Updates extends React.Component {
     handleChange = event => {
         let {name, value} = event.target
         this.setState({
-            [name]: value
+            [name]: value,
+            update: false
         })
+    }
+
+    handleSubmit() {
+        this.setState({
+            update: true
+        })
+    }
+
+    checkPassword() {
+        if (this.state.newPassword !== this.state.newPasswordConfirmation) {
+            return <p className={'FormError'}>Cele doua parole nu se potrivesc</p>
+        }
     }
 
     render() {
@@ -58,6 +76,13 @@ class Updates extends React.Component {
                          handleChange={this.handleChange}/>
                 <Birthday birthday={this.state.birthday}
                           handleChange={this.handleChange}/>
+                <Button block onClick={this.handleSubmit} type='submit'>
+                    Schimba
+                </Button>
+
+                {this.checkPassword()}
+                {this.state.update &&
+                <p className={'FormUpdate'}>Schimbarea a fost inregistrata</p>}
             </div>
         )
     }
