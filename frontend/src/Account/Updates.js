@@ -12,9 +12,9 @@ class Updates extends React.Component {
         super(props)
         this.state = {
             id: Number(Cookies.get('user_id').substring(1)),
-            oldPassword: '',
-            newPassword: '',
-            newPasswordConfirmation: '',
+            // oldPassword: '',
+            // newPassword: '',
+            // newPasswordConfirmation: '',
             firstName: '',
             lastName: '',
             phoneNo: '',
@@ -24,7 +24,7 @@ class Updates extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.refreshUserData = this.refreshUserData.bind(this)
-        this.checkPassword = this.checkPassword.bind(this)
+        // this.checkPassword = this.checkPassword.bind(this)
     }
 
     componentDidMount() {
@@ -58,11 +58,11 @@ class Updates extends React.Component {
         })
     }
 
-    checkPassword() {
-        if (this.state.newPassword !== this.state.newPasswordConfirmation) {
-            return <p className={'FormError'}>Cele doua parole nu se potrivesc</p>
-        }
-    }
+    // checkPassword() {
+    //     if (this.state.newPassword !== this.state.newPasswordConfirmation) {
+    //         return <p className={'FormError'}>Cele doua parole nu se potrivesc</p>
+    //     }
+    // }
 
     render() {
         return (
