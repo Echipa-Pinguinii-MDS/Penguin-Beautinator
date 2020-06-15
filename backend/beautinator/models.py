@@ -116,6 +116,7 @@ class Service(models.Model):
         ('BE', 'Cosmetica'),
         ('MH', 'Frizerie'),
         ('MP', 'Manichiura'),
+        ('MG', 'Masaj'),
     ]
 
     salon = models.ForeignKey(

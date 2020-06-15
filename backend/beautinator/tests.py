@@ -79,7 +79,7 @@ def create_data():
     services = []
     for i in range(6):
         sal = salons[i % 3]
-        cat = random.choice(['FH', 'BE', 'MH', 'MP'])
+        cat = random.choice(['FH', 'BE', 'MH', 'MP', 'MG'])
         t = "service" + str(i)
         pr = random.random() * 77
         ser = Service(salon_id=sal.id, category=cat, title=t, price=pr)
