@@ -49,7 +49,7 @@ export function userAppointments(user_id) {
 export function userDataByEmail(user_email) {
     return axios({
         method: 'post',
-        url: 'users/profile/',
+        url: 'users/profile/email/',
         data: {
             'user_email': user_email,
         },
@@ -64,10 +64,10 @@ export function userDataByEmail(user_email) {
             let data = result.data['user_data'];
             userData = {
                 email: result.data['user_data'].email,
-                first_name: result.data['user_data'].first_name,
-                last_name: result.data['user_data'].last_name,
-                phone: data.phone,
-                birthday: Date.parse(data.birthday),
+                firstName: result.data['user_data'].first_name,
+                lastName: result.data['user_data'].last_name,
+                phoneNo: data.phone,
+                birthday: new Date(data.birthday),
                 gender: data.gender
             }
         }
@@ -97,10 +97,10 @@ export function userDataById(user_id) {
             let data = result.data['user_data']
             userData = {
                 email: data.email,
-                first_name: data.first_name,
-                last_name: data.last_name,
-                phone: data.phone,
-                birthday: Date.parse(data.birthday),
+                firstName: data.first_name,
+                lastName: data.last_name,
+                phoneNo: data.phone,
+                birthday: new Date(data.birthday),
                 gender: data.gender
             }
         }

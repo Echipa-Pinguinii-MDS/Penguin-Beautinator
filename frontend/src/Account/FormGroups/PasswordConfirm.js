@@ -5,7 +5,7 @@ import React from 'react';
 const PasswordConfirm = (props) => {
     return (
         <Form.Group>
-            <Form.Label>Reintrodu parola*</Form.Label>
+            <Form.Label>Reintrodu parola</Form.Label>
             <Form.Control type='password'
                           name='passwordConfirmation'
                           value={props.passwordConfirmation}

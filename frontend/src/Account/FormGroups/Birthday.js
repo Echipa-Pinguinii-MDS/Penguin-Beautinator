@@ -16,7 +16,7 @@ const Birthday = (props) => {
 }
 
 Birthday.propTypes = {
-    birthday: PropTypes.object.isRequired,
+    birthday: PropTypes.instanceOf(Date).isRequired,
     handleChange: PropTypes.func.isRequired
 }
 
