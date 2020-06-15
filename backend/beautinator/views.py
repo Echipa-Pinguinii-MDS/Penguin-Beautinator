@@ -101,7 +101,6 @@ def salon_services(request, salon_id):
 
 def user_appointments(request, is_test):
     data = get_data_from_request(request, is_test)
-    #data = json.loads(request.body.decode('utf-8'))
     user_id = data['user_id']
 
     appointments = list(Appointment.objects.filter(client_id=user_id).values())
@@ -227,7 +226,6 @@ def available_hours(request, is_test=False):
 
 def add_user(request, is_test=False):
     data = get_data_from_request(request, is_test)
-    #data = json.loads(request.body.decode('utf-8'))
     email = data['user_email']
     password = data['user_password']
     first_name = data['user_first_name']
@@ -253,7 +251,6 @@ def add_user(request, is_test=False):
 
 def add_salon(request, is_test=False):
     data = get_data_from_request(request, is_test)
-    #data = json.loads(request.body.decode('utf-8'))
     email = data['salon_email']
     password = data['salon_password']
     name = data['salon_name']
@@ -263,6 +260,7 @@ def add_salon(request, is_test=False):
     women_services = data['women_services']
     men_services = data['men_services']
     kids_services = data['kids_services']
+    logo = data['logo']
     location = Location.objects.get(pk=data['location_id'])
 
     if Salon.objects.filter(email=email).exists():
@@ -278,7 +276,8 @@ def add_salon(request, is_test=False):
         location=location,
         women_services=women_services,
         men_services=men_services,
-        kids_services=kids_services)
+        kids_services=kids_services,
+        logo=logo)
     salon.save()
 
     return JsonResponse({'added': True})

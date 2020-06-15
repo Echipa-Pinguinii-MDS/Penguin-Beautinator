@@ -90,6 +90,7 @@ class Location(models.Model):
 
 
 class Salon(models.Model):
+    logo = models.URLField(default='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png')
     email = models.EmailField(unique=True, max_length=100)
     password = models.CharField(max_length=100)
     name = models.CharField(max_length=100)

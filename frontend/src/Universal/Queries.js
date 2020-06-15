@@ -127,7 +127,7 @@ export function salonsList() {
             for (let i = 0; i < result.data['salons_list'].length; i ++) {
                 let data = result.data['salons_list'][i]
                 let aux_salon = {
-                    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
+                    src: data.logo,
                     id: data.id,
                     name: data.name,
                     noFullStars: 0,
@@ -167,7 +167,7 @@ export function salonData(salon_id) {
         } else {
             let data = result.data['salon_data']
             salon = {
-                src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
+                src: data.logo,
                 id: data.id,
                 name: data.name,
                 noFullStars: 0,
