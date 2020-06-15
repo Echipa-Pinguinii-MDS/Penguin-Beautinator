@@ -745,7 +745,8 @@ class SalonModelTests(TestCase):
             'women_services': False,
             'men_services': True,
             'kids_services': False,
-            'location_id': loc_id
+            'location_id': loc_id,
+            'logo': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png'
         }
         req = HttpRequest()
         req.POST = dict
@@ -772,7 +773,8 @@ class SalonModelTests(TestCase):
             'salon_address': 'km0distractie',
             'women_services': False,
             'men_services': True,
-            'kids_services': False
+            'kids_services': False,
+            'logo': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png'
         }
         req = HttpRequest()
         req.POST = dict
