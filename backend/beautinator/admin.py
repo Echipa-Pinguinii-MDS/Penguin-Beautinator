@@ -36,7 +36,7 @@ class SalonAdmin(admin.ModelAdmin):
     empty_value_display = '-empty-'
     fieldsets = [
         ('Login info', {'fields': ['email', 'password']}),
-        ('General info', {'fields': ['name', 'description']}),
+        ('General info', {'fields': ['name', 'description', 'logo']}),
         ('Contact info', {'fields': ['phone', 'location', 'address']}),
         ('Service types', {'fields': ['women_services', 'men_services', 'kids_services']})
     ]
