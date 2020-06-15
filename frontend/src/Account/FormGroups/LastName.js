@@ -4,7 +4,7 @@ import {Form} from 'react-bootstrap';
 
 const LastName = (props) => {
     return (
-        <Form.Group className={'Required'}>
+        <Form.Group>
             <Form.Label>Nume</Form.Label>
             <Form.Control type='text'
                           name='lastName'
