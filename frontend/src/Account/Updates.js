@@ -4,7 +4,7 @@ import LastName from './FormGroups/LastName';
 import PhoneNo from './FormGroups/PhoneNo';
 import Birthday from './FormGroups/Birthday';
 import Cookies from 'js-cookie';
-import {userDataById} from '../Universal/Queries';
+import {userDataById, updateUser} from '../Universal/Queries';
 import {Button} from 'react-bootstrap';
 
 class Updates extends React.Component {
@@ -12,7 +12,6 @@ class Updates extends React.Component {
         super(props)
         this.state = {
             id: Number(Cookies.get('user_id').substring(1)),
-            email: '',
             oldPassword: '',
             newPassword: '',
             newPasswordConfirmation: '',
@@ -35,7 +34,6 @@ class Updates extends React.Component {
     refreshUserData() {
         userDataById(this.state.id).then(result => {
             this.setState({
-                email: result.email,
                 firstName: result.firstName,
                 lastName: result.lastName,
                 phoneNo: result.phoneNo,
@@ -53,8 +51,10 @@ class Updates extends React.Component {
     }
 
     handleSubmit() {
-        this.setState({
-            update: true
+        updateUser(this.state).then(result => {
+            this.setState({
+                update: result
+            })
         })
     }
 

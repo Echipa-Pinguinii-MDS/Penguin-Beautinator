@@ -79,12 +79,12 @@ export function userDataByEmail(user_email) {
 }
 
 //user_data_by_id
-export function userDataById(user_id) {
+export function userDataById(userId) {
     return axios({
         method: 'post',
         url: 'users/profile/',
         data: {
-            'user_id': user_id,
+            'user_id': userId,
         },
         headers: {
             'content-type': 'application/json'
@@ -106,6 +106,28 @@ export function userDataById(user_id) {
         }
 
         return userData
+    }).catch(function (error) {
+        console.log(error)
+    })
+}
+
+export function updateUser(userData) {
+    return axios({
+        method: 'post',
+        url: 'users/profile/update/',
+        data: {
+            'user_id': userData.id,
+            'user_first_name': userData.firstName,
+            'user_last_name': userData.lastName,
+            'user_phone': userData.phoneNo,
+            'user_birthday': userData.birthday.toISOString().split('T')[0],
+            'user_gender': 'N'
+        },
+        headers: {
+            'content-type': 'application/json'
+        }
+    }).then(result => {
+        return result.data['updated']
     }).catch(function (error) {
         console.log(error)
     })
