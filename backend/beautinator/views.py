@@ -52,6 +52,7 @@ def user_data_by_email(request, is_test=False):
         return JsonResponse({"user_data": user})
 
 
+@csrf_exempt
 def user_data_by_id(request, is_test=False):
     data = get_data_from_request(request, is_test)
     user_id = data['user_id']
@@ -285,7 +286,6 @@ def add_salon(request, is_test=False):
 
 def add_service(request, is_test=False):
     data = get_data_from_request(request, is_test)
-    #data = json.loads(request.body.decode('utf-8'))
     salon = Salon.objects.get(pk=data['salon_id'])
     category = data['service_category']
     title = data['service_title']

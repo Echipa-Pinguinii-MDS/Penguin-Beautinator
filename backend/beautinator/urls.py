@@ -14,6 +14,8 @@ urlpatterns = [
     path('salons/<int:salon_id>/services/', views.salon_services, name='salon_services'),
     # /beautinator/users/profile/
     path('users/profile/', views.user_data_by_id, name='user_data'),
+    # beautinator/users/profile/email/
+    path('users/profile/email/', views.user_data_by_email, name='user_data_by_email'),
     # /beautinator/users/appointments/
     path('users/appointments/', views.user_appointments, name='user_appointments'),
     # /beautinator/salons/appointments/
