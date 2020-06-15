@@ -80,7 +80,7 @@ class Updates extends React.Component {
                     Schimba
                 </Button>
 
-                {this.checkPassword()}
+                {/*{this.checkPassword()}*/}
                 {this.state.update &&
                 <p className={'FormUpdate'}>Schimbarea a fost inregistrata</p>}
             </div>
