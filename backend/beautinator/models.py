@@ -6,11 +6,11 @@ from datetime import timedelta, time, date
 
 
 def time_to_int(gvn_time):
-    return (gvn_time.hour * 60 + gvn_time.minute) // 15
+    return int((gvn_time.hour * 60 + gvn_time.minute) // 15)
 
 
 def duration_to_int(duration):
-    return (duration.total_seconds() // 60) // 15
+    return int((duration.total_seconds() // 60) // 15)
 
 
 class User(models.Model):
@@ -131,7 +131,7 @@ class Service(models.Model):
         return duration_to_int(self.duration)
 
     def duration_in_minutes(self):
-        return self.duration.total_seconds() // 60
+        return int(self.duration.total_seconds() // 60)
 
     def get_category(self):
         return self.get_category_display()
@@ -156,4 +156,4 @@ class Appointment(models.Model):
         return duration_to_int(self.service.duration)
 
     def duration_in_minutes(self):
-        return self.service.duration.total_seconds() // 60
+        return self.service.duration_in_minutes()

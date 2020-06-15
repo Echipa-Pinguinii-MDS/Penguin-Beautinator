@@ -99,8 +99,9 @@ def salon_services(request, salon_id):
     return JsonResponse({"salon_services": services})
 
 
-def user_appointments(request, is_test=False):
+def user_appointments(request, is_test):
     data = get_data_from_request(request, is_test)
+    #data = json.loads(request.body.decode('utf-8'))
     user_id = data['user_id']
 
     appointments = list(Appointment.objects.filter(client_id=user_id).values())
@@ -142,7 +143,7 @@ def salon_appointments(request, is_test=False):
 
 
 def available_hours_per_category(salon, day, categories):
-    appointments = Appointment.objects.filter(day=day, salon=salon)
+    appointments = Appointment.objects.filter(day=day, service__salon=salon)
     booked_hours = {}
 
     for category in categories:
@@ -167,7 +168,7 @@ def get_services(services_id):
         try:
             service = Service.objects.get(pk=service_id)
         except (KeyError, Service.DoesNotExist):
-            return HttpResponse("Service " + services_id + " does not exist", status=418)
+            return HttpResponse("Service " + str(service_id) + " does not exist", status=418)
 
         if service.category not in services.keys():
             services[service.category] = []
@@ -188,9 +189,9 @@ def is_available(categories, start_index, services, booked):
 
 def get_services_duration(services):
     services_duration = {}
-    for (key, value) in services:
+    for key in services.keys():
         services_duration[key] = 0
-        for service in value:
+        for service in services[key]:
             services_duration[service.category] += service.duration_to_int()
     return services_duration
 
@@ -204,9 +205,13 @@ def available_hours(request, is_test=False):
     try:
         salon = Salon.objects.get(pk=salon_id)
     except (KeyError, Salon.DoesNotExist):
-        return HttpResponse("Salon " + salon_id + " does not exist", status=418)
+        return HttpResponse("Salon " + str(salon_id) + " does not exist", status=418)
 
-    services_duration = get_services_duration(get_services(data['services']))
+    services_list = get_services(data['services'])
+    if type(services_list) == HttpResponse:
+        return services_list
+
+    services_duration = get_services_duration(services_list)
     categories = services_duration.keys()
     booked_hours = available_hours_per_category(salon, day, categories)
 
@@ -220,8 +225,9 @@ def available_hours(request, is_test=False):
     return JsonResponse({'available_hours': start_hours})
 
 
-def add_user(request):
-    data = json.loads(request.body.decode('utf-8'))
+def add_user(request, is_test=False):
+    data = get_data_from_request(request, is_test)
+    #data = json.loads(request.body.decode('utf-8'))
     email = data['user_email']
     password = data['user_password']
     first_name = data['user_first_name']
@@ -245,8 +251,9 @@ def add_user(request):
     return JsonResponse({'added': True})
 
 
-def add_salon(request):
-    data = json.loads(request.body.decode('utf-8'))
+def add_salon(request, is_test=False):
+    data = get_data_from_request(request, is_test)
+    #data = json.loads(request.body.decode('utf-8'))
     email = data['salon_email']
     password = data['salon_password']
     name = data['salon_name']
@@ -274,11 +281,12 @@ def add_salon(request):
         kids_services=kids_services)
     salon.save()
 
-    return JsonResponse({'check': True})
+    return JsonResponse({'added': True})
 
 
-def add_service(request):
-    data = json.loads(request.body.decode('utf-8'))
+def add_service(request, is_test=False):
+    data = get_data_from_request(request, is_test)
+    #data = json.loads(request.body.decode('utf-8'))
     salon = Salon.objects.get(pk=data['salon_id'])
     category = data['service_category']
     title = data['service_title']
@@ -307,14 +315,17 @@ def add_appointment(request, is_test=False):
     try:
         salon = Salon.objects.get(pk=salon_id)
     except (KeyError, Salon.DoesNotExist):
-        return HttpResponse("Salon " + salon_id + " does not exist", status=418)
+        return HttpResponse("Salon " + str(salon_id) + " does not exist", status=418)
 
     try:
         user = User.objects.get(pk=client_id)
     except (KeyError, User.DoesNotExist):
-        return HttpResponse("User " + client_id + " does not exist", status=418)
+        return HttpResponse("User " + str(client_id) + " does not exist", status=418)
 
     services = get_services(services_id)
+    if type(services) == HttpResponse:
+        return services
+
     services_duration = get_services_duration(services)
     categories = services.keys()
     booked_hours = available_hours_per_category(salon, day, categories)
@@ -340,6 +351,8 @@ def add_appointment(request, is_test=False):
             )
             appointment.save()
             start_index += service.duration_to_int()
+
+    return JsonResponse({'added': True})
 
 
 """Daca user-ul si parola sunt bune returneaza
