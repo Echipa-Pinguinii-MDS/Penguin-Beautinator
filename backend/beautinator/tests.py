@@ -513,6 +513,45 @@ class UserModelTests(TestCase):
         dict.pop('user_birthday')
         self.assertEqual(set(dict.values()), set(new_dict.values()))
 
+    def test_update_user_user_id_not_in_database(self):
+        create_data()
+        uid = len(User.objects.all().values()) + 1
+        data = {
+            "user_id": uid,
+            'user_first_name': 'prenume',
+            'user_last_name': 'nume',
+            'user_phone': '0004242',
+            'user_birthday': '1947-07-03',
+            'user_gender': 'N'
+        }
+        req = HttpRequest()
+        req.POST = data
+        res = update_user(req, True)
+        self.assertEqual(res.status_code, 418)
+
+    def test_update_user_good_attempt(self):
+        create_data()
+        uid = len(User.objects.all().values())
+        dict = {
+            "user_id": uid,
+            'user_first_name': 'prenume',
+            'user_last_name': 'nume',
+            'user_phone': '0004242',
+            'user_birthday': '1947-07-03',
+            'user_gender': 'N'
+        }
+        req = HttpRequest()
+        req.POST = dict
+        res = update_user(req, True)
+        self.assertEqual(res.status_code, 200)
+        data = json.loads(res.getvalue().decode('utf-8'))
+        self.assertEqual(data['updated'], True)
+        user = User.objects.get(pk=uid)
+        new_dict = model_to_dict(user)
+        new_dict.pop('email')
+        new_dict.pop('password')
+        dict['user_birthday'] = date.fromisoformat(dict['user_birthday'])
+        self.assertEqual(set(dict.values()), set(new_dict.values()))
 
 class SalonModelTests(TestCase):
     def test_salon_login_wrong_email(self):

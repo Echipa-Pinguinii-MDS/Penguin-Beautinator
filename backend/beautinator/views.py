@@ -250,6 +250,30 @@ def add_user(request, is_test=False):
     return JsonResponse({'added': True})
 
 
+def update_user(request, is_test=False):
+    data = get_data_from_request(request, is_test)
+    user_id = data['user_id']
+    first_name = data['user_first_name']
+    last_name = data['user_last_name']
+    phone = data['user_phone']
+    birthday = date.fromisoformat(data['user_birthday'])
+    gender = data['user_gender']
+
+    try:
+        user = User.objects.get(pk=user_id)
+    except (KeyError, User.DoesNotExist):
+        return HttpResponse("User " + str(user_id) + " does not exist", status=418)
+
+    user.last_name = last_name
+    user.first_name = first_name
+    user.phone = phone
+    user.birthday = birthday
+    user.gender = gender
+    user.save()
+
+    return JsonResponse({'updated': True})
+
+
 def add_salon(request, is_test=False):
     data = get_data_from_request(request, is_test)
     email = data['salon_email']
