@@ -34,7 +34,7 @@ body {
 
 .Item h2 {
     font-size: calc(4px + 0.6vw);
-    color: #ff000a;
+    color: #f7f5f7;
     text-decoration: none;
 }
 
@@ -51,8 +51,8 @@ body {
 }
 
 .SmallGif {
-    height: calc(4px + 0.8vw);
-    width: calc(4px + 0.8vw);
+    height: calc(20px + 0.8vw);
+    width: calc(20px + 0.8vw);
 }
 
 .AppPage {

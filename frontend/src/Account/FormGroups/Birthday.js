@@ -4,19 +4,19 @@ import {Form} from 'react-bootstrap';
 
 const Birthday = (props) => {
     return (
-        <Form.Group>
+        <div className={'group'}>
             <Form.Label>Data nasterii</Form.Label>
             <Form.Control type='date'
                           name='date'
                           value={props.birthday}
                           onChange={props.handleChange}
                           placeholder='Data nasterii'/>
-        </Form.Group>
+        </div>
     )
 }
 
 Birthday.propTypes = {
-    birthday: PropTypes.instanceOf(Date).isRequired,
+    birthday: PropTypes.object.isRequired,
     handleChange: PropTypes.func.isRequired
 }
 

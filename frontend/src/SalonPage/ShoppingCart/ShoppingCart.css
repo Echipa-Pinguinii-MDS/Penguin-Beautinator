@@ -8,6 +8,7 @@ h5 {
     right: 5%;
     text-align: start;
     width: 20%;
+    min-height: 79.9%;
     height: 80%;
     font-size:calc(10px + 0.5vw);
     border-style: hidden;
@@ -33,7 +34,7 @@ h5 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    color: #ff000a;
+    color: #263543;
 }
 
 .Popup {
@@ -42,7 +43,7 @@ h5 {
 
 .PopupNotLoggedIn {
     text-align: center;
-    color: #ff000a;
+    color: #263543;
 }
 
 .Close {
@@ -79,10 +80,10 @@ h5 {
 
 .ServiciiSelectate {
     padding: 0 10px 0 10px;
-    color: #ff000a;
+    color: #263543;
 }
 
-.TimePickButton {
+.ShoppingCart .TimePickButton {
     background-color: #4CAF50;
     border: none;
     color: white;

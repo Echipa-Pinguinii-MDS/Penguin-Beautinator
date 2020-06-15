@@ -14,15 +14,17 @@
 }
 
 .FutureAppointments h3{
-    color: #ff000a;
+    color: #263543;
     text-align: center;
     position: static;
+    font-size: calc(15px + 1vw);
 }
 
 .PastAppointments h3{
-    color: #ff000a;
+    color: #263543;
     text-align: center;
     position: static;
+    font-size: calc(15px + 1vw);
 }
 
 .AppointmentCard {
