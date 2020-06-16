@@ -91,7 +91,7 @@ class SalonPage extends React.Component {
 
     handleSubmit() {
         let userId = Cookies.get('user_id')
-        userId = Number(userId.substring(1, userId.length()))
+        userId = Number(userId.substring(1, userId.length))
         addAppointment(
             this.getServicesId(),
             this.state.salon.id,

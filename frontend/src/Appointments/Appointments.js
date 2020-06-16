@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Appointment from './Appointment';
 import './Appointments.css'
+import {userAppointments} from "../Universal/Queries";
+import Cookies from "js-cookie";
 
 const FutureAppointments = (props) => {
     return (
@@ -47,58 +49,35 @@ PastAppointments.propTypes = {
     appointments: PropTypes.array.isRequired
 }
 
-const Appointments = (props) => {
-    return (
-        <div className={'Appointments'}>
-            <FutureAppointments appointments={props.futureAppointments}/>
-            <PastAppointments appointments={props.pastAppointments}/>
-        </div>
-    )
-}
+class Appointments extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            futureAppointments: [],
+            pastAppointments: []
+        }
+    }
 
-Appointments.defaultProps = {
-    futureAppointments: [{
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
-        name: 'Salon1',
-        contact: ['Lorem Ipsum 10', '0712345678', 'salon@salon.com'],
-        time: ['20.06.2020', '11.00-12.00'],
-        price: 100,
-        services: {
-            coafor: ['Tuns - par scurt', 'Spalat'],
-            manichiura: ['Clasic']
-        }
-    }, {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
-        name: 'Salon1',
-        contact: ['Lorem Ipsum 10', '0712345678', 'salon@salon.com'],
-        time: ['20.06.2020', '12.00-13.00'],
-        price: 100,
-        services: {
-            coafor: ['Tuns - par scurt', 'Spalat'],
-            manichiura: ['Clasic']
-        }
-    }],
-    pastAppointments: [{
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
-        name: 'Salon1',
-        contact: ['Lorem Ipsum 10', '0712345678', 'salon@salon.com'],
-        time: ['19.06.2020', '11.00-12.00'],
-        price: 100,
-        services: {
-            coafor: ['Tuns - par scurt', 'Spalat'],
-            manichiura: ['Clasic']
-        }
-    }, {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_TV_2015.svg/1200px-Logo_TV_2015.svg.png',
-        name: 'Salon1',
-        contact: ['Lorem Ipsum 10', '0712345678', 'salon@salon.com'],
-        time: ['18.06.2020', '11.00-12.00'],
-        price: 100,
-        services: {
-            coafor: ['Tuns - par scurt', 'Spalat'],
-            manichiura: ['Clasic']
-        }
-    }]
+    componentDidMount() {
+        this.refreshAppointments()
+    }
+
+    refreshAppointments() {
+        let userId = Cookies.get('user_id')
+        userId = Number(userId.substring(1, userId.length))
+        userAppointments(userId).then(result => {
+            this.setState({futureAppointments: result})
+        })
+    }
+
+    render() {
+        return (
+            <div className={'Appointments'}>
+                <FutureAppointments appointments={this.state.futureAppointments}/>
+                <PastAppointments appointments={this.state.pastAppointments}/>
+            </div>
+        )
+    }
 }
 
 Appointments.propTypes = {

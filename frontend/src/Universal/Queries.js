@@ -39,6 +39,7 @@ export function userAppointments(user_id) {
             }
         }
 
+        console.log(appointments)
         return appointments
     }).catch(function (error) {
         console.log(error)

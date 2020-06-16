@@ -100,7 +100,7 @@ def salon_services(request, salon_id):
     return JsonResponse({"salon_services": services})
 
 
-def user_appointments(request, is_test):
+def user_appointments(request, is_test=False):
     data = get_data_from_request(request, is_test)
     user_id = data['user_id']
 
