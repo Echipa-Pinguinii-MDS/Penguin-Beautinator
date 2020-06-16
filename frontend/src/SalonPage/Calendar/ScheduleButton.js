@@ -33,7 +33,7 @@ PopUpNotLoggedIn.propTypes = {
 const PopUpLoggedIn = (props) => {
     return (
         <Popup trigger={
-            <Button className='ScheduleButton' disabled={props.disabled}>
+            <Button className='ScheduleButton' disabled={props.disabled} onClick={props.handleSubmit}>
                 <TiShoppingCart/>
                 Rezerva
             </Button>
@@ -52,7 +52,8 @@ const PopUpLoggedIn = (props) => {
 
 PopUpLoggedIn.propTypes = {
     disabled: PropTypes.bool.isRequired,
-    data: PropTypes.string.isRequired
+    data: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired
 }
 
 const ScheduleButton = (props) => {
@@ -62,14 +63,15 @@ const ScheduleButton = (props) => {
             <PopUpNotLoggedIn disabled={props.disabled}/>}
 
         {(Cookies.get('user_id') !== undefined) &&
-            <PopUpLoggedIn disabled={props.disabled} data={props.data}/>}
+            <PopUpLoggedIn disabled={props.disabled} data={props.data} handleSubmit={props.handleSubmit}/>}
         </div>
     )
 }
 
 ScheduleButton.propTypes = {
     disabled: PropTypes.bool.isRequired,
-    data: PropTypes.string
+    data: PropTypes.string,
+    handleSubmit: PropTypes.func
 }
 
 export default ScheduleButton;

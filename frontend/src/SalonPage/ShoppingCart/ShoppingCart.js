@@ -21,7 +21,8 @@ function ShoppingCart (props) {
 
             {props.calendarPage &&
             <ScheduleButton disabled={props.disabled}
-                            data={props.data}/>}
+                            data={props.data}
+                            handleSubmit={props.handleSubmit}/>}
 
             {props.calendarPage &&
             <BackButton closeCalendarPage={props.closeCalendarPage}/>}
@@ -35,7 +36,8 @@ ShoppingCart.propTypes = {
     closeCalendarPage: PropTypes.func.isRequired,
     services: PropTypes.object.isRequired,
     disabled: PropTypes.bool.isRequired,
-    data: PropTypes.string
+    data: PropTypes.string,
+    handleSubmit: PropTypes.func
 }
 
 export default ShoppingCart;

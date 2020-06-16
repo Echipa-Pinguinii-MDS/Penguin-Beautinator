@@ -141,7 +141,8 @@ class SalonPage extends React.Component {
                               openCalendarPage={this.openCalendarPage}
                               closeCalendarPage={this.closeCalendarPage}
                               disabled={this.state.time == null}
-                              data={this.state.date + ', ora ' + this.state.time + ' la ' + this.state.salon.name}/>
+                              data={this.state.date + ', ora ' + this.state.time + ' la ' + this.state.salon.name}
+                              handleSubmit={this.handleSubmit}/>
             </article>
         )
     }
