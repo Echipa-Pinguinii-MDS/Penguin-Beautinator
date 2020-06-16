@@ -8,11 +8,12 @@ h5 {
     right: 5%;
     text-align: start;
     width: 20%;
-    min-height: 79.9%;
-    height: 80%;
+    max-height: 80%;
+    height: auto;
     font-size:calc(10px + 0.5vw);
     border-style: hidden;
     box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    overflow: auto;
     background-color: #f7f5f7;
 }
 
@@ -55,7 +56,7 @@ h5 {
     right: -10px;
     top: -10px;
     font-size: 24px;
-    background: #ffffff;
+    background: #f7f5f7;
     border-radius: 18px;
     border: 1px solid #cfcece;
 }
@@ -67,7 +68,7 @@ h5 {
 .Total {
     display: flex;
     justify-content: space-between;
-    position: absolute;
+    position: static;
     bottom: calc(50px + 0.6vw);
     padding: 0 10px 0 10px;
     width: 90%;
@@ -86,31 +87,37 @@ h5 {
 .ShoppingCart .TimePickButton {
     background-color: #4CAF50;
     border: none;
-    color: white;
+    color: #f7f5f7;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-    font-size: calc(7px + 0.6vw);
+    font-size: calc(18px + 0.8vw);
     height: calc(50px + 0.6vw);
     cursor: pointer;
     width: 100%;
-    position: absolute;
+    position: static;
     bottom: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .TimePickButton:disabled {
     background-color: grey;
     border: none;
-    color: white;
+    color: #f7f5f7;
     padding: 15px 32px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: calc(7px + 0.6vw);
+    display: flex;
+    justify-content: center;
+    flex-flow: row;
+    font-size: calc(18px + 0.8vw);
     cursor: pointer;
     width: 100%;
     bottom: 0;
+}
+
+.TimePickButton svg{
+    font-size: calc(12px + 0.8vw);
 }
 
 .datePick {
@@ -120,7 +127,7 @@ h5 {
 .ScheduleButton {
     background-color: #4CAF50;
     border: none;
-    color: white;
+    color: #f7f5f7;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -128,7 +135,7 @@ h5 {
     cursor: pointer;
     width: 100%;
     height: calc(25px + 0.3vw);
-    position: absolute;
+    position: static;
     bottom: calc(25px + 0.3vw);
 }
 
@@ -139,21 +146,21 @@ h5 {
 .ScheduleButton:disabled {
     background-color: grey;
     border: none;
-    color: white;
+    color: #f7f5f7;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: calc(7px + 0.7vw);
     width: 100%;
     height: calc(25px + 0.3vw);
-    position: absolute;
+    position: static;
     bottom: calc(25px + 0.3vw);
 }
 
 .BackButton {
     background-color: red;
     border: none;
-    color: white;
+    color: #f7f5f7;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -161,6 +168,6 @@ h5 {
     cursor: pointer;
     width: 100%;
     height: calc(25px + 0.3vw);
-    position: absolute;
+    position: static;
     bottom: 0;
 }

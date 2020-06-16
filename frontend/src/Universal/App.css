@@ -13,11 +13,14 @@ body {
 
 .NavBar {
     top: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
     position: fixed;
     align-items: center;
     background-color: #263543;
+}
+
+.NavBarHelp {
+    position: absolute;
 }
 
 .Item {

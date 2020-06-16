@@ -49,33 +49,35 @@ class NavBar extends React.Component {
 
     render() {
         return (
-            <Navbar className={'NavBar'}>
-                <Link to={'/desprenoi'} className={'Left'}>
-                    <this.Item section={'Penguin Beautinator'}
-                          className={'SmallGif'}
-                          src={'https://discordemoji.com/assets/emoji/3946_Penguin_walk.gif'}/>
-                </Link>
+            <div className={'NavBarHelp'}>
+                <Navbar className={'NavBar'}>
+                    <Link to={'/desprenoi'} className={'Left'}>
+                        <this.Item section={'Penguin Beautinator'}
+                              className={'SmallGif'}
+                              src={'https://discordemoji.com/assets/emoji/3946_Penguin_walk.gif'}/>
+                    </Link>
 
-                <Link to={'/saloane'} className={'Left'}>
-                    <this.Item section={'Saloane'}
-                          className={'SmallGif'}
-                          src={'https://media.giphy.com/media/Ep8HfalJsuCcg/giphy.gif'}/>
-                </Link>
+                    <Link to={'/saloane'} className={'Left'}>
+                        <this.Item section={'Saloane'}
+                              className={'SmallGif'}
+                              src={'https://media.giphy.com/media/Ep8HfalJsuCcg/giphy.gif'}/>
+                    </Link>
 
-                <Link to={'/programari'} className={'Left'}>
-                    <this.Item section={'Programarile mele'}
-                          className={'SmallGif'}
-                          src={'https://thumbs.gfycat.com/BossyCarelessHake.webp'}/>
-                </Link>
+                    <Link to={'/programari'} className={'Left'}>
+                        <this.Item section={'Programarile mele'}
+                              className={'SmallGif'}
+                              src={'https://thumbs.gfycat.com/BossyCarelessHake.webp'}/>
+                    </Link>
 
-                {this.rightSide()}
+                    {this.rightSide()}
 
-                <Link to={'/account'} className={'Right'}>
-                    <this.Item section={'Account'}
-                          className={'SmallGif'}
-                          src={'https://img.pngio.com/top-club-penguin-stickers-for-android-ios-find-the-best-gif-club-penguin-transparent-606_648.gif'}/>
-                </Link>
-            </Navbar>
+                    <Link to={'/account'} className={'Right'}>
+                        <this.Item section={'Account'}
+                              className={'SmallGif'}
+                              src={'https://img.pngio.com/top-club-penguin-stickers-for-android-ios-find-the-best-gif-club-penguin-transparent-606_648.gif'}/>
+                    </Link>
+                </Navbar>
+            </div>
         )
     }
 }
