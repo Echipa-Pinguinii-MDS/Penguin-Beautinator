@@ -12,7 +12,12 @@ Our app aims to give small businesses and freelancers a platform where they can 
 
 # User Stories
 
-(will do)
+- Accessing your preffered salons from the same app
+- Seeing all available information about any salon in your area
+- Choosing a timeslot for your appointment by checking a calendar updated live
+- Making online appointments, without making a phone call
+- Checking past and future appointments
+- Having an account that would ease the proccess of filing in your data when making said appointment
 
 # The development process
 
