@@ -30,10 +30,11 @@ export function userAppointments(user_id) {
                 let end_time = start_time.add({minutes: duration})
                 let aux_appointment = {
                     id: data.salon_id,
-                    name: data.salon_name,
+                    name: data.name,
                     time: [day.format("ddd, DD-MM-YYYY"), start_time.format("HH:mm") + " - " + end_time.format("HH:mm")],
                     price: data.price,
                     services: data.service,
+                    contact: [data.address, data.phone, data.email],
                 }
                 appointments.push(aux_appointment)
             }
@@ -252,7 +253,6 @@ export function salonServices(salon_id) {
     })
 }
 
-console.log("hellooooo queries!");
 export function availableHours(serviceList, salonId, day) {
     let url = 'available/'
     return axios({
@@ -267,7 +267,6 @@ export function availableHours(serviceList, salonId, day) {
             services: serviceList
         }
     }).then(result => {
-        console.log(result.data['available_hours'])
         return result.data['available_hours']
     }).catch(function (error) {
         console.log(error)
@@ -276,6 +275,7 @@ export function availableHours(serviceList, salonId, day) {
 
 export function addAppointment(serviceList, salonId, userId, day, time) {
     let url = 'add/appointment/'
+    console.log("day", day)
     return axios({
         method: 'post',
         url: url,

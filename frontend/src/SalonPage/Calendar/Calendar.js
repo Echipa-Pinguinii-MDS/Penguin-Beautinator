@@ -23,42 +23,43 @@ class Calendar extends React.Component {
         this.previousWeek = this.previousWeek.bind(this)
         this.getRelativeDate = this.getRelativeDate.bind(this)
         this.refreshSlots = this.refreshSlots.bind(this)
+        this.getDate = this.getDate.bind(this)
     }
 
     componentDidMount() {
         this.refreshSlots()
     }
 
-    refreshSlots() {
-        let date = this.state.year + '-'
-        if (this.state.month < 10) {
-            date = date + '0'
+    refreshSlots(day) {
+        if (day === undefined) {
+            day = this.state.day;
         }
-        date = date + this.state.month + '-'
-        if (this.state.day < 10) {
-            date = date + '0'
-        }
-        date = date + this.state.day;
-        console.log("Hello?");
-        console.log(availableHours);
-        console.log("this = ", this);
-        console.log("this.state = ", this.state);
-        console.log("date = ", date);
         availableHours(
             this.state.services,
             this.state.salonId,
-            date).then(result => {
-                this.setState({availableSlots: result})
+            this.getDate(day)).then(result => {
+                this.setState({availableSlots: result, day: day})
             })
     }
 
+    getDate(day) {
+        let date = this.state.year + '-'
+        let month = this.state.month + 1
+        if (month < 10) {
+            date = date + '0'
+        }
+        date = date + month + '-'
+        if (day < 10) {
+            date = date + '0'
+        }
+        date = date + day;
+        return date;
+    }
+
     changeSelectedDate(day) {
-        this.setState({
-            day: day
-        })
         this.props.setTime(null)
-        this.props.setDate(this.state.year + '-' + this.state.month + '-' + day)
-        this.refreshSlots()
+        this.props.setDate(this.getDate(day))
+        this.refreshSlots(day)
     }
 
     getRelativeDate() {

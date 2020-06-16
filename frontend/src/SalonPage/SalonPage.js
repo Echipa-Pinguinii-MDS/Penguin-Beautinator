@@ -99,7 +99,7 @@ class SalonPage extends React.Component {
             this.getServicesId(),
             this.state.salon.id,
             userId,
-            this.state.day,
+            this.state.date,
             this.state.time).then(result => {})
     }
 

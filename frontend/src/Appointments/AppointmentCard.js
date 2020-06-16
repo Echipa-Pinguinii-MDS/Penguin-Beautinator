@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const AppointmentContact = (props) => {
+    console.log("App card props:", props)
     return (
         <div className={'AppointmentContact'}>
             <p>{props.name}</p>

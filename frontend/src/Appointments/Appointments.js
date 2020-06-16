@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 const FutureAppointments = (props) => {
     return (
         <div className={'FutureAppointments'}>
-            <h3>Programari viitoare</h3>
+            <h3>Programari</h3>
 
             {props.appointments.length === 0 &&
             <p className={'NoFutureAppointments'}>
@@ -54,7 +54,7 @@ class Appointments extends React.Component {
         super(props)
         this.state = {
             futureAppointments: [],
-            pastAppointments: []
+            // pastAppointments: []
         }
     }
 
@@ -74,7 +74,7 @@ class Appointments extends React.Component {
         return (
             <div className={'Appointments'}>
                 <FutureAppointments appointments={this.state.futureAppointments}/>
-                <PastAppointments appointments={this.state.pastAppointments}/>
+                {/*<PastAppointments appointments={this.state.pastAppointments}/>*/}
             </div>
         )
     }

@@ -105,6 +105,7 @@ def user_appointments(request, is_test=False):
     user_id = data['user_id']
 
     appointments = list(Appointment.objects.filter(client_id=user_id).values())
+    appointments.sort(key=lambda x: x['day'], reverse=True)
     for appointment in appointments:
         appointment['day'] = appointment['day'].__str__()
         appointment['start_time'] = appointment['start_time'].__str__()
@@ -115,7 +116,10 @@ def user_appointments(request, is_test=False):
         appointment['service'] = {service.get_category(): service.title}
         appointment['salon_id'] = service.salon_id
         appointment['duration'] = service.duration_in_minutes()
-        appointment['salon_name'] = service.salon.name
+        appointment['name'] = service.salon.name
+        appointment['address'] = service.salon.address
+        appointment['phone'] = service.salon.phone
+        appointment['email'] = service.salon.email
 
     return JsonResponse({"user_appointments": appointments})
 
@@ -128,6 +132,7 @@ def salon_appointments(request, is_test=False):
     appointments = []
     for service in services:
         service_appointments = Appointment.objects.filter(service=service).values()
+        service_appointments.sort(key=lambda x: x['day'], reverse=True)
         for appointment in service_appointments:
             appointment['day'] = appointment['day'].__str__()
             appointment['start_time'] = appointment['start_time'].__str__()
@@ -136,7 +141,10 @@ def salon_appointments(request, is_test=False):
             appointment['service'] = service.get_category() + ': ' + service.title
             appointment.pop('service_id')
             user = User.objects.get(pk=appointment['client_id'])
-            appointment['client_name'] = user.first_name + ' ' + user.last_name
+            appointment['name'] = user.first_name + ' ' + user.last_name
+            appointment['address'] = user.address
+            appointment['phone'] = user.phone
+            appointment['email'] = user.email
         appointments.extend(service_appointments)
 
     return JsonResponse({"salon_appointments": appointments})
