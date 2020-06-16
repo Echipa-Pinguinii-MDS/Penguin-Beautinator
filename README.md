@@ -13,9 +13,13 @@ Our app aims to give small businesses and freelancers a platform where they can 
 # User Stories
 
 - Accessing your preffered salons from the same app
-- Seeing all available information about any salon in your area
-- Choosing a timeslot for your appointment by checking a calendar updated live
-- Making online appointments, without making a phone call
+- Seeing all available information about any salon in your city
+- Choosing your desired services by checking them on a list
+- Seeing chosen services in a shopping cart
+- Having the possibility to remove services from the cart
+- Choosing a time of your convenience for your appointment by checking a calendar updated live
+- Changing your mind as many times as you want about said services and timeslots
+- Making online appointments, without going through the mortifying ordeal of making a phone call
 - Checking past and future appointments
 - Having an account that would ease the proccess of filing in your data when making said appointment
 
