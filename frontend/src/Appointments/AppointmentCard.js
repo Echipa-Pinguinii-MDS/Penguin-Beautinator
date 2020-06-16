@@ -32,7 +32,7 @@ AppointmentTime.propTypes = {
 
 const AppointmentPrice = (props) => {
     return (
-        <p className={'AppointmentPrice'}>Total: {props.price}</p>
+        <p className={'AppointmentPrice'}>Total: {props.price} lei</p>
     )
 }
 

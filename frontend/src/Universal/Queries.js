@@ -33,7 +33,7 @@ export function userAppointments(user_id) {
                     name: data.name,
                     time: [day.format("ddd, DD-MM-YYYY"), start_time.format("HH:mm") + " - " + end_time.format("HH:mm")],
                     price: data.price,
-                    services: data.service,
+                    services: data.services,
                     contact: [data.address, data.phone, data.email],
                 }
                 appointments.push(aux_appointment)

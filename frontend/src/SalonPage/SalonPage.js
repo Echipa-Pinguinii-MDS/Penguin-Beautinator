@@ -7,6 +7,7 @@ import Calendar from './Calendar/Calendar';
 import {salonServices, addAppointment} from '../Universal/Queries';
 import './SalonPage.css';
 import Cookies from "js-cookie";
+import {Redirect} from "react-router-dom";
 
 class SalonPage extends React.Component {
     constructor(props) {
@@ -18,7 +19,8 @@ class SalonPage extends React.Component {
             selected: new Set(),
             calendarPage: false,
             time: null,
-            date: null
+            date: null,
+            added: false,
         }
         this.hasContent = this.hasContent.bind(this)
         this.addService = this.addService.bind(this)
@@ -29,6 +31,7 @@ class SalonPage extends React.Component {
         this.setDate = this.setDate.bind(this)
         this.getServicesId = this.getServicesId.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.setAdded = this.setAdded.bind(this)
     }
 
     componentDidMount() {
@@ -100,7 +103,9 @@ class SalonPage extends React.Component {
             this.state.salon.id,
             userId,
             this.state.date,
-            this.state.time).then(result => {})
+            this.state.time).then(result => {
+                this.setAdded(result)
+        })
     }
 
     openCalendarPage() {
@@ -124,6 +129,12 @@ class SalonPage extends React.Component {
     setDate(date) {
         this.setState({
             date: date
+        })
+    }
+
+    setAdded(value = true) {
+        this.setState({
+            added: value
         })
     }
 
@@ -158,6 +169,9 @@ class SalonPage extends React.Component {
                               disabled={this.state.time == null}
                               data={this.state.date + ', ora ' + this.state.time + ' la ' + this.state.salon.name}
                               handleSubmit={this.handleSubmit}/>
+
+                {this.state.added &&
+                <Redirect to='/programari'/>}
             </article>
         )
     }

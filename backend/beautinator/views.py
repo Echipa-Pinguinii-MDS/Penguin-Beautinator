@@ -113,7 +113,7 @@ def user_appointments(request, is_test=False):
         service = Service.objects.get(pk=appointment['service_id'])
         appointment.pop('service_id')
         appointment['price'] = service.price
-        appointment['service'] = {service.get_category(): service.title}
+        appointment['services'] = {service.get_category(): [service.title]}
         appointment['salon_id'] = service.salon_id
         appointment['duration'] = service.duration_in_minutes()
         appointment['name'] = service.salon.name
@@ -138,7 +138,7 @@ def salon_appointments(request, is_test=False):
             appointment['start_time'] = appointment['start_time'].__str__()
             appointment['price'] = service.price
             appointment['duration'] = service.duration_in_minutes()
-            appointment['service'] = service.get_category() + ': ' + service.title
+            appointment['services'] = {service.get_category(): [service.title]}
             appointment.pop('service_id')
             user = User.objects.get(pk=appointment['client_id'])
             appointment['name'] = user.first_name + ' ' + user.last_name
