@@ -2,15 +2,19 @@ import React from 'react';
 import {CalendarTitle, Week} from './Misc';
 import AvailableSlots from './AvailableSlots';
 import './Calendar.css'
+import {availableHours} from './../../Universal/Queries'
 
 class Calendar extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             lastMonday: new Date().getDate() - new Date().getDay() + (new Date().getDay() === 0 ? -6 : 1),
-            day: null,
+            day: new Date().getDate(),
             month: new Date().getMonth(),
-            year: new Date().getFullYear()
+            year: new Date().getFullYear(),
+            availableSlots: [],
+            services: props.services,
+            salonId: props.salonId
         }
         this.changeSelectedDate = this.changeSelectedDate.bind(this)
         this.daysInMonth = this.daysInMonth.bind(this)
@@ -18,6 +22,20 @@ class Calendar extends React.Component {
         this.nextWeek = this.nextWeek.bind(this)
         this.previousWeek = this.previousWeek.bind(this)
         this.getRelativeDate = this.getRelativeDate.bind(this)
+        this.refreshSlots = this.refreshSlots.bind(this)
+    }
+
+    componentDidMount() {
+        this.refreshSlots()
+    }
+
+    refreshSlots() {
+        availableHours(
+            this.state.services,
+            this.state.salonId,
+            this.state.year + '-' + this.state.month + ' ' + this.state.day).then(result => {
+                this.setState({availableSlots: result})
+            })
     }
 
     changeSelectedDate(day) {
@@ -119,8 +137,7 @@ class Calendar extends React.Component {
                       changeSelectedDate={this.changeSelectedDate}/>
 
                 {this.getRelativeDate() === 1 &&
-                <AvailableSlots timeSlots={['11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30',
-                    '11:00', '12:05', '13:00', '13:30', '11:00', '12:05', '13:00', '13:30']}
+                <AvailableSlots timeSlots={this.state.availableSlots}
                                 month={this.state.month}
                                 year={this.state.year}
                                 setTime={this.props.setTime}/>}

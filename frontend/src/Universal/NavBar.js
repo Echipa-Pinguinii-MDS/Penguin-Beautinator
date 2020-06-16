@@ -72,7 +72,7 @@ class NavBar extends React.Component {
                     {this.rightSide()}
 
                     <Link to={'/account'} className={'Right'}>
-                        <this.Item section={'Account'}
+                        <this.Item section={'Cont'}
                               className={'SmallGif'}
                               src={'https://img.pngio.com/top-club-penguin-stickers-for-android-ios-find-the-best-gif-club-penguin-transparent-606_648.gif'}/>
                     </Link>

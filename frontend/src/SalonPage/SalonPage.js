@@ -120,7 +120,10 @@ class SalonPage extends React.Component {
 
                 {this.state.calendarPage &&
                 <Calendar setTime={this.setTime}
-                          setDate={this.setDate}/>}
+                          setDate={this.setDate}
+                          services={this.state.selected}
+                          salonId={this.state.salon.id}
+                />}
 
                 <ShoppingCart services={this.getServices()}
                               handleClick={this.deleteService}

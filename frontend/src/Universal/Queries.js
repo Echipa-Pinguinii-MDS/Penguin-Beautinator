@@ -260,7 +260,7 @@ export function availableHours(serviceList, salonId, day) {
             'content-type': 'application/json'
         },
         data: {
-            day: day.format('YYYY-MM-DD'),
+            day: day,
             salon_id: salonId,
             services: serviceList
         }
@@ -284,7 +284,7 @@ export function addAppointment(serviceList, salonId, userId, day, time) {
             salon_id: salonId,
             services: serviceList,
             day: day.format('YYYY-MM-DD'),
-            time: time.format('HH:mm:ss+-HH:mm'),
+            time: time,
         },
     }).then(result => {
         return result.data['added']
