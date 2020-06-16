@@ -57,7 +57,7 @@ class Calendar extends React.Component {
             day: day
         })
         this.props.setTime(null)
-        this.props.setDate(day + '.' + this.state.month + '.' + this.state.year)
+        this.props.setDate(this.state.year + '-' + this.state.month + '-' + day)
         this.refreshSlots()
     }
 

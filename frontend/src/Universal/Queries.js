@@ -285,7 +285,7 @@ export function addAppointment(serviceList, salonId, userId, day, time) {
             user_id: userId,
             salon_id: salonId,
             services: serviceList,
-            day: day.format('YYYY-MM-DD'),
+            day: day,
             time: time,
         },
     }).then(result => {

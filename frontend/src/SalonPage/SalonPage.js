@@ -4,8 +4,9 @@ import Menu from './Menu.js';
 import Content from './Content';
 import ShoppingCart from './ShoppingCart/ShoppingCart';
 import Calendar from './Calendar/Calendar';
-import {salonServices} from '../Universal/Queries';
+import {salonServices, addAppointment} from '../Universal/Queries';
 import './SalonPage.css';
+import Cookies from "js-cookie";
 
 class SalonPage extends React.Component {
     constructor(props) {
@@ -86,6 +87,17 @@ class SalonPage extends React.Component {
             )
         })
         return services
+    }
+
+    handleSubmit() {
+        let userId = Cookies.get('user_id')
+        userId = Number(userId.substring(1, userId.length()))
+        addAppointment(
+            this.getServicesId(),
+            this.state.salon.id,
+            userId,
+            this.state.day,
+            this.state.time).then(result => {})
     }
 
     openCalendarPage() {
