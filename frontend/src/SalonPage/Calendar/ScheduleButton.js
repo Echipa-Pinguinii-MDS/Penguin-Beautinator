@@ -18,7 +18,7 @@ const PopUpNotLoggedIn = (props) => {
                 <div className={'PopupNotLoggedIn'}>
                     <p className={'Close'} onClick={close}>&times;</p>
                     <p>Conecteaza-te pentru a putea face o programare!<br/>
-                        <Link to={'/salon'}>Click aici</Link>
+                        <Link to={'/account'}>Click aici</Link>
                     </p>
                 </div>
             )}
