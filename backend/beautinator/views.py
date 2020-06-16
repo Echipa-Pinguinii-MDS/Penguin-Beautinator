@@ -216,9 +216,10 @@ def available_hours(request, is_test=False):
     booked_hours = available_hours_per_category(salon, day, categories)
 
     start_hours = []
+    permutation = list(permutations(categories))
     for hour in range(4 * 24):
-        for perm in permutations(categories):
-            if is_available(perm, hour, services_duration, booked_hours):
+        for perm in permutation:
+            if is_available(list(perm), hour, services_duration, booked_hours):
                 start_hours.append(int_to_time(hour).__str__())
                 break
 

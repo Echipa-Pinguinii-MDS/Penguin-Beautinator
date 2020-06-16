@@ -251,9 +251,10 @@ export function salonServices(salon_id) {
     })
 }
 
+console.log("hellooooo queries!");
 export function availableHours(serviceList, salonId, day) {
     let url = 'available/'
-    axios({
+    return axios({
         method: 'post',
         url: url,
         headers: {
@@ -265,6 +266,7 @@ export function availableHours(serviceList, salonId, day) {
             services: serviceList
         }
     }).then(result => {
+        console.log(result.data['available_hours'])
         return result.data['available_hours']
     }).catch(function (error) {
         console.log(error)

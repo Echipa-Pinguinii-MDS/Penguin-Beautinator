@@ -1,8 +1,8 @@
 import React from 'react';
 import {CalendarTitle, Week} from './Misc';
 import AvailableSlots from './AvailableSlots';
-import './Calendar.css'
-import {availableHours} from './../../Universal/Queries'
+import './Calendar.css';
+import {availableHours} from '../../Universal/Queries';
 
 class Calendar extends React.Component {
     constructor(props) {
@@ -30,10 +30,24 @@ class Calendar extends React.Component {
     }
 
     refreshSlots() {
+        let date = this.state.year + '-'
+        if (this.state.month < 10) {
+            date = date + '0'
+        }
+        date = date + this.state.month + '-'
+        if (this.state.day < 10) {
+            date = date + '0'
+        }
+        date = date + this.state.day;
+        console.log("Hello?");
+        console.log(availableHours);
+        console.log("this = ", this);
+        console.log("this.state = ", this.state);
+        console.log("date = ", date);
         availableHours(
             this.state.services,
             this.state.salonId,
-            this.state.year + '-' + this.state.month + ' ' + this.state.day).then(result => {
+            date).then(result => {
                 this.setState({availableSlots: result})
             })
     }
@@ -44,6 +58,7 @@ class Calendar extends React.Component {
         })
         this.props.setTime(null)
         this.props.setDate(day + '.' + this.state.month + '.' + this.state.year)
+        this.refreshSlots()
     }
 
     getRelativeDate() {

@@ -78,6 +78,16 @@ class SalonPage extends React.Component {
         return services
     }
 
+    getServicesId() {
+        let services = []
+        Object.keys(this.state.services).map(category => {
+            this.state.services[category].map(service =>
+                this.state.selected.has(service.id) ? services.push(service.id) : null
+            )
+        })
+        return services
+    }
+
     openCalendarPage() {
         this.setState({
             calendarPage: true
@@ -121,7 +131,7 @@ class SalonPage extends React.Component {
                 {this.state.calendarPage &&
                 <Calendar setTime={this.setTime}
                           setDate={this.setDate}
-                          services={this.state.selected}
+                          services={this.getServicesId()}
                           salonId={this.state.salon.id}
                 />}
 
