@@ -32,21 +32,10 @@ PopUpNotLoggedIn.propTypes = {
 
 const PopUpLoggedIn = (props) => {
     return (
-        <Popup trigger={
-            <Button className='ScheduleButton' disabled={props.disabled} onClick={props.handleSubmit}>
-                <TiShoppingCart/>
-                Rezerva
-            </Button>
-        } modal>
-            {close => (
-                <div className={'PopupLoggedIn'}>
-                    <p className={'Close'} onClick={close}>&times;</p>
-                    <p>Programarea din data de {props.data} a fost facuta cu succes!<br/>
-                        O poti vizualiza in <Link to={'/programari'}>Programarile mele</Link>
-                    </p>
-                </div>
-            )}
-        </Popup>
+        <Button className='ScheduleButton' disabled={props.disabled} onClick={props.handleSubmit}>
+            <TiShoppingCart/>
+            Rezerva
+        </Button>
     )
 }
 
