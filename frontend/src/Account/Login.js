@@ -88,8 +88,8 @@ class Login extends Component {
                 this.setState({wrongPassword: true})
                 console.log('parola gresita')
             } else {
+                this.setState({loggedIn: true})
                 Cookies.set('user_id', result.data['user_id'], {expires: 7})
-                window.location.reload(false)
                 console.log('ok')
             }
         }).catch(function (error) {

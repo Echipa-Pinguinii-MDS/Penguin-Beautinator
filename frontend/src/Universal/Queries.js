@@ -267,7 +267,11 @@ export function availableHours(serviceList, salonId, day) {
             services: serviceList
         }
     }).then(result => {
-        return result.data['available_hours']
+        let hours = result.data['available_hours']
+        for (let i = 0; i < hours.length; i ++) {
+            hours[i] = hours[i].substring(0, hours[i].length - 3)
+        }
+        return hours
     }).catch(function (error) {
         console.log(error)
     })
