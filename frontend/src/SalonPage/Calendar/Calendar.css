@@ -1,3 +1,13 @@
+.CalendarTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.CalendarTitle .gr {
+    align-self: center;
+    margin: 10px;
+}
+
 .Calendar {
     position: static;
     top: 10px;
