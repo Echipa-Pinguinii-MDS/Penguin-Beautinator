@@ -275,7 +275,7 @@ export function availableHours(serviceList, salonId, day) {
 }
 
 export function addAppointment(serviceList, salonId, userId, day, time) {
-    let url = 'add/appointment'
+    let url = 'add/appointment/'
     return axios({
         method: 'post',
         url: url,

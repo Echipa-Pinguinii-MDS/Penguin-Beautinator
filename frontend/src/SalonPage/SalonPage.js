@@ -27,6 +27,8 @@ class SalonPage extends React.Component {
         this.closeCalendarPage = this.closeCalendarPage.bind(this)
         this.setTime = this.setTime.bind(this)
         this.setDate = this.setDate.bind(this)
+        this.getServicesId = this.getServicesId.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     componentDidMount() {
@@ -86,6 +88,7 @@ class SalonPage extends React.Component {
                 this.state.selected.has(service.id) ? services.push(service.id) : null
             )
         })
+        console.log("heeii ", services)
         return services
     }
 
