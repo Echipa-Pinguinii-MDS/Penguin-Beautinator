@@ -49,7 +49,7 @@ class SignUp extends Component {
         return this.state.email.length > 0 &&
             this.state.password.length > 0 &&
             this.state.lastName.length > 0 &&
-            this.state.firstName.length > 0
+            this.state.firstName.length
     }
 
     checkPassword() {
@@ -105,7 +105,7 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div className='SignUp'>
+            <div className={'sign-up-htm'}>
                 <Form onSubmit={this.handleSubmit}>
                     <Email email={this.state.email}
                            handleChange={this.handleChange}
@@ -123,7 +123,7 @@ class SignUp extends Component {
                              handleChange={this.handleChange}/>
                     <Birthday birthday={this.state.birthday}
                               handleChange={this.handleChange}/>
-                    <Button block disabled={!this.validateForm()} type='submit'>
+                    <Button block disabled={!this.validateForm()} type='submit' className = {'button'}>
                         Sign Up
                     </Button>
                 </Form>

@@ -100,19 +100,16 @@ class Login extends Component {
 
     render() {
         return (
-            <div className='Login'>
-                <Form onSubmit={this.handleSubmit}>
-                    <Email email={this.state.email}
-                           handleChange={this.handleChange}
-                           name={'login'}/>
-                    <Password password={this.state.password}
-                              handleChange={this.handleChange}
-                              name={'login'}/>
-                    <Button block disabled={!this.validateForm()} type='submit'>
-                        Login
-                    </Button>
-                </Form>
-
+            <div className={'sign-in-htm'}>
+                <Email email={this.state.email}
+                       handleChange={this.handleChange}
+                       name={'login'}/>
+                <Password password={this.state.password}
+                          handleChange={this.handleChange}
+                          name={'login'}/>
+                <Button block disabled={!this.validateForm()} type='submit' className={'button'}>
+                    Login
+                </Button>
                 {this.wrongEmail()}
                 {this.wrongPassword()}
                 {this.loggedIn()}

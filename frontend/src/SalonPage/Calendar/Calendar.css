@@ -7,7 +7,7 @@
     width: 65%;
     height: 80%;
     box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    color: #ff000a;
+    color: #263543;
     overflow: auto;
     background-color: #f7f5f7;
 }
@@ -43,6 +43,10 @@ h1 {
 .TimeSlots {
     font-size: 2vw;
     overflow: auto;
+}
+
+.TimeSlots p {
+    text-align: center;
 }
 
 .TimeSlots p:hover {

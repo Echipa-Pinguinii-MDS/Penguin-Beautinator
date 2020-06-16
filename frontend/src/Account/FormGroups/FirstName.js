@@ -4,14 +4,14 @@ import {Form} from 'react-bootstrap';
 
 const FirstName = (props) => {
     return (
-        <Form.Group className={'Required'}>
-            <Form.Label>Prenume</Form.Label>
+        <div className={'group'}>
+            <Form.Label className={'label'}>Prenume</Form.Label>
             <Form.Control type='text'
                           name='firstName'
                           value={props.firstName}
                           onChange={props.handleChange}
                           placeholder='Nume'/>
-        </Form.Group>
+        </div>
     )
 }
 

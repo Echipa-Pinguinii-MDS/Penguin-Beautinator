@@ -10,7 +10,7 @@
 
 .SalonCard {
     display: flex;
-    position: relative;
+    position: static;
     flex-direction: row;
     justify-content: space-between;
     border-style: hidden;
@@ -28,8 +28,11 @@
 
 .InfoCard img {
     padding: 10px;
-    height: 100px;
-    width: 100px;
+    height: auto;
+    width: auto;
+    max-height: 200px;
+    max-width: 130px;
+    margin: auto;
 }
 
 .SalonInfo {
@@ -42,7 +45,8 @@
     margin: 0 0 10px 0;
     display: flex;
     justify-content: flex-start;
-    color: #ff000a;
+    color: #263543;
+    font-size:calc(5px + 0.9vw);
 }
 
 .Review {
@@ -53,6 +57,8 @@
     margin: 10px 0 0 0;
     display: flex;
     justify-content: flex-end;
+    font-size:calc(5px + 0.6vw);
+    text-align: right;
 }
 
 .Stars {
