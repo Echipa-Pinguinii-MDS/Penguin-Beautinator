@@ -4,15 +4,15 @@ import React from 'react';
 
 const Email = (props) => {
     return (
-        <div className={'group'}>
+        <Form.Group className={'group'}>
             <Form.Label>Email</Form.Label>
             <Form.Control autoFocus
                           type='email'
                           name='email'
-                          placeholder='Enter email'
+                          placeholder='Email'
                           value={props.email}
                           onChange={props.handleChange}/>
-        </div>
+        </Form.Group>
     )
 }
 

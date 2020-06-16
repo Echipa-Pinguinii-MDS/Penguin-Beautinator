@@ -92,10 +92,12 @@ a{color:inherit;text-decoration:none}
 }
 .login-form .button{
     background:#2c4654;
+    color: #f7f5f7;
 }
 
 .login-form .button:disabled{
     background:grey;
+    color: #2c4654;
 }
 
 .login-form .group label .icon{

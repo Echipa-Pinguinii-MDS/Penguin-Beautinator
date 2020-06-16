@@ -24,7 +24,7 @@ class SignUp extends Component {
             firstName: '',
             lastName: '',
             phoneNo: '',
-            birthday: new Date(),
+            birthday: null,
             invalidEmail: false,
             signedIn: false
         }
@@ -49,7 +49,7 @@ class SignUp extends Component {
         return this.state.email.length > 0 &&
             this.state.password.length > 0 &&
             this.state.lastName.length > 0 &&
-            this.state.firstName.length
+            this.state.firstName.length > 0
     }
 
     checkPassword() {

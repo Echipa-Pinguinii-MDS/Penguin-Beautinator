@@ -5,16 +5,13 @@ import PhoneNo from './FormGroups/PhoneNo';
 import Birthday from './FormGroups/Birthday';
 import Cookies from 'js-cookie';
 import {userDataById, updateUser} from '../Universal/Queries';
-import {Button} from 'react-bootstrap';
+import {Button, Form} from 'react-bootstrap';
 
 class Updates extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             id: Number(Cookies.get('user_id').substring(1)),
-            // oldPassword: '',
-            // newPassword: '',
-            // newPasswordConfirmation: '',
             firstName: '',
             lastName: '',
             phoneNo: '',
@@ -24,7 +21,6 @@ class Updates extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.refreshUserData = this.refreshUserData.bind(this)
-        // this.checkPassword = this.checkPassword.bind(this)
     }
 
     componentDidMount() {
@@ -58,29 +54,24 @@ class Updates extends React.Component {
         })
     }
 
-    // checkPassword() {
-    //     if (this.state.newPassword !== this.state.newPasswordConfirmation) {
-    //         return <p className={'FormError'}>Cele doua parole nu se potrivesc</p>
-    //     }
-    // }
-
     render() {
         return (
-            <div className={'Updates'}>
+            <div className={'update-html'}>
                 <h2>Schimba setarile contului</h2>
-                <LastName lastName={this.state.lastName}
-                          handleChange={this.handleChange}/>
-                <FirstName firstName={this.state.firstName}
-                           handleChange={this.handleChange}/>
-                <PhoneNo phoneNo={this.state.phoneNo}
-                         handleChange={this.handleChange}/>
-                <Birthday birthday={this.state.birthday}
-                          handleChange={this.handleChange}/>
-                <Button block onClick={this.handleSubmit} type='submit'>
-                    Schimba
-                </Button>
+                <Form onSubmit={this.handleSubmit}>
+                    <LastName lastName={this.state.lastName}
+                              handleChange={this.handleChange}/>
+                    <FirstName firstName={this.state.firstName}
+                               handleChange={this.handleChange}/>
+                    <PhoneNo phoneNo={this.state.phoneNo}
+                             handleChange={this.handleChange}/>
+                    <Birthday birthday={this.state.birthday}
+                              handleChange={this.handleChange}/>
+                    <Button block type='submit' className = {'button'}>
+                        Salveaza
+                    </Button>
+                </Form>
 
-                {/*{this.checkPassword()}*/}
                 {this.state.update &&
                 <p className={'FormUpdate'}>Schimbarea a fost inregistrata</p>}
             </div>

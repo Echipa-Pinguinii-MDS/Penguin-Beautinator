@@ -4,14 +4,14 @@ import {Form} from 'react-bootstrap';
 
 const LastName = (props) => {
     return (
-        <div className={'group'}>
+        <Form.Group className={'group'}>
             <Form.Label>Nume</Form.Label>
             <Form.Control type='text'
                           name='lastName'
                           value={props.lastName}
                           onChange={props.handleChange}
                           placeholder='Nume'/>
-        </div>
+        </Form.Group>
     )
 }
 

@@ -4,14 +4,14 @@ import React from 'react';
 
 const PasswordConfirm = (props) => {
     return (
-        <div className={'group'}>
+        <Form.Group className={'group'}>
             <Form.Label>Reintrodu parola</Form.Label>
             <Form.Control type='password'
                           name='passwordConfirmation'
                           value={props.passwordConfirmation}
                           onChange={props.handleChange}
                           placeholder='Parola'/>
-        </div>
+        </Form.Group>
     )
 }
 
