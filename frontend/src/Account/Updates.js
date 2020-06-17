@@ -15,7 +15,7 @@ class Updates extends React.Component {
             firstName: '',
             lastName: '',
             phoneNo: '',
-            birthday: new Date(),
+            birthday: null,
             update: false
         }
         this.handleChange = this.handleChange.bind(this)
@@ -46,12 +46,13 @@ class Updates extends React.Component {
         })
     }
 
-    handleSubmit() {
+    handleSubmit(event) {
         updateUser(this.state).then(result => {
             this.setState({
                 update: result
             })
         })
+        event.preventDefault()
     }
 
     render() {

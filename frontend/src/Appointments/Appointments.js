@@ -53,13 +53,16 @@ class Appointments extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            loggedIn: Cookies.get('user_id') !== undefined,
             futureAppointments: [],
             // pastAppointments: []
         }
     }
 
     componentDidMount() {
-        this.refreshAppointments()
+        if (this.state.loggedIn) {
+            this.refreshAppointments()
+        }
     }
 
     refreshAppointments() {
@@ -71,12 +74,20 @@ class Appointments extends React.Component {
     }
 
     render() {
-        return (
-            <div className={'Appointments'}>
-                <FutureAppointments appointments={this.state.futureAppointments}/>
-                {/*<PastAppointments appointments={this.state.pastAppointments}/>*/}
-            </div>
-        )
+        if (this.state.loggedIn) {
+            return (
+                <div className={'Appointments'}>
+                    <FutureAppointments appointments={this.state.futureAppointments}/>
+                    {/*<PastAppointments appointments={this.state.pastAppointments}/>*/}
+                </div>
+            )
+        } else {
+            return (
+                <div className={'Appointments'}>
+                    <h3>Pentru a vedea programarile intrati in <Link to={'/account'}>cont</Link>.</h3>
+                </div>
+            )
+        }
     }
 }
 

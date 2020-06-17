@@ -30,6 +30,8 @@ class SignUp extends Component {
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.signedIn = this.signedIn.bind(this)
+        this.reset = this.reset.bind(this)
     }
 
     reset() {
@@ -73,6 +75,7 @@ class SignUp extends Component {
     }
 
     handleSubmit = (event) => {
+        console.log("HEEEI")
         this.reset()
         axios({
             method: 'post',
@@ -127,7 +130,6 @@ class SignUp extends Component {
                         Sign Up
                     </Button>
                 </Form>
-
                 {this.checkPassword()}
                 {this.wrongEmail()}
                 {this.signedIn()}
